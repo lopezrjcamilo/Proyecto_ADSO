@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name="TieneVD")
-public class Tiene {
+public class Informedeldiagnostico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "num_reg", nullable = false, length = 15)
@@ -22,10 +22,10 @@ public class Tiene {
 
     @Column(name = "fecha_reg", nullable = false)
     private Date fechReg;
-    public Tiene() {
+    public Informedeldiagnostico() {
     }
 
-    public Tiene(Integer numReg, Diagnostico diagnostico, Virus virus, Date fechReg) {
+    public Informedeldiagnostico(Integer numReg, Diagnostico diagnostico, Virus virus, Date fechReg) {
         this.numReg = numReg;
         this.diagnostico = diagnostico;
         this.virus = virus;
