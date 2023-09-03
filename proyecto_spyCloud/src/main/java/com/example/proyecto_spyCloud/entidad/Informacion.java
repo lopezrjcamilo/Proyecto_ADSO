@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="Informedeldiagnostico")
-public class Informedeldiagnostico {
+@Table(name="Informacion")
+public class Informacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "num_reg", nullable = false, length = 15)
@@ -22,10 +22,10 @@ public class Informedeldiagnostico {
 
     @Column(name = "fecha_reg", nullable = false)
     private Date fechReg;
-    public Informedeldiagnostico() {
+    public Informacion() {
     }
 
-    public Informedeldiagnostico(Integer numReg, Diagnostico diagnostico, Virus virus, Date fechReg) {
+    public Informacion(Integer numReg, Diagnostico diagnostico, Virus virus, Date fechReg) {
         this.numReg = numReg;
         this.diagnostico = diagnostico;
         this.virus = virus;
