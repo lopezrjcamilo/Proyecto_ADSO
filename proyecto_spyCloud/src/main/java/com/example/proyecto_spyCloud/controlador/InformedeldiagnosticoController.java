@@ -24,12 +24,12 @@ public class InformedeldiagnosticoController {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Informedeldiagnostico>> listarTiene() {
-        return new ResponseEntity<>(informedeldiagnosticoService.listarTiene(), HttpStatus.OK);
+        return new ResponseEntity<>(informedeldiagnosticoService.listarInformedeldiagnostico(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Informedeldiagnostico> tienePorId(@PathVariable Integer id) {
-        Informedeldiagnostico informedeldiagnostico = informedeldiagnosticoService.tienePorId(String.valueOf(id));
+        Informedeldiagnostico informedeldiagnostico = informedeldiagnosticoService.tienePorInformedeldiagnostico(String.valueOf(id));
         if (informedeldiagnostico != null) {
             return ResponseEntity.ok(informedeldiagnostico);
         } else {

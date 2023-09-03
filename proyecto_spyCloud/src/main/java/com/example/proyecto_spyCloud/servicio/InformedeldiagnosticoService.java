@@ -17,11 +17,11 @@ public class InformedeldiagnosticoService {
         this.informedeldiagnosticoRepository = informedeldiagnosticoRepository;
     }
 
-    public List<Informedeldiagnostico> listarTiene() {
+    public List<Informedeldiagnostico> listarInformedeldiagnostico() {
         return informedeldiagnosticoRepository.findAll();
     }
 
-    public Informedeldiagnostico tienePorId(String id) {
+    public Informedeldiagnostico tienePorInformedeldiagnostico(String id) {
         return informedeldiagnosticoRepository.findById(Integer.valueOf(id)).get();
     }
 
