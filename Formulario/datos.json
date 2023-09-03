@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "nombre": "Nombre de la persona",
+    "edad": 30,
+    "correo": "correo@example.com",
+    "categoria": "Categoria1"
+  }
+]
