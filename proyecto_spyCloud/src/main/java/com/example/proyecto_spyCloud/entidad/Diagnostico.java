@@ -24,24 +24,18 @@ public class Diagnostico {
     private Date fechaEntreg;
     @Column (name="tip_daño",nullable = false, length = 20)
     private String tipoDaño;
-    @ManyToOne
-    @JoinColumn(name = "cod_dron", referencedColumnName = "cod_dron")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cod_dron", referencedColumnName = "cod_dron",nullable = false)
     private Dron dron;
 
-    @ManyToOne
-    @JoinColumn(name = "cod_cult", referencedColumnName = "cod_cult")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cod_cult", referencedColumnName = "cod_cult",nullable = false)
     private Cultivo cultivo;
 
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "TieneVD",
-            joinColumns = @JoinColumn(name = "diagnostico_num_diag"),
-            inverseJoinColumns = @JoinColumn(name = "virus_cod_virus"))
-    private Set<Virus> virusSet = new HashSet<>();
     public Diagnostico() {
     }
 
-    public Diagnostico(Integer numDiag, String observaciones, Date fechaSolicit, Date fechaDiag, Date fechaEntreg, String tipoDaño, Dron dron, Cultivo cultivo, Set<Virus> virusSet) {
+    public Diagnostico(Integer numDiag, String observaciones, Date fechaSolicit, Date fechaDiag, Date fechaEntreg, String tipoDaño, Dron dron, Cultivo cultivo) {
         this.numDiag = numDiag;
         this.observaciones = observaciones;
         this.fechaSolicit = fechaSolicit;
@@ -50,7 +44,7 @@ public class Diagnostico {
         this.tipoDaño = tipoDaño;
         this.dron = dron;
         this.cultivo = cultivo;
-        this.virusSet = virusSet;
+
     }
 
     public Cultivo getCultivo() {
@@ -118,11 +112,5 @@ public class Diagnostico {
     }
 
 
-    public Set<Virus> getVirusSet() {
-        return virusSet;
-    }
 
-    public void setVirusSet(Set<Virus> virusSet) {
-        this.virusSet = virusSet;
-    }
 }

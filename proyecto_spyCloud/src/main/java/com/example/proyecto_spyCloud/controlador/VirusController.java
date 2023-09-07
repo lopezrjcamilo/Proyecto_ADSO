@@ -23,12 +23,12 @@ public class VirusController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Virus>> listarVirus() {
-        return new ResponseEntity<>(virusService.listarVirus(), HttpStatus.OK);
+    public List<Virus> listarVirus() {
+        return virusService.listarVirus();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Virus> virusPorId(@PathVariable String id) {
+    public ResponseEntity<Virus> virusPorId(@PathVariable Integer id) {
         Virus virus = virusService.virusPorId(id);
         if (virus != null) {
             return ResponseEntity.ok(virus);

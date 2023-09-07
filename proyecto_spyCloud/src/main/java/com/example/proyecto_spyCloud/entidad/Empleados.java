@@ -7,10 +7,9 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Empleados")
+@Table(name = "empleados")
 public class Empleados {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cod_emp",nullable = false, length = 15)
     private Integer codEmp;
     @Column(nullable = false, length = 30)
@@ -20,24 +19,24 @@ public class Empleados {
     @Column(nullable = false, length = 15)
     private String tipo_doc;
     @Column(nullable = false, length = 15)
-    private String num_doc;
+    private String num_docu;
 
 
 
-    @ManyToOne
-    @JoinColumn(name = "administrador_num_doc", referencedColumnName = "num_doc" )
-    private Administrador administrador1;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "num_doc", referencedColumnName = "num_doc", nullable = false )
+    private Administrador administrador;
 
     public Empleados() {
     }
 
-    public Empleados(Integer codEmp, String nombre, String apellido, String tipo_doc, String num_doc, Administrador administrador1) {
+    public Empleados(Integer codEmp, String nombre, String apellido, String tipo_doc, String num_docu, Administrador administrador) {
         this.codEmp = codEmp;
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipo_doc = tipo_doc;
-        this.num_doc = num_doc;
-        this.administrador1 = administrador1;
+        this.num_docu = num_docu;
+        this.administrador = administrador;
     }
 
     public Integer getCodEmp() {
@@ -74,20 +73,18 @@ public class Empleados {
     }
 
     public String getNum_doc() {
-        return num_doc;
+        return num_docu;
     }
 
     public void setNum_doc(String num_doc) {
-        this.num_doc = num_doc;
+        this.num_docu = num_docu;
     }
 
-    public Administrador getAdministrador1() {
-        return administrador1;
+    public Administrador getAdministrador() {
+        return administrador;
     }
 
-    public void setAdministrador1(Administrador administrador1) {
-        this.administrador1 = administrador1;
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
     }
-
-
 }

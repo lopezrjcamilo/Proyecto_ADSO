@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-    @Table(name="Drones")
+    @Table(name="dron")
     public class Dron {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cod_dron", nullable = false, length = 10)
     private Integer codDron;
     @Column(name = "num_serial", nullable = false, length = 10)

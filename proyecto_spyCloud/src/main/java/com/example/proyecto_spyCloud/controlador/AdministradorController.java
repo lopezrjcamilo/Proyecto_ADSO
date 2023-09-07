@@ -21,7 +21,7 @@ public class AdministradorController {
 
     @PostMapping("/insertar")
     public ResponseEntity<Administrador> insertarAdministrador(@RequestBody Administrador administrador) {
-        String numDoc = administrador.getNumDoc();
+        Integer numDoc = administrador.getNumDoc();
 
         // No es necesario verificar si el administrador ya existe por ID aquí
 
@@ -37,7 +37,7 @@ public class AdministradorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Administrador> aministradorPorId(@PathVariable String id) {
+    public ResponseEntity<Administrador> aministradorPorId(@PathVariable Integer id) {
         Administrador administrador = administradorService.administradorPorId(id);
         if (administrador != null) {
             return ResponseEntity.ok(administrador);
@@ -47,7 +47,7 @@ public class AdministradorController {
     }
     @PutMapping("/actualizar/{numDoc}")
     public ResponseEntity<Administrador> actualizarAdministrador(
-            @PathVariable String numDoc, @RequestBody Administrador administrador) {
+            @PathVariable Integer numDoc, @RequestBody Administrador administrador) {
         administrador.setNumDoc(numDoc);
         Administrador administradorActualizado = administradorService.actualizarAdministrador(administrador);
         if (administradorActualizado != null) {
@@ -58,7 +58,7 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/eliminar/{numDoc}")
-    public ResponseEntity<Void> eliminarAdministrador(@PathVariable String numDoc) {
+    public ResponseEntity<Void> eliminarAdministrador(@PathVariable Integer numDoc) {
         if(administradorService.administradorPorId(numDoc)!= null) {
             administradorService.eliminarAdministrador(numDoc);
             return new ResponseEntity<>(HttpStatus.OK);

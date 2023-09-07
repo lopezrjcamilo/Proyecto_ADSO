@@ -3,7 +3,7 @@ package com.example.proyecto_spyCloud.entidad;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Multimedias")
+@Table(name="multimedia")
 public class Multimedia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +13,8 @@ public class Multimedia {
     private String nombArchivo;
     @Column (nullable = false, length = 15)
     private String tamaño;
-    @ManyToOne
-    @JoinColumn(name = "num_diag", referencedColumnName = "num_diag")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "num_diag", referencedColumnName = "num_diag",nullable = false)
     private Diagnostico diagnostico;
 
 

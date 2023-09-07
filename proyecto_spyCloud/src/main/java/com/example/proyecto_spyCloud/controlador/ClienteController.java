@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    @Autowired
+
     private ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
@@ -23,8 +23,12 @@ public class ClienteController {
 
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Cliente>> listarTodosLosClientes() {
-        return new ResponseEntity<>(clienteService.listarClientes(), HttpStatus.OK);
+    public List<Cliente> listarTodosLosClientes() {
+        return clienteService.listarClientes();
+    }
+    @PostMapping("/agregar/{admi}")
+    public String agregarCliente(@PathVariable("admi") Integer nit ){
+        return clienteService.agregarCliente(nit);
     }
 
     @GetMapping("/{nit}")
