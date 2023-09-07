@@ -35,6 +35,7 @@ public class FacturacionController {
         }
     }
 
+<<<<<<< HEAD
     @PostMapping("/agregar")
     public ResponseEntity<Facturacion> insertarFacturacion(@RequestBody Facturacion facturacionPost){
         Facturacion facturacion = facturacionService.facturacionPorId(facturacionPost.getNumFac());
@@ -50,12 +51,30 @@ public class FacturacionController {
         Facturacion facturacion = facturacionService.facturacionPorId(numFac);
         if (facturacion != null) {
             facturacionService.eliminarFacturacionPorId(numFac);
+=======
+   /* @PostMapping("/agregar")
+    public ResponseEntity<Facturacion> insertarFacturacion(@RequestBody Facturacion facturacionPost){
+        Cliente cliente = clienteService.clientePorId(facturacionPost.getIdNit());
+        if (cliente != null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            clienteService.insertarCliente(clientePost);
+            return ResponseEntity.ok(clientePost);
+        }
+    }
+    @DeleteMapping("/eliminar/{idNit}")
+    public ResponseEntity<Void> insertarCliente(@PathVariable Integer idNit){
+        Cliente cliente = clienteService.clientePorId(idNit);
+        if (cliente != null) {
+            clienteService.eliminarClientePorId(idNit);
+>>>>>>> 1503245 (Modificacion de tablas "clienteService" y "clienteController" añadiendo la funcion de ingresar con llave foranea, actualizar y eliminar.)
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
     @PutMapping("/actualizar")
+<<<<<<< HEAD
     public ResponseEntity<Facturacion> actualizarFacturacion(@RequestBody Facturacion facturacionPut){
         Facturacion facturacion = facturacionService.facturacionPorId(facturacionPut.getNumFac());
         if (facturacion != null) {
@@ -65,5 +84,16 @@ public class FacturacionController {
             return ResponseEntity.noContent().build();
         }
     }
+=======
+    public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente clientePut){
+        Cliente cliente = clienteService.clientePorId(clientePut.getIdNit());
+        if (cliente != null) {
+            clienteService.insertarCliente(clientePut);
+            return ResponseEntity.ok(clientePut);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    } */
+>>>>>>> 1503245 (Modificacion de tablas "clienteService" y "clienteController" añadiendo la funcion de ingresar con llave foranea, actualizar y eliminar.)
 
 }

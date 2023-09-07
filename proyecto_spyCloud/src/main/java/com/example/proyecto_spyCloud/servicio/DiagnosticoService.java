@@ -1,7 +1,14 @@
 package com.example.proyecto_spyCloud.servicio;
 
+<<<<<<< HEAD
 import com.example.proyecto_spyCloud.entidad.*;
 import com.example.proyecto_spyCloud.repositorio.CultivoRepository;
+=======
+import com.example.proyecto_spyCloud.entidad.Administrador;
+import com.example.proyecto_spyCloud.entidad.Cliente;
+import com.example.proyecto_spyCloud.entidad.Cultivo;
+import com.example.proyecto_spyCloud.entidad.Diagnostico;
+>>>>>>> 1503245 (Modificacion de tablas "clienteService" y "clienteController" añadiendo la funcion de ingresar con llave foranea, actualizar y eliminar.)
 import com.example.proyecto_spyCloud.repositorio.DiagnosticoRepository;
 import com.example.proyecto_spyCloud.repositorio.DronRepository;
 import com.example.proyecto_spyCloud.repositorio.VirusRepository;
@@ -38,6 +45,7 @@ public class DiagnosticoService {
         return diagnosticoRepository.findById(Integer.valueOf(id)).get();
     }
 
+<<<<<<< HEAD
     public Diagnostico insertarDiagnostico(Diagnostico diagnostico){
         Optional<Cultivo> cultivoOptional= cultivoRepository.findById(diagnostico.getCultivo().getCodCult());
         Optional<Dron> dronOptional= dronRepository.findById(diagnostico.getDron().getCodDron());
@@ -69,4 +77,7 @@ public class DiagnosticoService {
     public void eliminarDiagnostico(Integer numDiag){
         diagnosticoRepository.deleteById(numDiag);
     }
+=======
+
+>>>>>>> 1503245 (Modificacion de tablas "clienteService" y "clienteController" añadiendo la funcion de ingresar con llave foranea, actualizar y eliminar.)
 }
