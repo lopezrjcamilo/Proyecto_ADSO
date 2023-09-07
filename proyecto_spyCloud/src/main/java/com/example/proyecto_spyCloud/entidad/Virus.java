@@ -6,33 +6,32 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Virus")
+@Table(name="virus")
 public class Virus {
     @Id
-    @Column(name = "cod_virus", nullable = false, length = 20)
-    private String codVirus;
+    @Column(name= "cod_virus" ,nullable = false, length = 15)
+    private Integer codVirus;
     @Column (name="nom_virus",nullable = false, length = 20)
     private String nomVirus;
-
-    @ManyToMany(mappedBy = "virusSet")
-    private Set<Diagnostico> diagnosticoSet = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name ="num_diag",referencedColumnName = "num_diag", nullable = false)
+    private Diagnostico diagnosticoSet ;
 
     public Virus() {
     }
 
-
-    public String getCodVirus() {
-        return codVirus;
-    }
-
-    public void setCodVirus(String codVirus) {
-        this.codVirus = codVirus;
-    }
-
-    public Virus(String codVirus, String nomVirus, Set<Diagnostico> diagnosticoSet) {
+    public Virus(Integer codVirus, String nomVirus, Diagnostico diagnosticoSet) {
         this.codVirus = codVirus;
         this.nomVirus = nomVirus;
         this.diagnosticoSet = diagnosticoSet;
+    }
+
+    public Integer getCodVirus() {
+        return codVirus;
+    }
+
+    public void setCodVirus(Integer codVirus) {
+        this.codVirus = codVirus;
     }
 
     public String getNomVirus() {
@@ -43,11 +42,11 @@ public class Virus {
         this.nomVirus = nomVirus;
     }
 
-    public Set<Diagnostico> getDiagnosticoSet() {
+    public Diagnostico getDiagnosticoSet() {
         return diagnosticoSet;
     }
 
-    public void setDiagnosticoSet(Set<Diagnostico> diagnosticoSet) {
+    public void setDiagnosticoSet(Diagnostico diagnosticoSet) {
         this.diagnosticoSet = diagnosticoSet;
     }
 }

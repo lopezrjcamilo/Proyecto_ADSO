@@ -3,6 +3,7 @@ package com.example.proyecto_spyCloud.entidad;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -11,7 +12,7 @@ public class Administrador {
 
     @Id
     @Column(name = "num_doc", nullable = false, length = 15)
-    private String numDoc;
+    private Integer numDoc;
     @Column(nullable = false, length = 20)
     private String nombre;
     @Column(nullable = false, length = 20)
@@ -23,11 +24,13 @@ public class Administrador {
     @Column(nullable = false, length = 15)
     private String telefono;
 
+   /* @OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Cliente> cliente;*/
 
     public Administrador() {
     }
 
-    public Administrador(String numDoc, String nombre, String apellido, String tipo_doc, String email, String telefono) {
+    public Administrador(Integer numDoc, String nombre, String apellido, String tipo_doc, String email, String telefono) {
         this.numDoc = numDoc;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -36,11 +39,11 @@ public class Administrador {
         this.telefono = telefono;
     }
 
-    public String getNumDoc() {
+    public Integer getNumDoc() {
         return numDoc;
     }
 
-    public void setNumDoc(String numDoc) {
+    public void setNumDoc(Integer numDoc) {
         this.numDoc = numDoc;
     }
 

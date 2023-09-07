@@ -8,7 +8,7 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name="Facturacion")
+@Table(name="facturacion")
 public class Facturacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,8 @@ public class Facturacion {
     @Column (name= "fech_pago",nullable = false)
     private Date fechPago;
 
-    @OneToOne
-    @JoinColumn(name = "cultivo", referencedColumnName = "cod_cult")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name ="cod_cult",referencedColumnName = "cod_cult", nullable = false)
     private Cultivo cultivo;
 
     public Facturacion() {

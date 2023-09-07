@@ -11,7 +11,6 @@ public class Cultivo {
 
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column (name= "cod_cult", nullable = false, length = 20)
         private Integer codCult;
         @Column (nullable = false, length = 30)

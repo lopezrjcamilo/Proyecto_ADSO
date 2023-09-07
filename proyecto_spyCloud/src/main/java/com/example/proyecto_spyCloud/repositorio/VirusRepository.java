@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VirusRepository extends JpaRepository<Virus, String> {
+public interface VirusRepository extends JpaRepository<Virus, Integer> {
 }

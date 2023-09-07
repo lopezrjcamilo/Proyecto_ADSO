@@ -10,7 +10,6 @@ public class Cliente {
     @Id
     @Column(name= "nit" ,nullable = false, length = 30)
     private Integer idNit;
-    @Column(name= "nom_cliente" ,nullable = false, length = 30)
     private String nombre;
     @Column(nullable = false, length = 20)
     private String correo;

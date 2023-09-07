@@ -26,7 +26,7 @@ public class AdministradorService {
         return administradorRepository.findAll();
     }
 
-    public Administrador administradorPorId(String id) {
+    public Administrador administradorPorId(Integer id) {
         if (administradorRepository.findById(id).isPresent()) {
             return administradorRepository.findById(id).get();
         } else {
@@ -41,7 +41,7 @@ public class AdministradorService {
         return null; // El administrador no existe o falta información requerida
     }
 
-    public void eliminarAdministrador(String numDoc) {
+    public void eliminarAdministrador(Integer numDoc) {
         administradorRepository.deleteById(numDoc);
     }
 

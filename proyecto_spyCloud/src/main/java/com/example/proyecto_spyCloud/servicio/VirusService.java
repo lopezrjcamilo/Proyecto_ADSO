@@ -21,7 +21,7 @@ public class VirusService {
         return virusRepository.findAll();
     }
 
-    public Virus virusPorId(String id) {
+    public Virus virusPorId(Integer id) {
         return virusRepository.findById(id).get();
     }
 
