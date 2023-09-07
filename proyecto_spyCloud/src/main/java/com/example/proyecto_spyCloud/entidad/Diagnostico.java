@@ -34,7 +34,7 @@ public class Diagnostico {
 
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "TieneVD",
+    @JoinTable(name = "Informacion",
             joinColumns = @JoinColumn(name = "diagnostico_num_diag"),
             inverseJoinColumns = @JoinColumn(name = "virus_cod_virus"))
     private Set<Virus> virusSet = new HashSet<>();

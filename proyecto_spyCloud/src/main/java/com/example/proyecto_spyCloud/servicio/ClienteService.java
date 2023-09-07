@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class ClienteService {
-//sadasdasda
 
     private ClienteRepository clienteRepository;
 
@@ -30,4 +29,36 @@ public class ClienteService {
     public Cliente clientePorCorreo(String correo) {
         return clienteRepository.findByCorreo(correo);
     }
+
+
+
+    public Cliente insertarCliente(Cliente cliente){
+        Optional<Administrador> administradorOptional= administradorRepository.findById(cliente.getAdministrador().getNumDoc());
+        if(administradorOptional.isPresent()){
+            Administrador administrador=administradorOptional.get();
+            cliente.setAdministrador(administrador);
+            return clienteRepository.save(cliente);
+        }else{
+            return null;
+        }
+    }
+
+    public Cliente actualizarCliente (Cliente cliente){
+        Optional<Administrador> administradorOptional= administradorRepository.findById(cliente.getAdministrador().getNumDoc());
+        if(administradorOptional.isPresent()){
+            Administrador administrador=administradorOptional.get();
+            cliente.setAdministrador(administrador);
+            return clienteRepository.save(cliente);
+        }else{
+            return null;
+        }
+    }
+
+    public void eliminarClientePorId(Integer idNit){
+        clienteRepository.deleteById(idNit);
+    }
+
+
+
+
 }

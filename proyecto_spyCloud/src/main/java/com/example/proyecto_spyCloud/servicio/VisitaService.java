@@ -25,4 +25,37 @@ public class VisitaService {
         return visitaRepository.findById(Integer.valueOf(id)).get();
     }
 
+
+    public Visita insertarVisita(Visita visita){
+        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getCodEmp());
+        Optional<Cultivo> cultivoOptional= cultivoRepository.findById(visita.getCultivo().getCodCult());
+        if(empleadosOptional.isPresent() && cultivoOptional.isPresent()){
+            Empleados empleados=empleadosOptional.get();
+            Cultivo cultivo=cultivoOptional.get();
+            visita.setEmpleados(empleados);
+            visita.setCultivo(cultivo);
+            return visitaRepository.save(visita);
+        }else{
+            return null;
+        }
+    }
+    public void eliminarVisita(Integer numVisita){
+        visitaRepository.deleteById(numVisita);
+    }
+    public Visita actualizarVisita(Visita visita){
+        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getCodEmp());
+        Optional<Cultivo> cultivoOptional= cultivoRepository.findById(visita.getCultivo().getCodCult());
+        if(empleadosOptional.isPresent() && cultivoOptional.isPresent()){
+            Empleados empleados=empleadosOptional.get();
+            Cultivo cultivo=cultivoOptional.get();
+            visita.setEmpleados(empleados);
+            visita.setCultivo(cultivo);
+            return visitaRepository.save(visita);
+        }else{
+            return null;
+        }
+    }
+
+
+
 }
