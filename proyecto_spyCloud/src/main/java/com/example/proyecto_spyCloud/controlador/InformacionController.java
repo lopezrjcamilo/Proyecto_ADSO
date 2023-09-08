@@ -29,7 +29,7 @@ public class InformacionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Informacion> InformacionPorId(@PathVariable Integer id) {
-        Informacion informacion = informacionService.InformacionPorId(String.valueOf(id));
+        Informacion informacion = informacionService.informacionPorId(Integer.valueOf(String.valueOf(id)));
         if (informacion != null) {
             return ResponseEntity.ok(informacion);
         } else {

@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class FacturacionService {
 
-    FacturacionRepository facturacionRepository;
+    private FacturacionRepository facturacionRepository;
     private CultivoRepository cultivoRepository;
 
     @Autowired

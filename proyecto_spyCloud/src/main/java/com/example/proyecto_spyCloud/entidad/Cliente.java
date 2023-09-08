@@ -16,10 +16,9 @@ public class Cliente {
     private String correo;
     @Column(nullable = false, length = 15)
     private String telefono;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JsonIgnore
+    @ManyToOne//(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name ="num_doc",referencedColumnName = "num_doc", nullable = false)
-    @JsonIgnore
     public Administrador administrador;
     public Cliente() {
     }

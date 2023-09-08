@@ -35,35 +35,35 @@ public class FacturacionController {
         }
     }
 
-   /* @PostMapping("/agregar")
+    @PostMapping("/agregar")
     public ResponseEntity<Facturacion> insertarFacturacion(@RequestBody Facturacion facturacionPost){
-        Cliente cliente = clienteService.clientePorId(facturacionPost.getIdNit());
-        if (cliente != null) {
+        Facturacion facturacion = facturacionService.facturacionPorId(facturacionPost.getNumFac());
+        if (facturacion != null) {
             return ResponseEntity.notFound().build();
         } else {
-            clienteService.insertarCliente(clientePost);
-            return ResponseEntity.ok(clientePost);
+            facturacionService.insertarFacturacion(facturacionPost);
+            return ResponseEntity.ok(facturacionPost);
         }
     }
-    @DeleteMapping("/eliminar/{idNit}")
-    public ResponseEntity<Void> insertarCliente(@PathVariable Integer idNit){
-        Cliente cliente = clienteService.clientePorId(idNit);
-        if (cliente != null) {
-            clienteService.eliminarClientePorId(idNit);
+    @DeleteMapping("/eliminar/{numFac}")
+    public ResponseEntity<Void> eliminarFacturacionPorId(@PathVariable Integer numFac){
+        Facturacion facturacion = facturacionService.facturacionPorId(numFac);
+        if (facturacion != null) {
+            facturacionService.eliminarFacturacionPorId(numFac);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
     @PutMapping("/actualizar")
-    public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente clientePut){
-        Cliente cliente = clienteService.clientePorId(clientePut.getIdNit());
-        if (cliente != null) {
-            clienteService.insertarCliente(clientePut);
-            return ResponseEntity.ok(clientePut);
+    public ResponseEntity<Facturacion> actualizarFacturacion(@RequestBody Facturacion facturacionPut){
+        Facturacion facturacion = facturacionService.facturacionPorId(facturacionPut.getNumFac());
+        if (facturacion != null) {
+            facturacionService.insertarFacturacion(facturacionPut);
+            return ResponseEntity.ok(facturacionPut);
         } else {
             return ResponseEntity.noContent().build();
         }
-    } */
+    }
 
 }
