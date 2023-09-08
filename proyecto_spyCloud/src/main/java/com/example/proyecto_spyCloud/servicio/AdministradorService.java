@@ -47,13 +47,6 @@ public class AdministradorService {
 
     // Otras operaciones relacionadas con administradores, como actualización y eliminación
 
-    @SpringBootApplication
-          public static class ProyectoSpyCloudApplication {
 
-        public static void main(String[] args) {
-            SpringApplication.run(ProyectoSpyCloudApplication.class, args);
-        }
-
-    }
 }
 
