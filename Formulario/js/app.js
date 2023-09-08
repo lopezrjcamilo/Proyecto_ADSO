@@ -2,6 +2,38 @@
 $(document).ready(function() {
 
 //---------------  ADMINISTRADOR  -----------------------------
+    //PRUEBA
+    //llamar datos del Administrador por el ID en los inputs
+    $('#llamarAdmin').on('click', function() {
+        var numDoc = $('#codigo').val(); // Cambiado el ID a 'ndocumentoAdmin' para obtener el valor del número de documento.
+
+        $.ajax({
+            url: "http://localhost:8080/administradores/" + numDoc,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#ndocumentoAdmin').val(respuesta.numDoc);
+                    $('#nombreAdmin').val(respuesta.nombre);
+                    $('#apellidoAdmin').val(respuesta.apellido);
+                    $('#tdocumentoAdmin').val(respuesta.tipo_doc);
+                    $('#correoAdmin').val(respuesta.email);
+                    $('#telefonoAdmin').val(respuesta.telefono);
+                } else {
+                    $('#nombreAdmin').val('');
+                    $('#apellidoAdmin').val('');
+                    $('#tdocumentoAdmin').val('');
+                    $('#correoAdmin').val('');
+                    $('#telefonoAdmin').val('');
+                    $('#error-message').html('No se encontró ninguna persona con el número de documento especificado.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
     //buscar por Numero documento ID
     $('#buscarAdmin').on('click', function() {
         var numDoc = $('#codigo').val(); 
@@ -80,7 +112,7 @@ $(document).ready(function() {
                     if (response.trim() === "Eliminado") {
                     alert("Administrador eliminado exitosamente.");
                     } else {
-                        alert("Ocurrió un error al intentar eliminar el administrador." + numDoc);
+                        alert("Eliminado el administrador " + numDoc);
                     }
                 },
                 error: function(xhr) {
@@ -168,7 +200,7 @@ $(document).ready(function() {
         });
     });
 
-        //Limpiar campos
+        //Limpiar campos de Administrado
     $('#limpiarAdmin').on('click', function () {
         $('#ndocumentoAdmin').val('');
         $('#tdocumentoAdmin').val('');
@@ -204,7 +236,7 @@ $(document).ready(function() {
 
 
 //---------------  CULTIVO  -----------------------------   
-    //buscar codigo
+    //buscar codigo ID cltivo
     $('#buscarCultivo').on('click', function() {
         var codCult = $('#codigoCultivo').val();
         $.ajax({
@@ -363,20 +395,20 @@ $(document).ready(function() {
         $('#terrenocultivo').val('');
     });
     //PRUEBA
-    // Cargar valores de numDoc de Administrador en el formulario select
+    // Cargar valores de codCult de Cultivos en el formulario select
 $(document).ready(function() {
     $.ajax({
-        url: "http://localhost:8080/administradores/listar", // Ajusta la URL adecuadamente
+        url: "http://localhost:8080/cultivos/listar", // Ajusta la URL adecuadamente
         type: "GET",
         dataType: "json",
         success: function(respuesta) {
-            var select = $('#codigo');
+            var select = $('#codigoCultivo');
             
             for (var i = 0; i < respuesta.length; i++) {
-                var administrador = respuesta[i];
+                var cultivos = respuesta[i];
                 select.append($('<option>', {
-                    value: administrador.numDoc,
-                    text: administrador.numDoc
+                    value: cultivos.codCult,
+                    text: cultivos.codCult
                 }));
             }
         },
@@ -385,7 +417,331 @@ $(document).ready(function() {
         }
     });
 });
-    
+
+    //llamar datos de los CULTIVOS por el ID en los inputs
+    $('#llamarCultivo').on('click', function() {
+        var codCult = $('#codigoCultivo').val(); // Cambiado el ID
+
+        $.ajax({
+            url: "http://localhost:8080/cultivos/" + codCult,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#codcultivo').val(respuesta.codCult);
+                    $('#dircultivo').val(respuesta.direccion);
+                    $('#hectareascultivo').val(respuesta.hectareas);
+                    $('#terrenocultivo').val(respuesta.terreno);
+                } else {
+                    $('#codcultivo').val('');
+                    $('#dircultivo').val('');
+                    $('#hectareascultivo').val('');
+                    $('#terrenocultivo').val('');
+                    $('#error-message').html('No se encontró ninguna persona con el número de documento especificado.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+      
+//  -------------------  CLIENTE  -----------------------------
+    // Insertar tabla cliente
+    $('#insertarCliente').on('click', function() {
+        var nitCliente = $('#nitcliente').val();
+        var nombreCliente = $('#nombrecliente').val();
+        var correoCliente = $('#correocliente').val();
+        var telefonoCliente = $('#telefonocliente').val();
+        var administradorCliente = $('#administradorcliente').val(); // NumDoc del administrador
+
+        var clienteData = {
+            idNit: nitCliente,
+            nombre: nombreCliente,
+            correo: correoCliente,
+            telefono: telefonoCliente,
+            administrador: {
+                numDoc: administradorCliente
+            }
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/clientes", // Ajusta la URL adecuadamente
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(clienteData),
+            success: function(respuesta) {
+                console.log(respuesta);
+                alert("Cliente insertado correctamente");
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+                alert("No se pudo insertar el cliente");
+            }
+        });
+    });
+        //Listar CLIENTES
+        $('#listarCliente').on('click', function() {
+            $.ajax({
+                url: "http://localhost:8080/clientes/listar", 
+                type: "GET",
+                dataType: "json",
+                success: function(respuesta) {
+                    $('#tablaCliente').html('');
+                    if (respuesta.length > 0) {
+                        var tablaHTML = '<thead><tr>' +
+                                        '<th>Nit</th>' +
+                                        '<th>Nombre Cliente</th>' +
+                                        '<th>Correo</th>' +
+                                        '<th>Telefono</th>' +
+                                        '<th>Codigo Administrador</th>' +
+                                        '</tr></thead><tbody>';
+                        
+                        for (var i = 0; i < respuesta.length; i++) {
+                            var admin = respuesta[i];
+                            tablaHTML += '<tr>' +
+                                         '<td>' + admin.idNit + '</td>' +
+                                         '<td>' + admin.nombre + '</td>' +
+                                         '<td>' + admin.correo + '</td>' +
+                                         '<td>' + admin.telefono + '</td>' +
+                                         '<td>' + admin.administrador + '</td>' +
+                                         '</tr>';
+                        }
+        
+                        tablaHTML += '</tbody>';
+                        $('#tablaCliente').html(tablaHTML);
+                    } else {
+                        $('#tablaCliente').html('');
+                        $('#error-message').html('No se encontraron clientes.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        /*
+// Listar clientes
+$('#listarCliente').on('click', function() {
+    $.ajax({
+        url: "http://localhost:8080/clientes/listar", 
+        type: "GET",
+        dataType: "json",
+        success: function(respuesta) {
+            $('#tablaCliente').html('');
+            if (respuesta.length > 0) {
+                var tablaHTML = '<thead><tr>' +
+                                '<th>Nit</th>' +
+                                '<th>Nombre Cliente</th>' +
+                                '<th>Correo</th>' +
+                                '<th>Telefono</th>' +
+                                '<th>Administrador</th>' +
+                                '</tr></thead><tbody>';
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var cliente = respuesta[i];
+                    tablaHTML += '<tr>' +
+                                 '<td>' + cliente.idNit + '</td>' +
+                                 '<td>' + cliente.nombre + '</td>' +
+                                 '<td>' + cliente.correo + '</td>' +
+                                 '<td>' + cliente.telefono + '</td>' +
+                                 '<td>' + cliente.administrador.numDoc + '</td>' +
+                                 '</tr>';
+                }
+
+                tablaHTML += '</tbody>';
+                $('#tablaCliente').html(tablaHTML);
+            } else {
+                $('#tablaCliente').html('');
+                $('#error-message').html('No se encontraron clientes.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});
+*/
+
+        //buscar codigo ID cliente
+        $('#buscarCliente').on('click', function() {
+            var idNit = $('#codigoCliente').val();
+            $.ajax({
+                url: "http://localhost:8080/clientes/" + idNit,
+                type: "GET",
+                datatype: "JSON",
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    $('#tablaCliente').html('');
+                    if (respuesta != null) {
+                        $('#tablaCliente').html('<thead><tr>' +
+                            '<th>nitcliente</th>' +
+                            '<th>nombrecliente</th>' +
+                            '<th>correocliente</th>' +
+                            '<th>telefonocliente</th>' +
+                            '<th>administradorcliente</th>' +
+                            '<tr>' +
+                            '<td>' + respuesta.idNit + '</td>' +
+                            '<td>' + respuesta.nombre + '</td>' +
+                            '<td>' + respuesta.correo + '</td>' +
+                            '<td>' + respuesta.telefono + '</td>' +
+                            '<td>' + respuesta.administrador + '</td>' +
+                            '</tr></tbody>');
+                    } else {
+                        $('#tablaCliente').html('');
+                        $('#error-message').html('No se encontró ningun CLIENTE con el Numero de codigo especificado.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText); 
+                }
+            });
+        });
+
+        // Eliminar CLIENTE
+        $('#eliminarCliente').on('click', function() {
+            var codCult = $('#codigoCliente').val(); 
+            $.ajax({
+                url: "http://localhost:8080/clientes/eliminar/" + idNit, 
+                type: "DELETE",
+                dataType: "text",
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    if (respuesta === "Eliminado") {
+                        alert("Cliente eliminado");
+                    } 
+                },
+                error: function(xhr) {
+                    if (xhr.status === 404) {
+                        alert("No se pudo eliminar, no se encontró el codigo " + idNit); 
+                    }
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+            // Actualizar CLIENTE
+            $('#actualizarCliente').on('click', function() {
+                var idNit = $('#codigoCliente').val();
+                var nombre = $('#nombrecliente').val();
+                var correo = $('#correocliente').val();
+                var telefono = $('#telefonocliente').val();
+                //var administrador = $('#administradorcliente').val();
+        
+                var clienteData = {
+                    idNit: idNit,
+                    nombre: nombre,
+                    correo: correo,
+                    telefono: telefono
+                    //administrador: administrador
+                };
+        
+                $.ajax({
+                    url: "http://localhost:8080/clientes/actualizar/" + idNit,
+                    type: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(clienteData),
+                    success: function(respuesta) {
+                        console.log(respuesta);
+                        alert("Cliente actualizado correctamente");
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 404) {
+                            alert("No se pudo actualizar, no se encontró el código " + idNit);
+                        }
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+        //Limpiar campos CLIENTES
+        $('#limpiarCliente').on('click', function () {
+            $('#nitcliente').val('');
+            $('#nombrecliente').val('');
+            $('#correocliente').val('');
+            $('#telefonocliente').val('');
+            $('#administradorcliente').val('');
+        });
+
+    // Cargar valores de numDoc de Administrador en el formulario select de la tabla CLIENTE
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/administradores/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#administradorcliente');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.numDoc,
+                        text: administrador.numDoc
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+        //llamar datos del CLIENTE por el ID en los inputs
+    $('#llamarCliente').on('click', function() {
+        var idNit = $('#codigoCliente').val(); // 
+
+        $.ajax({
+            url: "http://localhost:8080/clientes/" + idNit,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#nitcliente').val(respuesta.idNit);
+                    $('#nombrecliente').val(respuesta.nombre);
+                    $('#correocliente').val(respuesta.correo);
+                    $('#telefonocliente').val(respuesta.telefono);
+                    $('#administradorcliente').val(respuesta.email);
+                } else {
+                    $('#nitcliente').val('');
+                    $('#nombrecliente').val('');
+                    $('#correocliente').val('');
+                    $('#telefonocliente').val('');
+                    $('#administradorcliente').val('');
+                    $('#error-message').html('No se encontró ningun cliente especificado.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //cargar ID en el SELECT de CLIENTE
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/clientes/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigoCliente');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.idNit,
+                        text: administrador.idNit
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+
+
 //---------------  VIRUS  -----------------------------   
     //buscar por Numero documento ID
     $('#buscarVirus').on('click', function() {
@@ -494,108 +850,5 @@ $(document).ready(function() {
         $('#nombrevirus').val('');
     });
   
-
-  
-//  -------------------  CLIENTE  -----------------------------
-// Insertar cliente
-$('#insertarCliente').on('click', function() {
-    var nitCliente = $('#nitcliente').val();
-    var nombreCliente = $('#nombrecliente').val();
-    var correoCliente = $('#correocliente').val();
-    var telefonoCliente = $('#telefonocliente').val();
-    var administradorCliente = $('#administradorcliente').val(); // NumDoc del administrador
-
-    var clienteData = {
-        idNit: nitCliente,
-        nombre: nombreCliente,
-        correo: correoCliente,
-        telefono: telefonoCliente,
-        administrador: {
-            numDoc: administradorCliente
-        }
-    };
-
-    $.ajax({
-        url: "http://localhost:8080/clientes", // Ajusta la URL adecuadamente
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(clienteData),
-        success: function(respuesta) {
-            console.log(respuesta);
-            alert("Cliente insertado correctamente");
-        },
-        error: function(xhr) {
-            console.error(xhr.responseText);
-            alert("No se pudo insertar el cliente");
-        }
-    });
-});
-
-// Listar clientes
-$('#listarCliente').on('click', function() {
-    $.ajax({
-        url: "http://localhost:8080/clientes/listar", 
-        type: "GET",
-        dataType: "json",
-        success: function(respuesta) {
-            $('#tablaCliente').html('');
-            if (respuesta.length > 0) {
-                var tablaHTML = '<thead><tr>' +
-                                '<th>Nit</th>' +
-                                '<th>Nombre Cliente</th>' +
-                                '<th>Correo</th>' +
-                                '<th>Telefono</th>' +
-                                '<th>Administrador</th>' +
-                                '</tr></thead><tbody>';
-                
-                for (var i = 0; i < respuesta.length; i++) {
-                    var cliente = respuesta[i];
-                    tablaHTML += '<tr>' +
-                                 '<td>' + cliente.idNit + '</td>' +
-                                 '<td>' + cliente.nombre + '</td>' +
-                                 '<td>' + cliente.correo + '</td>' +
-                                 '<td>' + cliente.telefono + '</td>' +
-                                 '<td>' + cliente.administrador.numDoc + '</td>' +
-                                 '</tr>';
-                }
-
-                tablaHTML += '</tbody>';
-                $('#tablaCliente').html(tablaHTML);
-            } else {
-                $('#tablaCliente').html('');
-                $('#error-message').html('No se encontraron clientes.');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-        }
-    });
-});
-
-    // Cargar valores de numDoc de Administrador en el formulario select de la tabla CLIENTE
-    $(document).ready(function() {
-        $.ajax({
-            url: "http://localhost:8080/administradores/listar", // Ajusta la URL adecuadamente
-            type: "GET",
-            dataType: "json",
-            success: function(respuesta) {
-                var select = $('#administradorcliente');
-                
-                for (var i = 0; i < respuesta.length; i++) {
-                    var administrador = respuesta[i];
-                    select.append($('<option>', {
-                        value: administrador.numDoc,
-                        text: administrador.numDoc
-                    }));
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    });
-
-
-
 
 });  // fin
