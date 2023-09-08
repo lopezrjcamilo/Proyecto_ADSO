@@ -13,17 +13,15 @@ public class Virus {
     private Integer codVirus;
     @Column (name="nom_virus",nullable = false, length = 20)
     private String nomVirus;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name ="num_diag",referencedColumnName = "num_diag", nullable = false)
-    private Diagnostico diagnosticoSet ;
+
 
     public Virus() {
     }
 
-    public Virus(Integer codVirus, String nomVirus, Diagnostico diagnosticoSet) {
+    public Virus(Integer codVirus, String nomVirus ){
         this.codVirus = codVirus;
         this.nomVirus = nomVirus;
-        this.diagnosticoSet = diagnosticoSet;
+
     }
 
     public Integer getCodVirus() {
@@ -42,11 +40,6 @@ public class Virus {
         this.nomVirus = nomVirus;
     }
 
-    public Diagnostico getDiagnosticoSet() {
-        return diagnosticoSet;
-    }
 
-    public void setDiagnosticoSet(Diagnostico diagnosticoSet) {
-        this.diagnosticoSet = diagnosticoSet;
-    }
+
 }
