@@ -1,5 +1,4 @@
 package com.example.proyecto_spyCloud.servicio;
-
 import com.example.proyecto_spyCloud.entidad.Visita;
 import com.example.proyecto_spyCloud.repositorio.VisitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +23,8 @@ public class VisitaService {
     public Visita visitaPorId(String id) {
         return visitaRepository.findById(Integer.valueOf(id)).get();
     }
+
+
+
 
 }

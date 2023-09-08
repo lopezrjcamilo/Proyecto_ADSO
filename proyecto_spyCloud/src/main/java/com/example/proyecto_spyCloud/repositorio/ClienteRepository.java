@@ -15,5 +15,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
 
     Cliente findByCorreo(String correo);
+
+
+
 }
 

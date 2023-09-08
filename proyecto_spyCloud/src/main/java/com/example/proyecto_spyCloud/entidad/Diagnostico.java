@@ -32,6 +32,13 @@ public class Diagnostico {
     @JoinColumn(name = "cod_cult", referencedColumnName = "cod_cult",nullable = false)
     private Cultivo cultivo;
 
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Informacion",
+            joinColumns = @JoinColumn(name = "diagnostico_num_diag"),
+            inverseJoinColumns = @JoinColumn(name = "virus_cod_virus"))
+    private Set<Virus> virusSet = new HashSet<>();
+
     public Diagnostico() {
     }
 
