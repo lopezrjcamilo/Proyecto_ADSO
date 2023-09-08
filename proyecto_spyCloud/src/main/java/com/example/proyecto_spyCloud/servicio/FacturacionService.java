@@ -15,11 +15,7 @@ import java.util.Optional;
 @Service
 public class FacturacionService {
 
-<<<<<<< HEAD
     private FacturacionRepository facturacionRepository;
-=======
-    FacturacionRepository facturacionRepository;
->>>>>>> 1503245 (Modificacion de tablas "clienteService" y "clienteController" añadiendo la funcion de ingresar con llave foranea, actualizar y eliminar.)
     private CultivoRepository cultivoRepository;
 
     @Autowired

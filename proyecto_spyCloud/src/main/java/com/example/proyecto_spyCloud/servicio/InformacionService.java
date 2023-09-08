@@ -16,7 +16,6 @@ import java.util.Optional;
 @Service
 public class InformacionService {
 
-
     private InformacionRepository informacionRepository;
     private DiagnosticoRepository diagnosticoRepository;
     private VirusRepository virusRepository;
@@ -27,11 +26,9 @@ public class InformacionService {
         this.virusRepository = virusRepository;
     }
 
-
     public List<Informacion> listarInformacion() {
         return informacionRepository.findAll();
     }
-
 
     public Informacion informacionPorId(Integer id) {
         return informacionRepository.findById(Integer.valueOf(id)).get();

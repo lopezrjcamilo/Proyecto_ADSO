@@ -16,9 +16,11 @@ public class Cliente {
     @Column(nullable = false, length = 15)
     private String telefono;
 
+
     //@JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name ="num_doc",referencedColumnName = "num_doc", nullable = false)
+
 
     public Administrador administrador;
     public Cliente() {
