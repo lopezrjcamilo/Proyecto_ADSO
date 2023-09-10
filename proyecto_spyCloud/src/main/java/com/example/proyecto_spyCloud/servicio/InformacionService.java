@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InformacionService {
@@ -31,6 +32,37 @@ public class InformacionService {
 
     public Informacion informacionPorId(Integer id) {
         return informacionRepository.findById(Integer.valueOf(id)).get();
+    }
+    public Informacion insertarInformacion(Informacion informacion){
+        Optional<Diagnostico> diagnosticoOptional= diagnosticoRepository.findById(informacion.getDiagnostico().getNumDiag());
+        Optional<Virus> virusOptional= virusRepository.findById(informacion.getVirus().getCodVirus());
+        if(diagnosticoOptional.isPresent() && virusOptional.isPresent()){
+            Diagnostico diagnostico=diagnosticoOptional.get();
+            Virus virus=virusOptional.get();
+            informacion.setDiagnostico(diagnostico);
+            informacion.setVirus(virus);
+            return informacionRepository.save(informacion);
+        }else{
+            return null;
+        }
+    }
+
+    public Informacion actualizarInformacion(Informacion informacion){
+        Optional<Diagnostico> diagnosticoOptional= diagnosticoRepository.findById(informacion.getDiagnostico().getNumDiag());
+        Optional<Virus> virusOptional= virusRepository.findById(informacion.getVirus().getCodVirus());
+        if(diagnosticoOptional.isPresent() && virusOptional.isPresent()){
+            Diagnostico diagnostico=diagnosticoOptional.get();
+            Virus virus=virusOptional.get();
+            informacion.setDiagnostico(diagnostico);
+            informacion.setVirus(virus);
+            return informacionRepository.save(informacion);
+        }else{
+            return null;
+        }
+    }
+
+    public void eliminarInformacion(Integer numReg){
+        informacionRepository.deleteById(numReg);
     }
 
 }

@@ -27,7 +27,7 @@ public class FacturacionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Facturacion> facturacionPorId(@PathVariable Integer id) {
-        Facturacion facturacion = facturacionService.facturacionPorId(String.valueOf(id));
+        Facturacion facturacion = facturacionService.facturacionPorId(id);
         if (facturacion != null) {
             return ResponseEntity.ok(facturacion);
         } else {

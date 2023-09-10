@@ -47,6 +47,37 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PostMapping("/agregar")
+    public ResponseEntity<Cliente> insertarCliente(@RequestBody Cliente clientePost){
+        Cliente cliente = clienteService.clientePorId(clientePost.getIdNit());
+        if (cliente != null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            clienteService.insertarCliente(clientePost);
+            return ResponseEntity.ok(clientePost);
+        }
+    }
+    @DeleteMapping("/eliminar/{idNit}")
+    public ResponseEntity<Void> insertarCliente(@PathVariable Integer idNit){
+        Cliente cliente = clienteService.clientePorId(idNit);
+        if (cliente != null) {
+            clienteService.eliminarClientePorId(idNit);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/actualizar")
+    public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente clientePut){
+        Cliente cliente = clienteService.clientePorId(clientePut.getIdNit());
+        if (cliente != null) {
+            clienteService.insertarCliente(clientePut);
+            return ResponseEntity.ok(clientePut);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 
 
 

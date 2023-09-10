@@ -1,21 +1,27 @@
 package com.example.proyecto_spyCloud.servicio;
 
+import com.example.proyecto_spyCloud.entidad.Administrador;
 import com.example.proyecto_spyCloud.entidad.Cliente;
+import com.example.proyecto_spyCloud.repositorio.AdministradorRepository;
 import com.example.proyecto_spyCloud.repositorio.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
 
     private ClienteRepository clienteRepository;
+    private AdministradorRepository administradorRepository;
 
     @Autowired
-    public ClienteService (ClienteRepository clienteRepository){
-        this.clienteRepository= clienteRepository;
+    public ClienteService(ClienteRepository clienteRepository, AdministradorRepository administradorRepository) {
+        this.clienteRepository = clienteRepository;
+        this.administradorRepository = administradorRepository;
     }
+
 
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();

@@ -28,8 +28,8 @@ public class FacturacionService {
         return facturacionRepository.findAll();
     }
 
-    public Facturacion facturacionPorId(String id) {
-        return facturacionRepository.findById(Integer.valueOf(id)).get();
+    public Facturacion facturacionPorId(Integer id) {
+        return facturacionRepository.findById(id).get();
     }
 
     public Facturacion insertarFacturacion(Facturacion facturacion){
