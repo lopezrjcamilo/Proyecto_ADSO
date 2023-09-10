@@ -6,33 +6,30 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Virus")
+@Table(name="virus")
 public class Virus {
     @Id
-    @Column(name = "cod_virus", nullable = false, length = 20)
-    private String codVirus;
+    @Column(name= "cod_virus" ,nullable = false, length = 15)
+    private Integer codVirus;
     @Column (name="nom_virus",nullable = false, length = 20)
     private String nomVirus;
 
-    @ManyToMany(mappedBy = "virusSet")
-    private Set<Diagnostico> diagnosticoSet = new HashSet<>();
 
     public Virus() {
     }
 
+    public Virus(Integer codVirus, String nomVirus ){
+        this.codVirus = codVirus;
+        this.nomVirus = nomVirus;
 
-    public String getCodVirus() {
+    }
+
+    public Integer getCodVirus() {
         return codVirus;
     }
 
-    public void setCodVirus(String codVirus) {
+    public void setCodVirus(Integer codVirus) {
         this.codVirus = codVirus;
-    }
-
-    public Virus(String codVirus, String nomVirus, Set<Diagnostico> diagnosticoSet) {
-        this.codVirus = codVirus;
-        this.nomVirus = nomVirus;
-        this.diagnosticoSet = diagnosticoSet;
     }
 
     public String getNomVirus() {
@@ -43,11 +40,6 @@ public class Virus {
         this.nomVirus = nomVirus;
     }
 
-    public Set<Diagnostico> getDiagnosticoSet() {
-        return diagnosticoSet;
-    }
 
-    public void setDiagnosticoSet(Set<Diagnostico> diagnosticoSet) {
-        this.diagnosticoSet = diagnosticoSet;
-    }
+
 }

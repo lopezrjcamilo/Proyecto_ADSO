@@ -13,21 +13,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadosController {
-
     @Autowired
     private EmpleadosService empleadosService;
     public EmpleadosController(EmpleadosService empleadosService) {
         this.empleadosService = empleadosService;
     }
-
     @GetMapping("/listar")
     public ResponseEntity<List<Empleados>> listarEmpleados() {
         return new ResponseEntity<>(empleadosService.listarEmpleados(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+<<<<<<< HEAD
     public ResponseEntity<Empleados> empleadosPorId(@PathVariable Integer id) {
         Empleados empleados = empleadosService.empleadosPorId(Integer.valueOf(String.valueOf(id)));
+=======
+    public ResponseEntity<Empleados> empleadosPorId(@PathVariable Integer id) {Empleados empleados = empleadosService.empleadosPorId(id);
+>>>>>>> 18c6de7e8a6a8063c64ace9ed0d63197d9160449
         if (empleados != null) {
             return ResponseEntity.ok(empleados);
         } else {
@@ -66,4 +68,8 @@ public class EmpleadosController {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 18c6de7e8a6a8063c64ace9ed0d63197d9160449

@@ -67,29 +67,33 @@
     <br>
     <div class="contenedores_especiales">
         <div class="botones_programados row justify-content-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12 text-center">
                 <button type="button" id="mostrarFormulario"
                     class="btn btn-primary btn-block mb-2">Administrador</button>
-                <button type="button" id="mostrarFormulario2" class="btn btn-primary btn-block mb-2">Cultivo</button>
-                <button type="button" id="mostrarFormulario3" class="btn btn-primary btn-block mb-2">Virus</button>
+                <button type="button" id="mostrarFormulario2" 
+                    class="btn btn-primary btn-block mb-2">Cultivo</button>
                 <button type="button" id="mostrarFormularioCliente"
                     class="btn btn-primary btn-block mb-2">Cliente</button>
                 <button type="button" id="mostrarFormularioEmpleados"
                     class="btn btn-primary btn-block mb-2">Empleados</button>
                 <button type="button" id="mostrarFormularioVisita"
                     class="btn btn-primary btn-block mb-2">Visita</button>
-            </div>
-            <div class="col-12 col-md-6">
+            <!--</div>
+            <div class="col-12 col-md-6">-->
                 <button type="button" id="mostrarFormularioFacturacion"
                     class="btn btn-primary btn-block mb-2">Facturacion</button>
                 <button type="button" id="mostrarFormularioAnalizado"
                     class="btn btn-primary btn-block mb-2">Analizado</button>
-                <button type="button" id="mostrarFormularioDron" class="btn btn-primary btn-block mb-2">Dron</button>
+                <button type="button" id="mostrarFormularioDron"
+                    class="btn btn-primary btn-block mb-2">Dron</button>
                 <button type="button" id="mostrarFormularioDiagnostico"
                     class="btn btn-primary btn-block mb-2">Diagnóstico</button>
                 <button type="button" id="mostrarFormularioMultimedia"
                     class="btn btn-primary btn-block mb-2">Multimedia</button>
-                <button type="button" id="mostrarFormularioTiene" class="btn btn-primary btn-block mb-2">Tiene</button>
+                <button type="button" id="mostrarFormularioTiene" 
+                    class="btn btn-primary btn-block mb-2">Tiene</button>
+                <button type="button" id="mostrarFormulario3" 
+                    class="btn btn-primary btn-block mb-2">Virus</button>
             </div>
         </div>
         <hr>
@@ -123,7 +127,7 @@
                             <select class="form-select" id="tdocumentoAdmin" aria-label="Default select example">
                                 <option selected>Seleccione</option>
                                 <option value="Cedula">Cedula</option>
-                                <option value="Tarjeta Identidad">Tarjeta Identidad</option>
+                                <option value="T.I.">Tarjeta Identidad</option>
                                 <option value="Pasaporte">Pasaporte</option>
                             </select>
                         </div>
@@ -142,21 +146,72 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                </div>
+            </div>
+            <!--BOTONES-->
+            <hr>
+            <div class="container" id="containerBotones">
+                <div class="row">
+                    <div class="col-12">
+                        <!--<div class="mb-3 d-flex justify-content-between">-->
+                        <div class="d-grid gap-2 d-md-flex">
+                            <div class="btn-group">
+                                <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
+                                <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
+                                <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">ID Administrador</span>
+                                <select id="codigo" class="form-select"></select>
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <!--BOTONES-->
+            <!--
+            <div class="container" id="containerBotones">
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
                             <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
                             <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
                             <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
+                        
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">ID Administrador</span>
+                                <select id="codigo" class="form-select"></select>
+                            </div>
+                        
+                                <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
+                            
                         </div>
-                    </div>
+                        
                 </div>
-            </div>
+                </div>
+            </div>-->
+
             <!-- tabla consulta -->
             <hr>
-            <div class="container mt-5">
+            <div class="container mt-2">
                 <div class="row">
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-12">
+                        <div class="table-responsive">
                         <table class="table table-striped table-hover table-bordered" id="tablaAdmin">
                             <thead>
                                 <tr>
@@ -169,28 +224,12 @@
                                 </tr>
                             </thead>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                            <!-- PRUEBA  -->
-                        <div class="col-12 col-md-4">
-                            <div class="mb-3">
-                                <label for="categoria" class="form-label">Administrador</label>
-                                <select id="codigo" class="form-select"></select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <hr>
         </form>
 
@@ -202,7 +241,7 @@
                     <div class="col-12 col-md-3">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Codigo Cultivo</label>
-                            <input type="number" id="codcultivo" class="form-control">
+                            <input type="number" id="codcultivo" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-12 col-md-9">
@@ -227,22 +266,24 @@
                         <div class="form-text">Llene todos los campos antes de enviar.</div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
+                <div class="row justify-content-end">
+                    <div class="col-12 ">
+                        <div class="mb-3 ">
+                            <div class="text-end">
                             <button type="button" id="insertarCultivo" class="btn btn-primary">Enviar</button>
                             <button type="button" id="listarCultivo" class="btn btn-primary">Listar</button>
                             <button type="button" id="limpiarCultivo" class="btn btn-secondary">Limpiar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- tabla consulta -->
             <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaCultivo">
+            <div class="container text-center mt-3">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <table class="table table-dark table-striped table-hover table-bordered" id="tablaCultivo">
                             <thead>
                                 <tr>
                                     <th>Codigo Cultivo</th>
@@ -256,96 +297,40 @@
                 </div>
             </div>
             <hr>
-            <div class="container mt-5">
+            <div class="container mt-2">
                 <div class="row">
-                    <div class="col-12 col-md-5">
-                        <!--<div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Cultivo</label>
-                            <input type="email" id="codigoCultivo" class="form-control">
-                        </div>-->
-                            <!-- PRUEBA  -->
-                            <div class="col-12 col-md-4">
-                                <div class="mb-3">
-                                    <label for="categoria" class="form-label">Codigo Cultivo</label>
-                                    <select id="codigoCultivo" class="form-select"></select>
-                                </div>
+                    <div class="col-12 col-md-9">
+                        <!-- PRUEBA  
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3">
+                                <label for="categoria" class="form-label">Codigo Cultivo</label>
+                                <select id="codigoCultivo" class="form-select"></select>
                             </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarCultivo" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarCultivo" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarCultivo" class="btn btn-primary">Actualizar</button>
+
+                            <div class="btn-group">
+                            <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
+                        </div>
+                        </div>-->
+                        <div class="d-grid gap-2 d-md-flex">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Codigo Cultivo</span>
+                                <select id="codigoCultivo" class="form-select"></select>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="button" id="buscarCultivo" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarCultivo" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarCultivo" class="btn btn-primary">Llamar</button>
+                                <button type="button" id="actualizarCultivo" class="btn btn-primary">Actualizar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
-        </form>
-
-        <!-- VIRUS -->
-        <form id="formulario3" style="display: none;">
-            <h2 class="text-center mt-4 mb-5">Formulario de Virus</h2>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Codigo Virus</label>
-                            <input type="text" id="codvirus" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Nombre Virus</label>
-                            <input type="text" id="nombrevirus" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-text">Llene todos los campos antes de enviar.</div>
-                    <br>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <br>
-                            <button type="button" id="insertarVirus" class="btn btn-primary">Enviar</button>
-                            <button type="button" id="listarVirus" class="btn btn-primary">Listar</button>
-                            <button type="button" id="limpiarVirus" class="btn btn-secondary">Limpiar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- tabla consulta -->
-            <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaVirus">
-                            <thead>
-                                <tr>
-                                    <th>Codigo Virus</th>
-                                    <th>Nombre Virus</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Virus</label>
-                            <input type="email" id="codigoVirus" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarVirus" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarVirus" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarVirus" class="btn btn-primary">Actualizar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </form>
 
         <!-- CLIENTE -->
@@ -368,7 +353,7 @@
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Correo</label>
-                            <input type="text" id="correocliente" class="form-control">
+                            <input type="email" id="correocliente" class="form-control">
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -377,12 +362,6 @@
                             <input type="text" id="telefonocliente" class="form-control">
                         </div>
                     </div>
-                    <!--<div class="col-12 col-md-4">
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Administrador</label>
-                            <input type="text" id="administradorcliente" class="form-control">
-                        </div>
-                    </div>-->
                     <!-- PRUEBA  -->
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
@@ -394,7 +373,7 @@
                     <div class="mb-3">
                         <div class="form-text">Llene todos los campos antes de enviar.</div>
                     </div>
-                        
+
                 </div>
 
                 <div class="row">
@@ -407,41 +386,67 @@
                     </div>
                 </div>
             </div>
-            <!-- tabla consulta -->
+            <!-- tabla CLIENTE consulta -->
             <hr>
             <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaCliente">
-                            <thead>
-                                <tr>
-                                    <th>Nit</th>
-                                    <th>Nombre Cliente</th>
-                                    <th>Correo</th>
-                                    <th>Telefono</th>
-                                    <th>Administrador</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Virus</label>
-                            <input type="text" id="codigoVirus" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarVirus" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarVirus" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarVirus" class="btn btn-primary">Actualizar</button>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered" id="tablaCliente">
+                                <thead>
+                                    <tr>
+                                        <th>Nit</th>
+                                        <th>Nombre Cliente</th>
+                                        <th>Correo</th>
+                                        <th>Telefono</th>
+                                        <th>Administrador</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr>
+
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-12 col-md-7">
+                        <div class="d-grid gap-2 d-md-flex">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
+                                <select id="codigoCliente" class="form-select"></select>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
+                                <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!--
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="codigo" class="form-label">Codigo Cliente</label>
+                            <input type="text" id="codigoCliente" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
 
         </form>
 
@@ -1064,7 +1069,7 @@
                 </div>
             </div>
         </form>
-        
+
         <!-- TIENE -->
         <form id="formularioTiene" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Tiene</h2>
@@ -1094,7 +1099,7 @@
                             <input type="text" id="fecharegistrotiene" class="form-control">
                         </div>
                     </div>
-                    
+
                     <div class="form-text">Llene todos los campos antes de enviar.</div>
                     <br>
                 </div>
@@ -1140,6 +1145,73 @@
                             <button type="button" id="buscarTiene" class="btn btn-primary">Buscar</button>
                             <button type="button" id="eliminarTiene" class="btn btn-danger">Eliminar</button>
                             <button type="button" id="actualizarTiene" class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- VIRUS -->
+        <form id="formulario3" style="display: none;">
+            <h2 class="text-center mt-4 mb-5">Formulario de Virus</h2>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Codigo Virus</label>
+                            <input type="text" id="codvirus" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Nombre Virus</label>
+                            <input type="text" id="nombrevirus" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                    <br>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <br>
+                            <button type="button" id="insertarVirus" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="listarVirus" class="btn btn-primary">Listar</button>
+                            <button type="button" id="limpiarVirus" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- tabla consulta -->
+            <hr>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <table class="table table-hover" id="tablaVirus">
+                            <thead>
+                                <tr>
+                                    <th>Codigo Virus</th>
+                                    <th>Nombre Virus</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="mb-3">
+                            <label for="codigo" class="form-label">Codigo Virus</label>
+                            <input type="email" id="codigoVirus" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" id="buscarVirus" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarVirus" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="actualizarVirus" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,12 @@
 package com.example.proyecto_spyCloud.servicio;
+<<<<<<< HEAD
 
 import com.example.proyecto_spyCloud.entidad.*;
 import com.example.proyecto_spyCloud.repositorio.CultivoRepository;
 import com.example.proyecto_spyCloud.repositorio.EmpleadosRepository;
+=======
+import com.example.proyecto_spyCloud.entidad.Visita;
+>>>>>>> 18c6de7e8a6a8063c64ace9ed0d63197d9160449
 import com.example.proyecto_spyCloud.repositorio.VisitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,36 +34,6 @@ public class VisitaService {
         return visitaRepository.findById(Integer.valueOf(id)).get();
     }
 
-
-    public Visita insertarVisita(Visita visita){
-        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getCodEmp());
-        Optional<Cultivo> cultivoOptional= cultivoRepository.findById(visita.getCultivo().getCodCult());
-        if(empleadosOptional.isPresent() && cultivoOptional.isPresent()){
-            Empleados empleados=empleadosOptional.get();
-            Cultivo cultivo=cultivoOptional.get();
-            visita.setEmpleados(empleados);
-            visita.setCultivo(cultivo);
-            return visitaRepository.save(visita);
-        }else{
-            return null;
-        }
-    }
-    public void eliminarVisita(Integer numVisita){
-        visitaRepository.deleteById(numVisita);
-    }
-    public Visita actualizarVisita(Visita visita){
-        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getCodEmp());
-        Optional<Cultivo> cultivoOptional= cultivoRepository.findById(visita.getCultivo().getCodCult());
-        if(empleadosOptional.isPresent() && cultivoOptional.isPresent()){
-            Empleados empleados=empleadosOptional.get();
-            Cultivo cultivo=cultivoOptional.get();
-            visita.setEmpleados(empleados);
-            visita.setCultivo(cultivo);
-            return visitaRepository.save(visita);
-        }else{
-            return null;
-        }
-    }
 
 
 
