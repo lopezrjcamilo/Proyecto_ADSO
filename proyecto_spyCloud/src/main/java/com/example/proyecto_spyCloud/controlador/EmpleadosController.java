@@ -1,5 +1,6 @@
 package com.example.proyecto_spyCloud.controlador;
 
+import com.example.proyecto_spyCloud.entidad.Cliente;
 import com.example.proyecto_spyCloud.entidad.Empleados;
 import com.example.proyecto_spyCloud.servicio.EmpleadosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,12 @@ public class EmpleadosController {
     }
 
     @GetMapping("/{id}")
+<<<<<<< HEAD
+    public ResponseEntity<Empleados> empleadosPorId(@PathVariable Integer id) {
+        Empleados empleados = empleadosService.empleadosPorId(Integer.valueOf(String.valueOf(id)));
+=======
     public ResponseEntity<Empleados> empleadosPorId(@PathVariable Integer id) {Empleados empleados = empleadosService.empleadosPorId(id);
+>>>>>>> 18c6de7e8a6a8063c64ace9ed0d63197d9160449
         if (empleados != null) {
             return ResponseEntity.ok(empleados);
         } else {
@@ -62,4 +68,8 @@ public class EmpleadosController {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 18c6de7e8a6a8063c64ace9ed0d63197d9160449
