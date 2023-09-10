@@ -18,7 +18,6 @@ public class ClienteService {
 
 
     @Autowired
-
     public ClienteService(ClienteRepository clienteRepository, AdministradorRepository administradorRepository) {
         this.clienteRepository = clienteRepository;
         this.administradorRepository = administradorRepository;

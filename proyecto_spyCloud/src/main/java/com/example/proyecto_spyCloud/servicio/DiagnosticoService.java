@@ -2,8 +2,6 @@ package com.example.proyecto_spyCloud.servicio;
 
 import com.example.proyecto_spyCloud.entidad.*;
 import com.example.proyecto_spyCloud.repositorio.CultivoRepository;
-import com.example.proyecto_spyCloud.entidad.Cultivo;
-import com.example.proyecto_spyCloud.entidad.Diagnostico;
 import com.example.proyecto_spyCloud.repositorio.DiagnosticoRepository;
 import com.example.proyecto_spyCloud.repositorio.DronRepository;
 import com.example.proyecto_spyCloud.repositorio.VirusRepository;
@@ -67,9 +65,9 @@ public class DiagnosticoService {
             return null;
         }
     }
+    
 
     public void eliminarDiagnostico(Integer numDiag){
         diagnosticoRepository.deleteById(numDiag);
     }
-
 }

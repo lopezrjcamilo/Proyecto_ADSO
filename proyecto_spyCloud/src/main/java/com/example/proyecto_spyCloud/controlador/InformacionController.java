@@ -1,12 +1,12 @@
 package com.example.proyecto_spyCloud.controlador;
 
+import com.example.proyecto_spyCloud.entidad.Diagnostico;
 import com.example.proyecto_spyCloud.entidad.Informacion;
 import com.example.proyecto_spyCloud.servicio.InformacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -35,7 +35,6 @@ public class InformacionController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     @PostMapping("/agregar")
     public ResponseEntity<Informacion> insertarInformacion(@RequestBody Informacion informacionPost) {
@@ -69,7 +68,6 @@ public class InformacionController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
 
 }
