@@ -11,7 +11,10 @@ import java.util.List;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-    List<Cliente> findByAdministrador(Administrador administrador);
+
     Cliente findByCorreo(String correo);
+
+
+
 }
 

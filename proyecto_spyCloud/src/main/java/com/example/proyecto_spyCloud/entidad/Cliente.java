@@ -1,14 +1,13 @@
 package com.example.proyecto_spyCloud.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "clientes")
-
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "nit" ,nullable = false, length = 30)
     private Integer idNit;
     @Column(name= "nom_cliente" ,nullable = false, length = 30)
@@ -17,10 +16,10 @@ public class Cliente {
     private String correo;
     @Column(nullable = false, length = 15)
     private String telefono;
-
-    @ManyToOne
-    @JoinColumn(name ="num_doc",referencedColumnName = "num_doc")
-    private Administrador administrador;
+    //@JsonIgnore
+    @ManyToOne//(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name ="num_doc",referencedColumnName = "num_doc", nullable = false)
+    public Administrador administrador;
     public Cliente() {
     }
 
