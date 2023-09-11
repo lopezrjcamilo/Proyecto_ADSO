@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadosController {
@@ -35,7 +35,7 @@ public class EmpleadosController {
         }
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/insertar")
     public ResponseEntity<Empleados> insertarEmpleados(@RequestBody Empleados empleadosPost){
         Empleados empleados = empleadosService.empleadosPorId(empleadosPost.getCodEmp());
         if (empleados != null) {
@@ -55,7 +55,7 @@ public class EmpleadosController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/actualizar")
+    @PutMapping("/actualizar/{CodEmp}")
     public ResponseEntity<Empleados> actualizarEmpleados(@RequestBody Empleados empleadosPut){
         Empleados empleados = empleadosService.empleadosPorId(empleadosPut.getCodEmp());
         if (empleados != null) {

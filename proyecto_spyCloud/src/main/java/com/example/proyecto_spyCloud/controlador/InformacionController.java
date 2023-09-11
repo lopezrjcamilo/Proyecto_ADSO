@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
-@RequestMapping("/tiene")
+@RequestMapping("/informacion")
 public class InformacionController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class InformacionController {
         }
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/insertar")
     public ResponseEntity<Informacion> insertarInformacion(@RequestBody Informacion informacionPost) {
         Informacion informacion = informacionService.informacionPorId(informacionPost.getNumReg());
         if (informacion != null) {
@@ -46,7 +46,7 @@ public class InformacionController {
         }
     }
 
-    @PutMapping("/actualizar")
+    @PutMapping("/actualizar/{id}")
     public ResponseEntity<Informacion> actualizarInformacion(@RequestBody Informacion informacionPost) {
         Informacion informacion = informacionService.informacionPorId(informacionPost.getNumReg());
         if (informacion != null) {

@@ -5,13 +5,10 @@ import com.example.proyecto_spyCloud.servicio.VirusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/virus")
 public class VirusController {
@@ -22,6 +19,12 @@ public class VirusController {
         this.virusService = virusService;
     }
 
+    @PostMapping("/insertar")
+    public ResponseEntity<Virus> insertarVirus(@RequestBody Virus virus) {
+        Integer codVirus = virus.getCodVirus();
+        virus.setCodVirus(codVirus);
+        return new ResponseEntity<>(virusService.insertarVirus(virus), HttpStatus.CREATED);
+    }
     @GetMapping("/listar")
     public List<Virus> listarVirus() {
         return virusService.listarVirus();
@@ -36,5 +39,28 @@ public class VirusController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/actualizar/{codVirus}")
+    public ResponseEntity<Virus> actualizarVirus(
+            @PathVariable Integer codVirus, @RequestBody Virus virus) {
+        virus.setCodVirus(codVirus);
+        Virus virusActualizado = virusService.actualizarVirus(virus);
+        if (virusActualizado != null) {
+            return ResponseEntity.ok(virusActualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/eliminar/{codVirus}")
+    public ResponseEntity<Void> eliminarVirus(@PathVariable Integer codVirus) {
+        if(virusService.virusPorId(codVirus)!= null) {
+            virusService.eliminarVirus(codVirus);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
