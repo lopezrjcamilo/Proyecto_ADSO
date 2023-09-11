@@ -445,7 +445,6 @@ $(document).ready(function() {
             }
         });
     });
-      
 //  -------------------  CLIENTE  -----------------------------
 
     //insertar CLIENTE
@@ -572,6 +571,22 @@ $(document).ready(function() {
             telefono: $('#telefonocliente').val(),
             administrador: {
                 numDoc: $('#administradorcliente').val()
+            }}
+                // Insertar tabla cliente
+    $('#insertarCliente').on('click', function() {
+        var nitCliente = $('#nitcliente').val();
+        var nombreCliente = $('#nombrecliente').val();
+        var correoCliente = $('#correocliente').val();
+        var telefonoCliente = $('#telefonocliente').val();
+        var administradorCliente = $('#administradorcliente').val(); // NumDoc del administrador
+
+        var clienteData = {
+            idNit: nitCliente,
+            nombre: nombreCliente,
+            correo: correoCliente,
+            telefono: telefonoCliente,
+            administrador: {
+                numDoc: administradorCl
             }
         };
 
@@ -626,10 +641,9 @@ $(document).ready(function() {
         });
     });
 
-    //llamar datos del CLIENTE por el ID en los inputs
+        //llamar datos del CLIENTE por el ID en los inputs
     $('#llamarCliente').on('click', function() {
-        var idNit = $('#codigoCliente').val();
-    
+        var idNit = $('#codigoCliente').val(); // 
         $.ajax({
             url: "http://localhost:8080/clientes/" + idNit,
             type: "GET",
@@ -640,16 +654,20 @@ $(document).ready(function() {
                     $('#nombrecliente').val(respuesta.nombre);
                     $('#correocliente').val(respuesta.correo);
                     $('#telefonocliente').val(respuesta.telefono);
+
     
                     // Aquí se establece el valor del select 'administradorcliente'
                     $('#administradorcliente').val(respuesta.administrador.numDoc); // Suponiendo que 'administrador' tiene un campo 'id'
+
+                    $('#administradorcliente').val(respuesta.email);
+
                 } else {
                     $('#nitcliente').val('');
                     $('#nombrecliente').val('');
                     $('#correocliente').val('');
                     $('#telefonocliente').val('');
                     $('#administradorcliente').val('');
-                    $('#error-message').html('No se encontró ningún cliente especificado.');
+                    $('#error-message').html('No se encontró ningun cliente especificado.');
                 }
             },
             error: function(xhr, status, error) {
@@ -2097,7 +2115,8 @@ $('#insertarDron').on('click', function() {
     $('#limpiarCultivo').on('click', function () {
         $('#codvirus').val('');
         $('#nombrevirus').val('');
-    });
-  
+    })
+});
 
-});  // fin
+
+}); 

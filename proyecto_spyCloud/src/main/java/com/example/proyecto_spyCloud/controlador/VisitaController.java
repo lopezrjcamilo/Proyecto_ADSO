@@ -1,14 +1,12 @@
 package com.example.proyecto_spyCloud.controlador;
 
+import com.example.proyecto_spyCloud.entidad.Cliente;
 import com.example.proyecto_spyCloud.entidad.Visita;
 import com.example.proyecto_spyCloud.servicio.VisitaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,11 +27,44 @@ public class VisitaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Visita> visitaPorId(@PathVariable Integer id) {
-        Visita visita = visitaService.visitaPorId(String.valueOf(id));
+        Visita visita = visitaService.visitaPorId(id);
         if (visita != null) {
             return ResponseEntity.ok(visita);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<Visita> insertarCliente(@RequestBody Visita visitaPost) {
+        Visita visita = visitaService.visitaPorId(visitaPost.getNumVisita());
+        if (visita != null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            visitaService.insertarVisita(visitaPost);
+            return ResponseEntity.ok(visitaPost);
+        }
+    }
+
+    @DeleteMapping("/eliminar/{numVisita}")
+    public ResponseEntity<Void> insertarCliente(@PathVariable Integer numVisita){
+        Visita visita = visitaService.visitaPorId(numVisita);
+        if (visita != null) {
+            visitaService.eliminarVisita(numVisita);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<Visita> actualizarCliente(@RequestBody Visita visitaPost) {
+        Visita visita = visitaService.visitaPorId(visitaPost.getNumVisita());
+        if (visita != null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            visitaService.insertarVisita(visitaPost);
+            return ResponseEntity.ok(visitaPost);
         }
     }
 

@@ -1,14 +1,12 @@
 package com.example.proyecto_spyCloud.controlador;
 
+import com.example.proyecto_spyCloud.entidad.Cliente;
 import com.example.proyecto_spyCloud.entidad.Multimedia;
 import com.example.proyecto_spyCloud.servicio.MultimediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,11 +27,42 @@ public class MultimediaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Multimedia> multimediaPorId(@PathVariable Integer id) {
-        Multimedia multimedia = multimediaService.multimediaPorId(String.valueOf(id));
+        Multimedia multimedia = multimediaService.multimediaPorId(Integer.valueOf(String.valueOf(id)));
         if (multimedia != null) {
             return ResponseEntity.ok(multimedia);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<Multimedia> insertarMultimedia(@RequestBody Multimedia multimediaPost){
+        Multimedia multimedia = multimediaService.multimediaPorId(multimediaPost.getCodMult());
+        if (multimedia != null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            multimediaService.insertarMultimedia(multimediaPost);
+            return ResponseEntity.ok(multimediaPost);
+        }
+    }
+    @DeleteMapping("/eliminar/{CodMult}")
+    public ResponseEntity<Void> eliminarMultimediaPorId(@PathVariable Integer CodMult){
+        Multimedia multimedia = multimediaService.multimediaPorId(CodMult);
+        if (multimedia != null) {
+            multimediaService.eliminarMultimediaPorId(CodMult);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/actualizar")
+    public ResponseEntity<Multimedia> actualizarCliente(@RequestBody Multimedia multimediaPut){
+        Multimedia multimedia = multimediaService.multimediaPorId(multimediaPut.getCodMult());
+        if (multimedia != null) {
+            multimediaService.insertarMultimedia(multimediaPut);
+            return ResponseEntity.ok(multimediaPut);
+        } else {
+            return ResponseEntity.noContent().build();
         }
     }
 
