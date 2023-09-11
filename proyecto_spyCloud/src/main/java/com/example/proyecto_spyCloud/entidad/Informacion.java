@@ -1,17 +1,19 @@
 package com.example.proyecto_spyCloud.entidad;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Date;
 
 @Entity
+
 @Table(name="informacion")
+
 public class Informacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "num_reg", nullable = false, length = 15)
     private Integer numReg;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name ="num_diag",referencedColumnName = "num_diag", nullable = false)
@@ -19,6 +21,9 @@ public class Informacion {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name ="cod_virus",referencedColumnName = "cod_virus", nullable = false)
+
+
+
     private Virus virus;
 
     @Column(name = "fecha_reg", nullable = false)
