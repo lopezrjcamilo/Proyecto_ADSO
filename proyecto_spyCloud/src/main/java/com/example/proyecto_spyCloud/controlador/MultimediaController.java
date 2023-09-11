@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/multimedia")
 public class MultimediaController {
@@ -35,7 +35,7 @@ public class MultimediaController {
         }
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/insertar")
     public ResponseEntity<Multimedia> insertarMultimedia(@RequestBody Multimedia multimediaPost){
         Multimedia multimedia = multimediaService.multimediaPorId(multimediaPost.getCodMult());
         if (multimedia != null) {
@@ -55,7 +55,7 @@ public class MultimediaController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/actualizar")
+    @PutMapping("/actualizar/{CodMult}")
     public ResponseEntity<Multimedia> actualizarCliente(@RequestBody Multimedia multimediaPut){
         Multimedia multimedia = multimediaService.multimediaPorId(multimediaPut.getCodMult());
         if (multimedia != null) {
