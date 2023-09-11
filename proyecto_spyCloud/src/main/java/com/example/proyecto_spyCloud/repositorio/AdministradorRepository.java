@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdministradorRepository
-                       extends JpaRepository<Administrador, String > {
+                       extends JpaRepository<Administrador, Integer> {
 
 }
