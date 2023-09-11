@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/diagnostico")
 public class DiagnosticoController {
@@ -35,7 +35,7 @@ public class DiagnosticoController {
         }
     }
 
-    @PostMapping ("/agregar")
+    @PostMapping ("/insertar")
     public ResponseEntity<Diagnostico> insertarDiagnostico(@RequestBody Diagnostico diagnosticoPost) {
         Diagnostico diagnostico = diagnosticoService.diagnosticoPorId(String.valueOf(diagnosticoPost.getNumDiag()));
         if (diagnostico != null) {
@@ -46,7 +46,7 @@ public class DiagnosticoController {
         }
     }
 
-    @PutMapping ("/actualizar")
+    @PutMapping ("/actualizar/{id}")
     public ResponseEntity<Diagnostico> actualizarDiagnostico(@RequestBody Diagnostico diagnosticoPost) {
         Diagnostico diagnostico = diagnosticoService.diagnosticoPorId(String.valueOf(diagnosticoPost.getNumDiag()));
         if (diagnostico != null) {
@@ -58,7 +58,7 @@ public class DiagnosticoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarDiagnosticoPorId(@PathVariable Integer id) {
+    public ResponseEntity<Void> eliminarDiagnostico(@PathVariable Integer id) {
         Diagnostico diagnostico = diagnosticoService.diagnosticoPorId(String.valueOf(id));
         if (diagnostico != null) {
             diagnosticoService.eliminarDiagnostico(id);

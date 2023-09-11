@@ -65,7 +65,7 @@ public class DiagnosticoService {
             return null;
         }
     }
-    
+
 
     public void eliminarDiagnostico(Integer numDiag){
         diagnosticoRepository.deleteById(numDiag);

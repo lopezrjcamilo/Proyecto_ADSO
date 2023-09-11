@@ -34,12 +34,10 @@ public class EmpleadosService {
     }
 
     public Empleados insertarEmpleados(Empleados empleados){
-
         Optional<Administrador> administradorOptional= administradorRepository.findById(empleados.getAdministrador().getNumDoc());
         if(administradorOptional.isPresent()){
             Administrador administrador=administradorOptional.get();
             empleados.setAdministrador(administrador);
-
             return empleadosRepository.save(empleados);
         }else{
             return null;
@@ -52,7 +50,6 @@ public class EmpleadosService {
         if(administradorOptional.isPresent()){
             Administrador administrador=administradorOptional.get();
             empleados.setAdministrador(administrador);
-
             return empleadosRepository.save(empleados);
         }else{
             return null;

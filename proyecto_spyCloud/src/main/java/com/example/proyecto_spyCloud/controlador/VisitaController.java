@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/visita")
 public class VisitaController {
@@ -35,7 +35,7 @@ public class VisitaController {
         }
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/insertar")
     public ResponseEntity<Visita> insertarCliente(@RequestBody Visita visitaPost) {
         Visita visita = visitaService.visitaPorId(visitaPost.getNumVisita());
         if (visita != null) {
@@ -57,7 +57,7 @@ public class VisitaController {
         }
     }
 
-    @PutMapping("/actualizar")
+    @PutMapping("/actualizar/{numVisita}")
     public ResponseEntity<Visita> actualizarCliente(@RequestBody Visita visitaPost) {
         Visita visita = visitaService.visitaPorId(visitaPost.getNumVisita());
         if (visita != null) {

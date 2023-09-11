@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -51,7 +51,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("/agregar")
+    @PostMapping("/insertar")
     public ResponseEntity<Cliente> insertarCliente(@RequestBody Cliente clientePost){
         Cliente cliente = clienteService.clientePorId(clientePost.getIdNit());
         if (cliente != null) {
@@ -71,7 +71,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/actualizar")
+    @PutMapping("/actualizar/{idNit}")
     public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente clientePut){
         Cliente cliente = clienteService.clientePorId(clientePut.getIdNit());
         if (cliente != null) {

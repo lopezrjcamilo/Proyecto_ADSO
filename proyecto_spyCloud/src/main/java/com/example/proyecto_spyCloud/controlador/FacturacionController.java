@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/facturacion")
 public class FacturacionController {
@@ -37,8 +37,9 @@ public class FacturacionController {
     }
 
 
-    @PostMapping("/agregar")
-    public ResponseEntity<Facturacion> insertarFacturacion(@RequestBody Facturacion facturacionPost) {
+    @PostMapping("/insertar")
+    public ResponseEntity<Facturacion> insertarFacturacion(@RequestBody Facturacion facturacionPost){
+
         Facturacion facturacion = facturacionService.facturacionPorId(facturacionPost.getNumFac());
         if (facturacion != null) {
             return ResponseEntity.notFound().build();
@@ -50,7 +51,10 @@ public class FacturacionController {
 
 
     @DeleteMapping("/eliminar/{numFac}")
+
     public ResponseEntity<Void> eliminarFacturacionPorId(@PathVariable Integer numFac) {
+
+
         Facturacion facturacion = facturacionService.facturacionPorId(numFac);
         if (facturacion != null) {
             facturacionService.eliminarFacturacionPorId(numFac);
@@ -60,8 +64,11 @@ public class FacturacionController {
         }
     }
 
-    @PutMapping("/actualizar")
-    public ResponseEntity<Facturacion> actualizarFacturacion(@RequestBody Facturacion facturacionPut) {
+
+
+    @PutMapping("/actualizar/{numFac}")
+    public ResponseEntity<Facturacion> actualizarFacturacion(@RequestBody Facturacion facturacionPut){
+
         Facturacion facturacion = facturacionService.facturacionPorId(facturacionPut.getNumFac());
         if (facturacion != null) {
             facturacionService.insertarFacturacion(facturacionPut);
