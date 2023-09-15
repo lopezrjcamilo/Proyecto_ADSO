@@ -32,7 +32,7 @@ public class Diagnostico {
     @JoinColumn(name = "cod_cult", referencedColumnName = "cod_cult",nullable = false)
     private Cultivo cultivo;
 
-    
+
     public Diagnostico() {
     }
 
