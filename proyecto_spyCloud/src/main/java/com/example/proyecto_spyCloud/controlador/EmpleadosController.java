@@ -27,7 +27,7 @@ public class EmpleadosController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Empleados> empleadosPorId(@PathVariable Integer id) {
-        Empleados empleados = empleadosService.empleadosPorId(Integer.valueOf(String.valueOf(id)));
+        Empleados empleados = empleadosService.empleadosPorId(id);
         if (empleados != null) {
             return ResponseEntity.ok(empleados);
         } else {
