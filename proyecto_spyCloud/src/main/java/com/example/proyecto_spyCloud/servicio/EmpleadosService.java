@@ -30,7 +30,7 @@ public class EmpleadosService {
     }
 
     public Empleados empleadosPorId(Integer id) {
-        return empleadosRepository.findById(Integer.valueOf(id)).get();
+        return empleadosRepository.findById(id).orElse(null);
     }
 
     public Empleados insertarEmpleados(Empleados empleados){
