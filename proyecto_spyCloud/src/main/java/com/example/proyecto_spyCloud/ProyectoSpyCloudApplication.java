@@ -1,5 +1,7 @@
 package com.example.proyecto_spyCloud;
 
+import com.example.proyecto_spyCloud.repositorio.CultivoRepository;
+import com.example.proyecto_spyCloud.servicio.CultivoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
