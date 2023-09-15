@@ -32,6 +32,9 @@ public class CultivoService {
             return null;
         }
     }
+    public List<Cultivo> cultivosConDiagnosticos(){
+        return cultivoRepository.cultivosConDiagnosticos();
+    }
 
 
 
