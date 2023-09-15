@@ -31,6 +31,11 @@ public class CultivoController {
     public ResponseEntity<List<Cultivo>> listarCultivo() {
         return new ResponseEntity<>(cultivoService.listarCultivo(), HttpStatus.OK);
     }
+    @GetMapping("/listarCultivoConDiagnosticos")
+    public ResponseEntity<List<Cultivo>> listarCultivoConDiagnosticos() {
+        return new ResponseEntity<>(cultivoService.cultivosConDiagnosticos(), HttpStatus.OK);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Cultivo> cultivoPorId(@PathVariable Integer id) {
