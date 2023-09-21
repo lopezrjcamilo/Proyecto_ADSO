@@ -32,8 +32,8 @@ public class CultivoController {
         return new ResponseEntity<>(cultivoService.listarCultivo(), HttpStatus.OK);
     }
     @GetMapping("/listarCultivoConDiagnosticos")
-    public ResponseEntity<List<Cultivo>> listarCultivoConDiagnosticos() {
-        return new ResponseEntity<>(cultivoService.cultivosConDiagnosticos(), HttpStatus.OK);
+    public ResponseEntity<List<Cultivo>> listarCultivoConDiagnosticos(@RequestParam("tipoDaño") String tipoDaño)  {
+        return new ResponseEntity<>(cultivoService.cultivosConDiagnosticos(tipoDaño), HttpStatus.OK);
     }
 
 

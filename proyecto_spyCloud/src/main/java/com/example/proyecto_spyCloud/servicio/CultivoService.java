@@ -32,7 +32,7 @@ public class CultivoService {
             return null;
         }
     }
-    public List<Cultivo> cultivosConDiagnosticos(){
+    public List<Cultivo> cultivosConDiagnosticos(String tipoDaño){
         return cultivoRepository.cultivosConDiagnosticos();
     }
 
