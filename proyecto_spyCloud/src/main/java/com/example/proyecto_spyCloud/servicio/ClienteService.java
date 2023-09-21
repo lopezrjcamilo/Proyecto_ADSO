@@ -36,6 +36,10 @@ public class ClienteService {
         return clienteRepository.findByCorreo(correo);
     }
 
+    public Cliente clientePorAdministrador(Integer nitCliente){
+        return clienteRepository.clientePorAdministrador(nitCliente);
+    }
+
 
 
     public Cliente insertarCliente(Cliente cliente){

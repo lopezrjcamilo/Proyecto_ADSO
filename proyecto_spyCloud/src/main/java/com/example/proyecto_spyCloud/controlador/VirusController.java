@@ -40,6 +40,12 @@ public class VirusController {
         }
     }
 
+    @GetMapping("/virusDiagnostico/{numDiag}")
+    public ResponseEntity<List<Virus>> virusPorDiagnostico(@PathVariable Integer numDiag) {
+        return new ResponseEntity<>(virusService.virusPorDiagnostico(numDiag), HttpStatus.OK);
+    }
+
+
     @PutMapping("/actualizar/{codVirus}")
     public ResponseEntity<Virus> actualizarVirus(
             @PathVariable Integer codVirus, @RequestBody Virus virus) {

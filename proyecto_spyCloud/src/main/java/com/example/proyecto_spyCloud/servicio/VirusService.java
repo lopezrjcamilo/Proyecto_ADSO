@@ -33,6 +33,9 @@ public class VirusService {
         }
         return null;
     }
+    public List<Virus> virusPorDiagnostico(Integer numeroDiagnostico){
+        return  virusRepository.virusDeUnDiagnosticos(numeroDiagnostico);
+    }
 
     public void eliminarVirus(Integer codVirus) {
         virusRepository.deleteById(codVirus);

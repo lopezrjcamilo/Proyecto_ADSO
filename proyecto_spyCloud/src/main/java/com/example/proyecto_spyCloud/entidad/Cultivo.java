@@ -11,7 +11,7 @@ public class Cultivo {
 
 
         @Id
-        @Column (name= "cod_cult", nullable = false, length = 20)
+        @Column (name= "cult_cod", nullable = false, length = 20)
         private Integer codCult;
         @Column (nullable = false, length = 30)
         private String direccion;

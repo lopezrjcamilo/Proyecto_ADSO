@@ -26,7 +26,7 @@ public class Visita {
     private Empleados empleados;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cod_cult", referencedColumnName = "cod_cult",nullable = false)
+    @JoinColumn(name = "cod_cult", referencedColumnName = "cult_cod",nullable = false)
     private Cultivo cultivo;
 
     public Visita() {

@@ -12,5 +12,4 @@ import java.util.List;
 public interface CultivoRepository extends JpaRepository<Cultivo, Integer>{
     @Query(value = "SELECT * FROM cultivos INNER JOIN diagnosticos ON cultivos.cod_cult=", nativeQuery = true)
     List<Cultivo> cultivosConDiagnosticos();
-
 }
