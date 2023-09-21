@@ -24,7 +24,7 @@ public class Facturacion {
     private Date fechPago;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name ="cod_cult",referencedColumnName = "cod_cult", nullable = false)
+    @JoinColumn(name ="cod_cult",referencedColumnName = "cult_cod", nullable = false)
     private Cultivo cultivo;
 
     public Facturacion() {

@@ -31,6 +31,11 @@ public class ClienteController {
         return clienteService.agregarCliente(nit);
     }
 
+    @GetMapping("/clienteAdmin/{nit}")
+    public ResponseEntity<Cliente> clientePorAdministrador(@PathVariable Integer nit) {
+        return new ResponseEntity<>(clienteService.clientePorAdministrador(nit), HttpStatus.OK);
+    }
+
     @GetMapping("/{nit}")
     public ResponseEntity<Cliente> clientePorId(@PathVariable Integer nit) {
         Cliente cliente = clienteService.clientePorId(nit);
