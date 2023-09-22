@@ -241,7 +241,8 @@
                     <div class="col-12 col-md-3">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Codigo Cultivo</label>
-                            <input type="number" id="codcultivo" class="form-control" disabled>
+                            <input type="number" id="codcultivo" class="form-control">
+                            <!--<input type="number" id="codcultivo" class="form-control" disabled>-->
                         </div>
                     </div>
                     <div class="col-12 col-md-9">
@@ -382,6 +383,8 @@
                             <button type="button" id="insertarCliente" class="btn btn-primary">Enviar</button>
                             <button type="button" id="listarCliente" class="btn btn-primary">Listar</button>
                             <button type="button" id="limpiarCliente" class="btn btn-secondary">Limpiar</button>
+                            
+
                         </div>
                     </div>
                 </div>
@@ -402,6 +405,9 @@
                                         <th>Administrador</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -411,7 +417,7 @@
 
             <div class="container mt-2">
                 <div class="row">
-                    <div class="col-12 col-md-7">
+                    <div class="col-12 col-md-8">
                         <div class="d-grid gap-2 d-md-flex">
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
@@ -423,31 +429,12 @@
                                 <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
                                 <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
                                 <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaCliente" class="btn btn-secondary">Limpiar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-<!--
-            <div class="container mt-3">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Cliente</label>
-                            <input type="text" id="codigoCliente" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
-                            <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
-
         </form>
 
         <!-- EMPLEADOS -->
@@ -473,16 +460,23 @@
                             <input type="text" id="apellidoempleados" class="form-control">
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Tipo Documento</label>
                             <input type="text" id="tdocumentoempleados" class="form-control">
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Numero Documento</label>
                             <input type="text" id="ndocumentoempleados" class="form-control">
+                        </div>
+                    </div>
+                    <!--   -->
+                    <div class="col-12 col-md-4">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Administrador</label>
+                            <select id="administradorempleados" class="form-select"></select>
                         </div>
                     </div>
 
@@ -500,7 +494,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- tabla consulta -->
+                <!-- tabla EMPLEADOS consulta -->
                 <hr>
                 <div class="container mt-5">
                     <div class="row">
@@ -515,6 +509,8 @@
                                         <th>Numero Documento</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                               </tbody>
                             </table>
                         </div>
                     </div>
@@ -522,16 +518,25 @@
                 <hr>
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-12 col-md-5">
-                            <div class="mb-3">
+                        <!--<div class="col-12 col-md-10">-->
+                        <div class="d-grid gap-2 d-md-flex">
+                            
+                            <!--<div class="mb-3">
                                 <label for="codigo" class="form-label">Codigo Empleados</label>
                                 <input type="text" id="codigoEmpleados" class="form-control">
+                            </div>-->
+
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Codigo Empleados</span>
+                                <select id="codigoEmpleados" class="form-select"></select>
                             </div>
-                            <div class="mb-3">
+
+                            <!--<div class="mb-3">-->
+                            <div class="d-grid gap-2 d-md-flex">
                                 <button type="button" id="buscarEmpleados" class="btn btn-primary">Buscar</button>
                                 <button type="button" id="eliminarEmpleados" class="btn btn-danger">Eliminar</button>
-                                <button type="button" id="actualizarEmpleados"
-                                    class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="actualizarEmpleados"class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaEmpleados" class="btn btn-secondary">Limpiar</button>
                             </div>
                         </div>
                     </div>
