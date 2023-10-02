@@ -503,10 +503,11 @@
                                 <thead>
                                     <tr>
                                         <th>Codigo Empleados</th>
-                                        <th>Nombres</th>
                                         <th>Apellidos</th>
-                                        <th>Tipo Documento</th>
+                                        <th>Nombres</th>
                                         <th>Numero Documento</th>
+                                        <th>Tipo Documento</th>
+                                        <th>Numero Admin</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -535,6 +536,7 @@
                             <div class="d-grid gap-2 d-md-flex">
                                 <button type="button" id="buscarEmpleados" class="btn btn-primary">Buscar</button>
                                 <button type="button" id="eliminarEmpleados" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarEmpleados" class="btn btn-primary">Llamar</button>
                                 <button type="button" id="actualizarEmpleados"class="btn btn-primary">Actualizar</button>
                                 <button type="button" id="limpiarTablaEmpleados" class="btn btn-secondary">Limpiar</button>
                             </div>
@@ -551,8 +553,8 @@
                 <div class="row">
                     <div class="col-12 col-md-2">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Numero VISITA</label>
-                            <input type="text" id="codvisita" class="form-control">
+                            <label for="nombre" class="form-label">Numero Visita</label>
+                            <input type="number" id="codvisita" class="form-control">
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -573,19 +575,19 @@
                             <input type="text" id="fechavisita" class="form-control">
                         </div>
                     </div>
+                    <!--   -->
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Codigo Empleado</label>
-                            <input type="text" id="codigoempleadovisita" class="form-control">
+                            <select id="codigoempleadovisita" class="form-select"></select>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Codigo Cultivo</label>
-                            <input type="text" id="codigocultivovisita" class="form-control">
+                            <select id="codigocultivovisita" class="form-select"></select>
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <div class="form-text">Llene todos los campos antes de enviar.</div>
                     </div>
@@ -602,12 +604,12 @@
                 </div>
             </div>
 
-            <!-- tabla consulta -->
+            <!-- tabla consulta VISITA-->
             <hr>
             <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaVirus">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <table class="table table-striped table-hover table-bordered" id="tablaVirus">
                             <thead>
                                 <tr>
                                     <th>Numero Visita</th>
@@ -618,6 +620,9 @@
                                     <th>Codigo Cultivo</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -625,15 +630,18 @@
             <hr>
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Visita</label>
-                            <input type="text" id="codigoVisita" class="form-control">
+                    
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Visita</span>
+                            <select id="codigoVisita" class="form-select"></select>
                         </div>
-                        <div class="mb-3">
+                        <div class="d-grid gap-2 d-md-flex">
                             <button type="button" id="buscarVisita" class="btn btn-primary">Buscar</button>
                             <button type="button" id="eliminarVisita" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarVisita" class="btn btn-primary">Llamar</button>
                             <button type="button" id="actualizarVisita" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaVisita" class="btn btn-secondary">Limpiar</button>
                         </div>
                     </div>
                 </div>
