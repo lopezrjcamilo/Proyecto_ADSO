@@ -1541,9 +1541,456 @@ $(document).ready(function() {
     });*/
 
 
+//---------------  FACTURACION  -----------------------------   
 
+    // Cargar valores de ID de Cultivo en el formulario select de la tabla FACTURACION
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/cultivos/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#cultivofacturacion');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var cultivos = respuesta[i];
+                    select.append($('<option>', {
+                        value: cultivos.codCult,
+                        text: cultivos.codCult
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
 
+    //Limpiar campos FACTURACION
+    $('#limpiarFacturacion').on('click', function () {
+        $('#numerofacturacion').val('');
+        $('#cuentaclientefacturacion').val('');
+        $('#formapagofacturacion').val('');
+        $('#valorfacturacion').val('');
+        $('#fechapagofacturacion').val('');
+        $('#cultivofacturacion').val('');
+    });
 
+    //limpiar tabla CLIENTES
+    $("#limpiarTablaFacturacion").click(function () {
+        // Elimina todas las filas de la tabla
+        $("#tablaFacturacion tbody").empty();
+    });
+
+    //cargar ID en el SELECT de FACTURACION
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/facturacion/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigoFacturacion');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var valor = respuesta[i];
+                    select.append($('<option>', {
+                        value: valor.numFac,
+                        text: valor.numFac
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //llamar datos del FACTURACION por el ID en los inputs
+    $('#llamarFacturacion').on('click', function() {
+        var numFac = $('#codigoFacturacion').val();
+    
+        $.ajax({
+            url: "http://localhost:8080/facturacion/" + numFac,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#numerofacturacion').val(respuesta.numFac);
+                    $('#cuentaclientefacturacion').val(respuesta.cuentClien);
+                    $('#formapagofacturacion').val(respuesta.formaPag);
+                    $('#valorfacturacion').val(respuesta.valor);
+                    $('#fechapagofacturacion').val(respuesta.fechPago);
+    
+                    // Aquí se establece el valor del select 
+                    $('#cultivofacturacion').val(respuesta.cultivo.codCult); // Suponiendo que 'administrador' tiene un campo 'id'
+                } else {
+                    $('#numerofacturacion').val('');
+                    $('#cuentaclientefacturacion').val('');
+                    $('#formapagofacturacion').val('');
+                    $('#valorfacturacion').val('');
+                    $('#fechapagofacturacion').val('');
+                    $('#cultivofacturacion').val('');
+                    $('#error-message').html('No se encontró ningúna factura especificada.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //insertar FACTURACION
+    $(document).ready(function() {
+        // Cuando se haga clic en el botón "Enviar"
+        $("#insertarFacturacion").click(function() {
+            // Recoge los valores de los campos de entrada
+            var nfactura = $("#numerofacturacion").val();
+            var cuentac = $("#cuentaclientefacturacion").val();
+            var formapago = $("#formapagofacturacion").val();
+            var valor = $("#valorfacturacion").val();
+            var fechapago = $("#fechapagofacturacion").val();
+            var cultivo = $("#cultivofacturacion").val(); // Valor del select
+
+            // Crea un objeto de cliente con los valores recogidos
+            var factura = {
+                "numFac": nfactura,
+                "cuentClien": cuentac,
+                "formaPag": formapago,
+                "valor": valor,
+                "fechPago": fechapago,
+                "cultivo": {
+                    "codCult": cultivo // La llave foránea
+                }
+            };
+
+            // Realiza la solicitud AJAX para insertar el cliente
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/facturacion/insertar",// La URL de tu endpoint de inserción
+                contentType: "application/json",
+                data: JSON.stringify(factura),
+                success: function(response) {
+                    // Cliente insertado con éxito
+                    alert("Factura insertado con éxito");
+                    // Limpia los campos de entrada
+                    $("#numerofacturacion").val("");
+                    $("#cuentaclientefacturacion").val("");
+                    $("#formapagofacturacion").val("");
+                    $("#valorfacturacion").val("");
+                    $("#fechapagofacturacion").val("");
+                    // Restablece el valor del select
+                    $("#cultivofacturacion").val("");
+                },
+                error: function() {
+                    // Maneja el error en caso de que falle la inserción
+                    alert("Error al insertar la factura");
+                }
+            });
+        });
+    });
+
+    //Listar FACTURACION
+    /*$(document).ready(function () {
+        // Función para cargar y mostrar los clientes en la tabla
+        function cargarFactura() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/facturacion/listar",
+                success: function (data) {
+                    $("#tablaFacturacion tbody").empty(); // Limpia la tabla antes de agregar datos
+                    $.each(data, function (index, facturacion) {
+                        var row = $("<tr>");
+                        row.append($("<td>").text(facturacion.numFac));
+                        row.append($("<td>").text(facturacion.cuentClien));
+                        row.append($("<td>").text(facturacion.formaPag));
+                        row.append($("<td>").text(facturacion.valor));
+                        row.append($("<td>").text(facturacion.fechPago));
+                        row.append($("<td>").text(facturacion.cultivo.codCult));
+                        $("#tablaFacturacion tbody").append(row);
+                    });
+                },
+                error: function () {
+                    alert("Error al obtener las facturas");
+                }
+            });
+        }
+
+        // Cargar los clientes al cargar la página
+        cargarFactura();
+
+        // Cuando se haga clic en el botón "Listar"
+        $("#listarFacturacion").click(function () {
+            cargarFactura();
+        });
+    });*/
+
+//---------------  DRON  ----------------------------- 
+
+    // Cargar valores del ID de DRON en el formulario select
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/dron/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigoDron');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.codDron,
+                        text: administrador.codDron
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+        //Limpiar campos de Administrado
+        $('#limpiarDron').on('click', function () {
+            $('#coddron').val('');
+            $('#numeroserialdron').val('');
+            $('#marcadron').val('');
+        });
+
+// Insertar DRON
+$('#insertarDron').on('click', function() {
+    var Data = {
+        codDron: $('#coddron').val(), 
+        numSerial: $('#numeroserialdron').val(),  
+        marca: $('#marcadron').val()  
+    };
+    
+    $.ajax({
+        url: "http://localhost:8080/dron/insertar", 
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(Data),
+        success: function(response) {
+            alert("Dron ingresado exitosamente.");
+            console.log(response);
+        },
+        error: function(xhr, status, error) {
+            alert("No se pudo ingresar el dron.");
+            console.error(error);
+        }
+    });
+});
+
+    //llamar datos del DRON por el ID en los inputs
+    $('#llamarDron').on('click', function() {
+        var codDron = $('#codigoDron').val(); // Cambiado el ID a 'ndocumentoAdmin' para obtener el valor del número de documento.
+
+        $.ajax({
+            url: "http://localhost:8080/dron/" + codDron,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#coddron').val(respuesta.codDron);
+                    $('#numeroserialdron').val(respuesta.numSerial);
+                    $('#marcadron').val(respuesta.marca);
+                } else {
+                    $('#numeroserialdron').val('');
+                    $('#marcadron').val('');
+                    $('#error-message').html('No se encontró ningun DRON con el número especificado.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //buscar por Numero documento ID
+    $('#buscarDron').on('click', function() {
+        var numDoc = $('#codigoDron').val(); 
+    
+        $.ajax({
+            url: "http://localhost:8080/dron/" + codDron,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                $('#tablaDron').html('');
+                if (respuesta != null) {
+                    $('#tablaDron').html('<thead><tr>' +
+                        '<th>N° dron</th>' +
+                        '<th>Serial</th>' +
+                        '<th>Marca</th>' +
+                        '</tr></thead><tbody>' +
+                        '<tr>' +
+                        '<td>' + respuesta.codDron + '</td>' +
+                        '<td>' + respuesta.numSerial + '</td>' +
+                        '<td>' + respuesta.marca + '</td>' +
+                        '</tr></tbody>');
+                } else {
+                    $('#tablaDron').html('');
+                    $('#error-message').html('No se encontró ningun dron con el número especificado.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+    
+    //Listar DRON
+    $('#listarDron').on('click', function() {
+        $.ajax({
+            url: "http://localhost:8080/dron/listar", 
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                $('#tablaDron').html('');
+                if (respuesta.length > 0) {
+                    var tablaDron = '<thead><tr>' +
+                                    '<th>N° dron</th>' +
+                                    '<th>Serial</th>' +
+                                    '<th>Marca</th>' +
+                                    '</tr></thead><tbody>';
+                    
+                    for (var i = 0; i < respuesta.length; i++) {
+                        var dataDRON = respuesta[i];
+                        tablaDron += '<tr>' +
+                                     '<td>' + dataDRON.codDron + '</td>' +
+                                     '<td>' + dataDRON.numSerial + '</td>' +
+                                     '<td>' + dataDRON.marca + '</td>' +
+                                     '</tr>';
+                    }
+    
+                    tablaDron += '</tbody>';
+                    $('#tablaDron').html(tablaDron);
+                } else {
+                    $('#tablaDron').html('');
+                    $('#error-message').html('No se encontraron drones.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Actualizar DRON
+    $('#actualizarDron').on('click', function() {
+        var codDron = $('#codigoDron').val();
+        var DataDRON = {
+            //codDron: $('#coddron').val(),
+            numSerial: $('#numeroserialdron').val(),
+            marca: $('#apellimarcadrondoAdmin').val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/dron/actualizar/" + codDron, 
+            type: "PUT",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(DataDRON),
+            success: function(response) {
+                alert("Dron actualizado exitosamente.");
+                console.log(response);
+            },
+            error: function(xhr) {
+                if (xhr.status === 404) {
+                    alert("No se encontró el número  " + codDron);
+                }
+                console.error(xhr.responseText);
+            }
+        });
+    });
+        
+
+    // Eliminar por número de ID
+    $('#eliminarDron').on('click', function () {
+        var codDron = $('#codigoDron').val();
+        $.ajax({
+            url: "http://localhost:8080/dron/eliminar/" + codDron,
+            type: "DELETE",
+            dataType: "text",
+            success: function (response) {
+                console.log("Respuesta del servidor:", response);
+                if (response.trim() === "Eliminado") {
+                    alert("dron eliminado exitosamente.");
+                } else {
+                    alert("Eliminado el dron " + codDron);
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 404) {
+                    alert("No se encontró el número " + codDron);
+                } else {
+                    alert("Ocurrió un error en la solicitud. Por favor, inténtalo nuevamente.");
+                }
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+//---------------  DIAGNOSTICO  ----------------------------- 
+    // Cargar valores de IDnumDoc de Administrador en el formulario select de la tabla CLIENTE
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/dron/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigodrondiagnostico');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.codDron,
+                        text: administrador.codDron
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+    // Cargar valores de IDnumDoc de Administrador en el formulario select de la tabla CLIENTE
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/cultivos/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigocultivodiagnostico');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.codCult,
+                        text: administrador.codCult
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //Limpiar campos CLIENTES
+    $('#limpiarDiagnostico').on('click', function () {
+        $('#numeroDiagnostico').val('');
+        $('#observacionesdiagnostico').val('');
+        $('#fechasolicitadadiagnostico').val('');
+        $('#fechadiagnostico').val('');
+        $('#fechaentregadiagnostico').val('');
+        $('#tipodañodiagnostico').val('');
+        $('#codigodrondiagnostico').val('');
+        $('#codigocultivodiagnostico').val('');
+    });
+
+    
+//---------------  MULTIMEDIA  ----------------------------- 
+//---------------  TIENE  ----------------------------- 
 //---------------  VIRUS  -----------------------------   
     //buscar por Numero documento ID
     $('#buscarVirus').on('click', function() {
