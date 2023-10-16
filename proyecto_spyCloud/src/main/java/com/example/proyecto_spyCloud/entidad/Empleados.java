@@ -23,7 +23,7 @@ public class Empleados {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "num_doc", referencedColumnName = "num_doc", nullable = false )
     private Administrador administrador;
 
@@ -72,13 +72,14 @@ public class Empleados {
         this.tipo_doc = tipo_doc;
     }
 
-    public String getNum_doc() {
+    public String getNum_docu() {
         return num_docu;
     }
 
-    public void setNum_doc(String num_doc) {
+    public void setNum_docu(String num_docu) {
         this.num_docu = num_docu;
     }
+
 
     public Administrador getAdministrador() {
         return administrador;

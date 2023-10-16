@@ -1,56 +1,28 @@
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
+const express = require("express");
+const cors = require("cors");
+//const fs = require('fs');
+const path = require("path");
 const app = express();
 
-// Permitir todas las solicitudes CORS
+// middleware
 app.use(cors());
 app.use(express.json());
+app.use(
+  express.static("public")
+); // Para acceder a los archivos estáticos
 
-// Configurar una ruta para manejar las solicitudes POST
-app.post('/insertarPersonaPorCategoria/:categoria', (req, res) => {
-  const categoria = req.params.categoria;
-  const persona = req.body;
+const port = 3000;
 
-  // Leer los datos existentes del archivo JSON
-  fs.readFile('datos.json', 'utf8', (err, fileData) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error interno del servidor');
-      return;
-    }
+// Ruta a la página web
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname + "/Login_Cloud.html"));
+});
 
-    const jsonData = JSON.parse(fileData || '[]');
-
-    // Verificar si el correo ya existe en los datos existentes
-    const existingEmail = jsonData.find(item => item.correo === persona.correo);
-    if (existingEmail) {
-      res.send('Correo ya existente');
-      return;
-    }
-
-    // Agregar la persona a la categoría correspondiente
-    const categoriaData = jsonData.find(item => item.categoria === categoria);
-    if (categoriaData) {
-      categoriaData.personas.push(persona);
-    } else {
-      jsonData.push({ categoria: categoria, personas: [persona] });
-    }
-
-    // Guardar los datos en el archivo JSON
-    fs.writeFile('datos.json', JSON.stringify(jsonData, null, 2), 'utf8', err => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error interno del servidor');
-        return;
-      }
-
-      res.send('Solicitud POST exitosa');
-    });
-  });
+app.get("/index", function (req, res) {
+  res.sendFile(path.join(__dirname + "/index.html"));
 });
 
 // Iniciar el servidor en el puerto 8080
-app.listen(8080, () => {
-  console.log('Servidor local iniciado en el puerto 8080');
+app.listen(port, () => {
+  console.log(`Servidor iniciado en http://localhost:${port}`);
 });

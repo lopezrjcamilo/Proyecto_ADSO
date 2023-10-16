@@ -94,22 +94,32 @@
         </div>
         <hr>
 
-        <!-- ADMINISTRADOR -->
+        <!--------------------------------------------------- ADMINISTRADOR ---------------------------------------------------------------------->
         <form id="formulario" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Administración</h2>
             <div class="container mt-5">
+                <div class="input-group col-md-2">
+                    <span class="input-group-text" id="basic-addon1">ID Administrador</span>
+                    <select id="codigo" class="form-select "></select>
+                    <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                </div>
+                <hr>
+                </hr>
+                
                 <div class="row">
-                    <div class="col-12 col-md-4">
+                    <div class="col-10 col-md-4">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">N° documento</label>
                             <input type="number" id="ndocumentoAdmin" class="form-control">
                         </div>
+                        
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" id="nombreAdmin" class="form-control">
                         </div>
+
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
@@ -149,61 +159,21 @@
             <!--BOTONES-->
             <hr>
             <div class="container" id="containerBotones">
-                <div class="row">
+                <div class="row"> 
                     <div class="col-12">
                         <!--<div class="mb-3 d-flex justify-content-between">-->
                         <div class="d-grid gap-2 d-md-flex">
-                            <div class="btn-group">
+                            <div class="mt-3 ">
                                 <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
+                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>   
+                                <button type="button" id="actualizarAdmin" class="btn btn-warning">Actualizar</button>
+                                <button  type="button" id="limpiarAdmin" class="btn btn-secondary" >Limpiar</button>  
                                 <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
-                                <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
-                            </div>
-
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">ID Administrador</span>
-                                <select id="codigo" class="form-select"></select>
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
-                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
-                                <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
-                                <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <hr>
-            <!--BOTONES-->
-            <!--
-            <div class="container" id="containerBotones">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
-                            <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
-                            <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
-                        
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">ID Administrador</span>
-                                <select id="codigo" class="form-select"></select>
-                            </div>
-                        
-                                <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
-                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
-                                <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
-                                <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
-                            
-                        </div>
-                        
-                </div>
-                </div>
-            </div>-->
-
-            <!-- tabla consulta -->
-            <hr>
             <div class="container mt-2">
                 <div class="row">
                     <div class="col-12 col-md-12">
@@ -224,12 +194,9 @@
                     </div>
                 </div>
             </div>
-            <hr>
-
-            <hr>
         </form>
 
-        <!-- CULTIVO -->
+        <!---------------------------------------------------------------------- CULTIVO---------------------------------------------------------------- -->
         <form id="formulario2" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Cultivo</h2>
             <div class="container mt-5">
@@ -334,6 +301,11 @@
         <form id="formularioCliente" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Cliente</h2>
             <div class="container mt-5">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
+                    <select id="codigoCliente" class="form-select"></select>
+                    <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
+                </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="mb-3">
@@ -377,6 +349,8 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <button type="button" id="insertarCliente" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="actualizarCliente" class="btn btn-warning">Actualizar</button>
                             <button type="button" id="listarCliente" class="btn btn-primary">Listar</button>
                             <button type="button" id="limpiarCliente" class="btn btn-secondary">Limpiar</button>
                             
@@ -401,9 +375,6 @@
                                         <th>Administrador</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -411,29 +382,7 @@
             </div>
             <hr>
 
-            <div class="container mt-2">
-                <div class="row">
-                    <div class="col-12 col-md-8">
-                        <div class="d-grid gap-2 d-md-flex">
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
-                                <select id="codigoCliente" class="form-select"></select>
-                            </div>
-
-                            <div class="d-grid gap-2 d-md-flex">
-                                <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
-                                <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
-                                <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
-                                <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
-                                <button type="button" id="limpiarTablaCliente" class="btn btn-secondary">Limpiar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <!-- EMPLEADOS -->
+        <!---------------------------------- EMPLEADOS -------------------------------------------------------->
         <form id="formularioEmpleados" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Empleados</h2>
             <div class="container mt-5">
@@ -1233,6 +1182,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/administrador.js"></script>
+    <script type="text/javascript" src="js/cliente.js"></script>
 </body>
 
 </html>
