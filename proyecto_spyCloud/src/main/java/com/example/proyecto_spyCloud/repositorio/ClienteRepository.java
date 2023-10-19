@@ -15,8 +15,11 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 881b758fa1379ca09d122015f4a2568f3c83d648
     Cliente findByCorreo(String correo);
 
     @Query(value = "SELECT clientes.* FROM clientes INNER JOIN administrador ON clientes.num_doc=administrador.num_doc where clientes.nit=:nitCliente", nativeQuery = true)

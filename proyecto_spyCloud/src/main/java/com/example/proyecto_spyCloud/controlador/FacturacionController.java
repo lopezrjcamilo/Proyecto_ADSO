@@ -37,8 +37,10 @@ public class FacturacionController {
     }
 
 
+
     @PostMapping("/insertar")
     public ResponseEntity<Facturacion> insertarFacturacion(@RequestBody Facturacion facturacionPost){
+
 
         Facturacion facturacion = facturacionService.facturacionPorId(facturacionPost.getNumFac());
         if (facturacion != null) {
@@ -49,11 +51,8 @@ public class FacturacionController {
         }
     }
 
-
     @DeleteMapping("/eliminar/{numFac}")
-
-    public ResponseEntity<Void> eliminarFacturacionPorId(@PathVariable Integer numFac) {
-
+    public ResponseEntity<Void> eliminarFacturacion(@PathVariable Integer numFac){
 
         Facturacion facturacion = facturacionService.facturacionPorId(numFac);
         if (facturacion != null) {
@@ -63,8 +62,6 @@ public class FacturacionController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
 
     @PutMapping("/actualizar/{numFac}")
     public ResponseEntity<Facturacion> actualizarFacturacion(@RequestBody Facturacion facturacionPut){

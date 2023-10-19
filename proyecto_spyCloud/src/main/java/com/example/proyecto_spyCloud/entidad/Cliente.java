@@ -17,6 +17,7 @@ public class Cliente {
     private String telefono;
 
 
+
     //@JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name ="num_doc",referencedColumnName = "num_doc", nullable = false)

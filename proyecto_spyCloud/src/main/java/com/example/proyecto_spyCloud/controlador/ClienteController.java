@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-
+    @Autowired
     private ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
@@ -23,18 +23,15 @@ public class ClienteController {
 
 
     @GetMapping("/listar")
-    public List<Cliente> listarTodosLosClientes() {
-        return clienteService.listarClientes();
-    }
-    @PostMapping("/agregar/{admi}")
-    public String agregarCliente(@PathVariable("admi") Integer nit ){
-        return clienteService.agregarCliente(nit);
+    public ResponseEntity<List<Cliente>> listarTodosLosClientes() {
+        return new ResponseEntity<>(clienteService.listarClientes(), HttpStatus.OK);
     }
 
     @GetMapping("/clienteAdmin/{nit}")
     public ResponseEntity<Cliente> clientePorAdministrador(@PathVariable Integer nit) {
         return new ResponseEntity<>(clienteService.clientePorAdministrador(nit), HttpStatus.OK);
     }
+
 
     @GetMapping("/{nit}")
     public ResponseEntity<Cliente> clientePorId(@PathVariable Integer nit) {
@@ -86,6 +83,5 @@ public class ClienteController {
             return ResponseEntity.noContent().build();
         }
     }
-
 
 }

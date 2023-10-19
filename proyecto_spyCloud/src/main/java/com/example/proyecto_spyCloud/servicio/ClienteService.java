@@ -16,7 +16,6 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
     private AdministradorRepository administradorRepository;
 
-
     @Autowired
     public ClienteService(ClienteRepository clienteRepository, AdministradorRepository administradorRepository) {
         this.clienteRepository = clienteRepository;
@@ -26,16 +25,6 @@ public class ClienteService {
 
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();
-    }
-    public String agregarCliente(Integer admi){
-        Cliente cli= new Cliente();
-        Administrador ad= administradorRepository.findById(admi).get();
-        if(administradorRepository.findById(admi).isPresent() ){
-            cli.setAdministrador(ad);
-            clienteRepository.save(cli);
-            return  "Cliente registrado";
-        }
-        else return  "El administrador no existe";
     }
 
     public Cliente clientePorId(Integer idNit) {

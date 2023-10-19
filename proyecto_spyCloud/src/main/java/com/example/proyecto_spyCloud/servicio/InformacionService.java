@@ -1,6 +1,5 @@
 package com.example.proyecto_spyCloud.servicio;
 
-
 import com.example.proyecto_spyCloud.entidad.*;
 import com.example.proyecto_spyCloud.repositorio.DiagnosticoRepository;
 import com.example.proyecto_spyCloud.repositorio.InformacionRepository;
@@ -10,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-import java.util.Optional;
-
 
 @Service
 public class InformacionService {
@@ -26,6 +22,9 @@ public class InformacionService {
         this.diagnosticoRepository = diagnosticoRepository;
         this.virusRepository = virusRepository;
     }
+
+
+
 
     public List<Informacion> listarInformacion() {
         return informacionRepository.findAll();
