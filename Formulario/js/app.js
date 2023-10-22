@@ -306,7 +306,9 @@ $(document).ready(function() {
                 console.log(respuesta);
                 if (respuesta === "Eliminado") {
                     alert("Cultivo eliminado");
-                } 
+                } else {
+                    alert("Eliminado el Cultivo " + codCult);
+                }
             },
             error: function(xhr) {
                 if (xhr.status === 404) {
@@ -703,16 +705,19 @@ $(document).ready(function() {
         });
     });
 
+
+
+
 //---------------  EMPLEADOS  -----------------------------   
     // Cargar valores de numDoc de Administrador en el formulario select de la tabla EMPLEADOS
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.ajax({
             url: "http://localhost:8080/administradores/listar", // Ajusta la URL adecuadamente
             type: "GET",
             dataType: "json",
-            success: function(respuesta) {
+            success: function (respuesta) {
                 var select = $('#administradorempleados');
-                
+
                 for (var i = 0; i < respuesta.length; i++) {
                     var administrador = respuesta[i];
                     select.append($('<option>', {
@@ -721,7 +726,7 @@ $(document).ready(function() {
                     }));
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
@@ -747,10 +752,10 @@ $(document).ready(function() {
                 var select = $('#codigoEmpleados');
 
                 for (var i = 0; i < respuesta.length; i++) {
-                    var administrador = respuesta[i];
+                    var data = respuesta[i];
                     select.append($('<option>', {
-                        value: administrador.codEmp,
-                        text: administrador.codEmp
+                        value: data.codEmp,
+                        text: data.codEmp
                     }));
                 }
             },
@@ -761,21 +766,20 @@ $(document).ready(function() {
     });
 
     //llamar datos del EMPLEADO por el ID en los inputs
-    $('#llamarEmpleados').on('click', function() {
+    $('#llamarEmpleados').on('click', function () {
         var codEmp = $('#codigoEmpleados').val();
-    
+
         $.ajax({
             url: "http://localhost:8080/empleados/" + codEmp,
             type: "GET",
             dataType: "json",
-            success: function(respuesta) {
+            success: function (respuesta) {
                 if (respuesta != null) {
                     $('#codempleados').val(respuesta.codEmp);
                     $('#nombreempleados').val(respuesta.nombre);
                     $('#apellidoempleados').val(respuesta.apellido);
                     $('#tdocumentoempleados').val(respuesta.tipo_doc);
-                    $('#ndocumentoempleados').val(respuesta.num_doc);
-    
+                    $('#ndocumentoempleados').val(respuesta.num_docu);
                     // Aquí se establece el valor del select 'administradorempleados'
                     $('#administradorempleados').val(respuesta.administrador.numDoc); // Suponiendo que 'administrador' tiene un campo 'id'
                 } else {
@@ -788,7 +792,7 @@ $(document).ready(function() {
                     $('#error-message').html('No se encontró ningún empleado especificado.');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
@@ -800,321 +804,58 @@ $(document).ready(function() {
         $("#tablaEmpleados tbody").empty();
     });
 
-    /*//insertar EMPLEADOS
-    $(document).ready(function() {
-        // Cuando se haga clic en el botón "Enviar"
-        $("#insertarEmpleados").click(function() {
-            // Recoge los valores de los campos de entrada
-            var codigoEmpleado = $("#codempleados").val();
-            var nombreEmpleado = $("#nombreempleados").val();
-            var apellidoEmpleado = $("#apellidoempleados").val();
-            var docEmpleado = $("#tdocumentoempleados").val();
-            var numEmpleado = $("#ndocumentoempleados").val();
-            var administradorEmpleado = $("#administradorempleados").val(); // Valor del select
+    // url: "http://localhost:8080/clientes/actualizar/" + codigoCliente,
 
-            // Crea un objeto de cliente con los valores recogidos
-            var empleado = {
-                "codEmp": codigoEmpleado,
-                "nombre": nombreEmpleado,
-                "apellido": apellidoEmpleado,
-                "tipo_doc": docEmpleado,
-                "num_docu": numEmpleado,
-                "administrador": {
-                    "numDoc": administradorEmpleado // La llave foránea
-                }
-            };
+    $("#insertarEmpleados").click(function () {
+        var codempleados = $("#codempleados").val();
+        var nombreempleados = $("#nombreempleados").val();
+        var apellidoempleados = $("#apellidoempleados").val();
+        var tdocumentoempleados = $("#tdocumentoempleados").val();
+        var ndocumentoempleados = $("#ndocumentoempleados").val();
+        var administradorempleados = $("#administradorempleados").val();
 
-            // Realiza la solicitud AJAX para insertar el cliente
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/empleados/insertar",// La URL de tu endpoint de inserción
-                contentType: "application/json",
-                data: JSON.stringify(empleado),
-                success: function(response) {
-                    // Cliente insertado con éxito
-                    alert("Empleado insertado con éxito");
-                    // Limpia los campos de entrada
-                    $("#codempleados").val("");
-                    $("#nombreempleados").val("");
-                    $("#apellidoempleados").val("");
-                    $("#tdocumentoempleados").val("");
-                    $("#ndocumentoempleados").val("");
-                    // Restablece el valor del select
-                    $("#administradorempleados").val("");
-                },
-                error: function() {
-                    // Maneja el error en caso de que falle la inserción
-                    alert("Error al insertar el empleado");
-                }
-            });
-        });
-    });*/
-   
-    /*$(document).ready(function() {
-        // Cuando se haga clic en el botón "Enviar"
-        $("#insertarEmpleados").click(function() {
-            // Recoge los valores de los campos de entrada
-            var codigoEmpleado = $("#codempleados").val();
-            var nombreEmpleado = $("#nombreempleados").val();
-            var apellidoEmpleado = $("#apellidoempleados").val();
-            var docEmpleado = $("#tdocumentoempleados").val();
-            var numEmpleado = $("#ndocumentoempleados").val();
-            var administradorEmpleado = $("#administradorempleados").val(); // Valor del select
-    
-            // Crea un objeto de empleado con los valores recogidos
-            var empleado = {
-                codEmp: codigoEmpleado,
-                nombre: nombreEmpleado,
-                apellido: apellidoEmpleado,
-                tipo_doc: docEmpleado,
-                num_docu: numEmpleado,
-                administrador: {
-                    numDoc: administradorEmpleado // La llave foránea
-                }
-            };
-    
-            // Realiza la solicitud AJAX para insertar el empleado
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/empleados/insertar", // La URL de tu endpoint de inserción
-                contentType: "application/json",
-                data: JSON.stringify(empleado),
-                success: function(response) {
-                    // Empleado insertado con éxito
-                    alert("Empleado insertado con éxito");
-                    // Limpia los campos de entrada
-                    $("#codempleados").val("");
-                    $("#nombreempleados").val("");
-                    $("#apellidoempleados").val("");
-                    $("#tdocumentoempleados").val("");
-                    $("#ndocumentoempleados").val("");
-                    // Restablece el valor del select
-                    $("#administradorempleados").val("");
-                },
-                error: function() {
-                    // Maneja el error en caso de que falle la inserción
-                    alert("Error al insertar el empleado");
-                }
-            });
-        });
-    });*/
-    
-    /*$(document).ready(function() {
-        // Selector para el botón 'insertarEmpleados'
-        $("#insertarEmpleados").click(function() {
-          // Obtener los valores de los campos de entrada
-          var codEmp = $("#codempleados").val();
-          var nombre = $("#nombreempleados").val();
-          var apellido = $("#apellidoempleados").val();
-          var tipo_doc = $("#tdocumentoempleados").val();
-          var num_doc = $("#ndocumentoempleados").val();
-          var administrador = $("#administradorempleados").val();
-      
-          // Crear un objeto con los datos del empleado
-          var empleadoData = {
-            codEmp: codEmp,
-            nombre: nombre,
-            apellido: apellido,
-            tipo_doc: tipo_doc,
-            num_docu: num_doc,
-            administrador: {
-              numDoc: administrador
-            }
-          };
-      
-          // Realizar la solicitud AJAX para agregar el empleado
-          $.ajax({
+        var empleadoData = {
+            codEmp: codempleados,
+            nombre: nombreempleados,
+            apellido: apellidoempleados,
+            tipo_doc: tdocumentoempleados,
+            num_docu: ndocumentoempleados,
+            administrador: { numDoc: administradorempleados }
+        };
+
+        $.ajax({
             type: "POST",
-            url: "http://localhost:8080/empleados/insertar",  // La URL de la API donde se procesará la solicitud
+            url: "http://localhost:8080/empleados/insertar",
             contentType: "application/json",
-            data: JSON.stringify(empleadoData), // Convertir el objeto a JSON
-            success: function(response) {
-              // Manejar la respuesta exitosa, por ejemplo, mostrar un mensaje de éxito o redirigir a otra página.
-              alert("Empleado agregado con éxito.");
-              // Puedes realizar otras acciones aquí, como limpiar los campos del formulario.
+            data: JSON.stringify(empleadoData),
+            success: function (data) {
+                alert("Empleado insertado con éxito");
+                // Limpiar los campos después de la inserción
+                $("#codempleados, #nombreempleados, #apellidoempleados, #tdocumentoempleados, #ndocumentoempleados, #administradorempleados").val("");
             },
-            error: function(error) {
-              // Manejar errores, por ejemplo, mostrar un mensaje de error.
-              alert("Error al agregar empleado.");
+            error: function (error) {
+                alert("Error al insertar empleado");
             }
-          });
         });
-      });*/
-      
-      /*$(document).ready(function() {
-          // Botón para enviar el formulario de inserción de empleado
-          $("#insertarEmpleados").click(function() {
-              var codempleados = $("#codempleados").val();
-              var nombreempleados = $("#nombreempleados").val();
-              var apellidoempleados = $("#apellidoempleados").val();
-              var tdocumentoempleados = $("#tdocumentoempleados").val();
-              var ndocumentoempleados = $("#ndocumentoempleados").val();
-              var administradorempleados = $("#administradorempleados").val();
-      
-              // Crear un objeto de datos para enviar al servidor
-              var empleadoData = {
-                  codEmp: codempleados,
-                  nombre: nombreempleados,
-                  apellido: apellidoempleados,
-                  tipo_doc: tdocumentoempleados,
-                  num_docu: ndocumentoempleados,
-                  administrador: {
-                      numDoc: administradorempleados
-                  }
-              };
-      
-              // Realizar la solicitud AJAX POST
-              $.ajax({
-                  type: "POST",
-                  url: "http://localhost:8080/empleados/insertar", // La URL de tu endpoint de inserción de empleados
-                  contentType: "application/json",
-                  data: JSON.stringify(empleadoData),
-                  success: function(response) {
-                      // Manejar la respuesta del servidor (por ejemplo, mostrar un mensaje de éxito)
-                      alert("Empleado ingresado con éxito.");
-                      // Limpiar los campos del formulario
-                      limpiarCampos();
-                  },
-                  error: function(error) {
-                      // Manejar errores (por ejemplo, mostrar un mensaje de error)
-                      alert("Error al ingresar el empleado.");
-                  }
-              });
-          });
-      
-          // Función para limpiar los campos del formulario
-          function limpiarCampos() {
-              $("#codempleados").val("");
-              $("#nombreempleados").val("");
-              $("#apellidoempleados").val("");
-              $("#tdocumentoempleados").val("");
-              $("#ndocumentoempleados").val("");
-              $("#administradorempleados").val("");
-          }
-      });*/
-    
-     /* $(document).ready(function() {
-        // Agrega un manejador de clic para el botón 'insertarEmpleados'
-        $('#insertarEmpleados').click(function() {
-            // Obtén los valores de los campos de entrada
-            var codEmp = $('#codempleados').val();
-            var nombre = $('#nombreempleados').val();
-            var apellido = $('#apellidoempleados').val();
-            var tipoDoc = $('#tdocumentoempleados').val();
-            var numDoc = $('#ndocumentoempleados').val();
-            var administradorNumDoc = $('#administradorempleados').val(); // Asegúrate de que el ID coincida con el campo de selección de administrador
-    
-            // Crea un objeto de datos para enviar al servidor
-            var empleadoData = {
-                codEmp: codEmp,
-                nombre: nombre,
-                apellido: apellido,
-                tipo_doc: tipoDoc,
-                num_doc: numDoc,
-                //administrador1: administradorNumDoc
-                administrador1: {
-                    numDoc: administradorNumDoc
-                }
-            };
-    
-            // Realiza una solicitud AJAX para agregar el empleado
-            $.ajax({
-                url: "http://localhost:8080/empleados/insertar",  // Reemplaza esto con la URL real de tu endpoint de inserción de empleados
-                type: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(empleadoData),
-                success: function(response) {
-                    // Si la inserción es exitosa, puedes realizar alguna acción adicional si es necesario
-                    console.log('Empleado insertado con éxito:', response);
-    
-                    // Limpia los campos de entrada después de la inserción
-                    $('#codempleados').val('');
-                    $('#nombreempleados').val('');
-                    $('#apellidoempleados').val('');
-                    $('#tdocumentoempleados').val('');
-                    $('#ndocumentoempleados').val('');
-                    $('#administradorempleados').val('');
-    
-                    // Actualiza la tabla de empleados
-                    //listarEmpleados();
-                },
-                error: function(error) {
-                    console.log('Error al insertar empleado:', error);
-                }
-            });
-        });
-    
-        // Define la función para listar empleados (como se mencionó en la respuesta anterior)
-        //function listarEmpleados() {
-            // Código para listar empleados aquí...
-       // }
-    });*/
+    });
 
-    //Ingresar EMPLEADOS
-    /*$(document).ready(function() {
-        // Agrega un manejador de clic para el botón 'insertarEmpleados'
-        $('#insertarEmpleados').click(function() {
-            // Obtiene los valores de los campos de entrada
-            var codEmp = $('#codempleados').val();
-            var nombre = $('#nombreempleados').val();
-            var apellido = $('#apellidoempleados').val();
-            var tipo_doc = $('#tdocumentoempleados').val();
-            var num_doc = $('#ndocumentoempleados').val();
-            var administrador_num_doc = $('#administradorempleados').val(); // Asegúrate de que este campo coincida con el valor que deseas enviar al servidor
-    
-            // Crea un objeto de datos con los valores
-            var datosEmpleado = {
-                codEmp: codEmp,
-                nombre: nombre,
-                apellido: apellido,
-                tipo_doc: tipo_doc,
-                num_doc: num_doc,
-                administrador: { numDoc: administrador_num_doc } // Asegúrate de que coincida con la estructura esperada por tu backend
-            };
-    
-            // Realiza la solicitud AJAX para insertar el empleado
-            $.ajax({
-                url: "http://localhost:8080/empleados/insertar",    // Reemplaza esto con la URL real de tu endpoint para insertar empleados
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(datosEmpleado),
-                success: function(response) {
-                    // Maneja la respuesta del servidor si es necesario
-                    console.log('Empleado insertado correctamente:', response);
-    
-                    // Limpia los campos de entrada
-                    $('#codempleados').val('');
-                    $('#nombreempleados').val('');
-                    $('#apellidoempleados').val('');
-                    $('#tdocumentoempleados').val('');
-                    $('#ndocumentoempleados').val('');
-                    $('#administradorempleados').val('');
-                },
-                error: function(error) {
-                    console.log('Error al insertar empleado:', error);
-                }
-            });
-        });
-    });*/
-    
-    //Listar EMPLEADOS
-    /*$(document).ready(function () {
-        // Función para cargar y mostrar los datos en la tabla
+    //Listar 
+    $(document).ready(function () {
+        // Función para cargar y mostrar los clientes en la tabla
         function cargarEmpleados() {
             $.ajax({
                 type: "GET",
                 url: "http://localhost:8080/empleados/listar",
                 success: function (data) {
                     $("#tablaEmpleados tbody").empty(); // Limpia la tabla antes de agregar datos
-                    $.each(data, function (index, empleados) {
+                    $.each(data, function (index, empleado) {
                         var row = $("<tr>");
-                        row.append($("<td>").text(empleados.codEmp));
-                        row.append($("<td>").text(empleados.nombre));
-                        row.append($("<td>").text(empleados.apellido));
-                        row.append($("<td>").text(empleados.tipo_doc));
-                        row.append($("<td>").text(empleados.num_docu));
-                        row.append($("<td>").text(empleados.administrador.numDoc));
+                        row.append($("<td>").text(empleado.codEmp));
+                        row.append($("<td>").text(empleado.apellido));
+                        row.append($("<td>").text(empleado.nombre));
+                        row.append($("<td>").text(empleado.num_docu));
+                        row.append($("<td>").text(empleado.tipo_doc));
+                        row.append($("<td>").text(empleado.administrador.numDoc));
                         $("#tablaEmpleados tbody").append(row);
                     });
                 },
@@ -1124,217 +865,200 @@ $(document).ready(function() {
             });
         }
 
-        // Cargar los datos al cargar la página
+        // Cargar los clientes al cargar la página
         cargarEmpleados();
 
         // Cuando se haga clic en el botón "Listar"
         $("#listarEmpleados").click(function () {
             cargarEmpleados();
         });
-    });*/
-
-    //Listar EMPLEADOS -YES
-    $(document).ready(function() {
-        // Define la función para listar empleados
-        function listarEmpleados() {
-            $.ajax({
-                url: "http://localhost:8080/empleados/listar", // Reemplaza esto con la URL real de tu endpoint de listado de empleados
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Limpia la tabla
-                    $('#tablaEmpleados tbody').empty();
-                    
-                    // Recorre los datos y agrega filas a la tabla
-                    $.each(data, function(index, empleado) {
-                        $('#tablaEmpleados tbody').append(
-                            '<tr>' +
-                            '<td>' + empleado.codEmp + '</td>' +
-                            '<td>' + empleado.apellido + '</td>' +
-                            '<td>' + empleado.nombre + '</td>' +
-                            '<td>' + empleado.num_docu + '</td>' +
-                            '<td>' + empleado.tipo_doc + '</td>' +
-                            '<td>' + empleado.administrador.nombre + '</td>' +
-                            //'<td>' + empleado.administrador.numDoc + '</td>' +
-                            //row.append($("<td>").text(empleados.administrador.numDoc));
-                            '</tr>'
-                        );
-                    });
-                },
-                error: function(error) {
-                    console.log('Error al listar empleados:', error);
-                }
-            });
-        }
-        // Cargar los datos al cargar la página
-        listarEmpleados();
-        // Agrega un manejador de clic para el botón 'listarEmpleados'
-        $('#listarEmpleados').click(function() {
-            listarEmpleados();
-        });
     });
 
-    // Actualizar EMPLEADOS
-    /*$('#actualizarEmpleados').on('click', function () {
-        var codigoEmpleado = $('#codigoEmpleados').val();
+    //Actualizar
+    $("#actualizarEmpleados").click(function () {
+        var codempleados = $("#codempleados").val();
+        var nombreempleados = $("#nombreempleados").val();
+        var apellidoempleados = $("#apellidoempleados").val();
+        var tdocumentoempleados = $("#tdocumentoempleados").val();
+        var ndocumentoempleados = $("#ndocumentoempleados").val();
+        var administradorempleados = $("#administradorempleados").val();
+
         var empleadoData = {
-            codEmp: codigoEmpleado,
-            nombre: $('#nombreempleados').val(),
-            apellido: $('#apellidoempleados').val(),
-            tipo_doc: $('#tdocumentoempleados').val(),
-            num_docu: $('#ndocumentoempleados').val(),
-            administrador: {
-                numDoc: $('#administradorempleados').val()
-            }
+            codEmp: codempleados,
+            nombre: nombreempleados,
+            apellido: apellidoempleados,
+            tipo_doc: tdocumentoempleados,
+            num_docu: ndocumentoempleados,
+            administrador: { numDoc: administradorempleados }
         };
 
         $.ajax({
-            url: "http://localhost:8080/empleados/actualizar/" + codigoEmpleado,
             type: "PUT",
-            dataType: "json",
+            url: "http://localhost:8080/empleados/actualizar/" + codempleados,
             contentType: "application/json",
             data: JSON.stringify(empleadoData),
-            success: function (response) {
-                alert("Empleado actualizado exitosamente.");
-                console.log(response);
+            success: function (data) {
+                alert("Empleado actualizado con éxito");
             },
-            error: function (xhr) {
-                if (xhr.status === 404) {
-                    alert("No se encontró el empleado con código " + codigoEmpleado);
-                }
-                console.error(xhr.responseText);
+            error: function (error) {
+                alert("Error al actualizar empleado");
             }
         });
-    });*/
+    });
 
-   /* $(document).ready(function() {
-        $("#actualizarEmpleados").click(function() {
-            // Obtén los valores de los campos de entrada
-            var codEmp = $("#codempleados").val();
-            var nombre = $("#nombreempleados").val();
-            var apellido = $("#apellidoempleados").val();
-            var tipo_doc = $("#tdocumentoempleados").val();
-            var num_docu = $("#ndocumentoempleados").val();
-            //var administrador = $("#administradorempleados").val();
+    //ELIMINAR
+    $("#eliminarEmpleados").click(function () {
+        var codEmp = $("#codigoEmpleados").val();
 
-            // Crea un objeto de datos para enviar al servidor
-            var data = {
-                codEmp: codEmp,
-                nombre: nombre,
-                apellido: apellido,
-                tipo_doc: tipo_doc,
-                num_docu: num_docu
-                //administrador: administrador
-            };
-
-            // Realiza la solicitud AJAX para actualizar el empleado
-            $.ajax({
-                type: "PUT",
-                url: "http://localhost:8080/empleados/actualizar/" + codEmp, // Ajusta la URL de acuerdo a tu API
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                success: function(response) {
-                    // Maneja la respuesta del servidor aquí, por ejemplo, muestra un mensaje de éxito
-                    alert("Empleado actualizado correctamente.");
-                },
-                error: function(error) {
-                    // Maneja los errores aquí, por ejemplo, muestra un mensaje de error
-                    alert("Error al actualizar el empleado.");
-                }
-            });
-        });
-    });*/
-
-    $(document).ready(function() {
-        // Captura el evento clic del botón "Actualizar Empleado"
-        $("#actualizarEmpleados").click(function() {
-            // Obtén los valores de los campos de entrada
-            var codEmpleado = $("#codempleados").val();
-            var nombre = $("#nombreempleados").val();
-            var apellido = $("#apellidoempleados").val();
-            var tipoDocumento = $("#tdocumentoempleados").val();
-            //var numDocumento = $("#ndocumentoempleados").val();
-            var administrador = $("#administradorempleados").val();
-    
-            // Crea un objeto con los datos del empleado
-            var empleadoData = {
-                codEmp: codEmpleado,
-                nombre: nombre,
-                apellido: apellido,
-                tipo_doc: tipoDocumento,
-                //num_docu: numDocumento,
-                administrador: {
-                    numDoc: administrador
-                }
-            };
-    
-            // Envía la solicitud AJAX para actualizar el empleado
-            $.ajax({
-                type: "PUT",
-                //url: "/empleados/actualizar/" + codEmpleado, // Asegúrate de que la URL sea correcta
-                url: "http://localhost:8080/empleados/actualizar/" + codEmp,
-                contentType: "application/json",
-                data: JSON.stringify(empleadoData),
-                success: function(response) {
-                    // Maneja la respuesta exitosa aquí (puedes mostrar un mensaje de éxito, recargar la lista, etc.)
-                    console.log("Empleado actualizado con éxito:", response);
-                },
-                error: function(error) {
-                    // Maneja el error aquí (puedes mostrar un mensaje de error, registrar errores, etc.)
-                    console.error("Error al actualizar el empleado:", error);
-                }
-            });
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/empleados/eliminar/" + codEmp,
+            success: function (data) {
+                alert("Empleado eliminado con éxito");
+            },
+            error: function (error) {
+                alert("Error al eliminar empleado");
+            }
         });
     });
-    
+
+    //Buscar por ID
+    $('#buscarEmpleados').on('click', function () {
+        var codEmp = $('#codigoEmpleados').val();
+        $.ajax({
+            url: "http://localhost:8080/empleados/" + codEmp,
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#tablaEmpleados tbody').empty(); // Limpia la tabla antes de agregar datos
+                if (respuesta != null) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(respuesta.codEmp));
+                    row.append($("<td>").text(respuesta.nombre));
+                    row.append($("<td>").text(respuesta.apellido));
+                    row.append($("<td>").text(respuesta.tipo_doc));
+                    row.append($("<td>").text(respuesta.num_docu));
+                    row.append($("<td>").text(respuesta.administrador.numDoc));
+                    $('#tablaEmpleados tbody').append(row);
+                } else {
+                    $('#error-message').html('No se encontró ningún empleado con el número de código especificado.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }); 
 
 //---------------  VISITA  -----------------------------   
 
-// Cargar valores de cod_emp de empleados en el formulario select de la tabla VISITA
-$(document).ready(function() {
-    $.ajax({
-        url: "http://localhost:8080/empleados/listar", // Ajusta la URL adecuadamente
-        type: "GET",
-        dataType: "json",
-        success: function(respuesta) {
-            var select = $('#codigoempleadovisita');
-            
-            for (var i = 0; i < respuesta.length; i++) {
-                var empleados = respuesta[i];
-                select.append($('<option>', {
-                    value: empleados.codEmp,
-                    text: empleados.codEmp
-                }));
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-        }
-    });
-});
+    // Cargar valores de cod_emp de empleados en el formulario select de la tabla VISITA
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/empleados/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                var select = $('#codigoempleadovisita');
 
-// Cargar valores de cod_cult de cultivo en el formulario select de la tabla VISITA
-$(document).ready(function() {
-    $.ajax({
-        url: "http://localhost:8080/cultivos/listar", // Ajusta la URL adecuadamente
-        type: "GET",
-        dataType: "json",
-        success: function(respuesta) {
-            var select = $('#codigocultivovisita');
-            
-            for (var i = 0; i < respuesta.length; i++) {
-                var cultivo = respuesta[i];
-                select.append($('<option>', {
-                    value: cultivo.codCult,
-                    text: cultivo.codCult
-                }));
+                for (var i = 0; i < respuesta.length; i++) {
+                    var empleados = respuesta[i];
+                    select.append($('<option>', {
+                        value: empleados.codEmp,
+                        text: empleados.codEmp
+                    }));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
             }
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-        }
+        });
     });
-});
+
+    // Cargar valores de cod_cult de cultivo en el formulario select de la tabla VISITA
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/cultivos/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                var select = $('#codigocultivovisita');
+
+                for (var i = 0; i < respuesta.length; i++) {
+                    var cultivo = respuesta[i];
+                    select.append($('<option>', {
+                        value: cultivo.codCult,
+                        text: cultivo.codCult
+                    }));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //url: "http://localhost:8080/visita/insertar",
+
+    // Función para insertar una visita
+    $(document).ready(function () {
+        // Función para insertar una visita
+        $("#insertarVisita").click(function () {
+            var nuevaVisita = {
+                numVisita: $("#codvisita").val(),
+                nom_finca: $("#nombrefincavisita").val(),
+                direc_visit: $("#direccionvisita").val(),
+                fecha: $("#fechavisita").val(),
+                empleados: { codEmp: $("#codigoempleadovisita").val() },
+                cultivo: { codCult: $("#codigocultivovisita").val() }
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/visita/insertar",  // Reemplaza la URL con la ruta correcta de tu API
+                data: JSON.stringify(nuevaVisita),
+                contentType: "application/json",
+                success: function (response) {
+                    // Manejar la respuesta del servidor si es necesario
+                }
+            });
+        });
+    });
+    //Listar 
+    $(document).ready(function () {
+        // Función para cargar y mostrar los clientes en la tabla
+        function cargarVisita() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/visita/listar",
+                success: function (data) {
+                    $("#tablaVisita tbody").empty(); // Limpia la tabla antes de agregar datos
+                    $.each(data, function (index, visita) {
+                        var row = $("<tr>");
+                        row.append($("<td>").text(visita.numVisita));
+                        row.append($("<td>").text(visita.nom_finca));
+                        row.append($("<td>").text(visita.direc_visit));
+                        row.append($("<td>").text(visita.fecha));
+                        row.append($("<td>").text(visita.empleados.codEmp));
+                        row.append($("<td>").text(visita.cultivo.codCult));
+                        $("#tablaVisita tbody").append(row);
+                    });
+                },
+                error: function () {
+                    alert("Error al obtener las visitas");
+                }
+            });
+        }
+
+        // Cargar los clientes al cargar la página
+        cargarVisita();
+
+        // Cuando se haga clic en el botón "Listar"
+        $("#listarVisita").click(function () {
+            cargarVisita();
+        });
+    });
 
     //Limpiar campos VISITA
     $('#limpiarVisita').on('click', function () {
@@ -1344,6 +1068,12 @@ $(document).ready(function() {
         $('#fechavisita').val('');
         $('#codigoempleadovisita').val('');
         $('#codigocultivovisita').val('');
+    });
+
+    //limpiar tabla 
+    $("#limpiarTablaVisita").click(function () {
+        // Elimina todas las filas de la tabla
+        $("#tablaVisita tbody").empty();
     });
 
     //cargar ID en el SELECT de VISITA
@@ -1369,177 +1099,128 @@ $(document).ready(function() {
         });
     })
 
-    /*//INSERTAR VISITA
-    $(document).ready(function() {
-        // Agrega un evento click al botón "insertarVisita"
-        $("#insertarVisita").click(function() {
-            // Obtiene los valores de los campos de entrada
-            var numVisita = $("#codvisita").val();
-            var nomFinca = $("#nombrefincavisita").val();
-            var direcVisita = $("#direccionvisita").val();
-            var fecha = $("#fechavisita").val();
-            var codEmpleado = $("#codigoempleadovisita").val();
-            var codCultivo = $("#codigocultivovisita").val();
-    
-            // Crea un objeto de datos para la visita
-            var visitaData = {
-                "numVisita": numVisita,
-                "nomFinca": nomFinca,
-                "direcVisita": direcVisita,
-                "fecha": fecha,
-                empleados: {
-                    codEmp: codEmpleado
-                },
-                cultivo: {
-                    codCult: codCultivo
-                }
-            };
-    
-            // Convierte el objeto de datos en una cadena JSON
-            var jsonData = JSON.stringify(visitaData);
-    
-            // Realiza la solicitud AJAX POST para insertar la visita
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/visita/insertar", // Reemplaza con la URL correcta
-                data: jsonData,
-                contentType: "application/json",
-                success: function(response) {
-                    // Maneja la respuesta del servidor (puede mostrar un mensaje de éxito, etc.)
-                    console.log("Visita insertada con éxito:", response);
-                },
-                error: function(error) {
-                    // Maneja cualquier error que ocurra durante la solicitud
-                    console.error("Error al insertar visita:", error);
-                }
-            });
-        });
-    });*/
-
-    /*$(document).ready(function() {
-        $("#insertarVisita").click(function() {
-            // Captura los valores de los campos del formulario
-            var numVisita = $("#codvisita").val();
-            var nomFinca = $("#nombrefincavisita").val();
-            var direcVisit = $("#direccionvisita").val();
-            var fecha = $("#fechavisita").val();
-            var codEmpleado = $("#codigoempleadovisita").val();
-            var codCultivo = $("#codigocultivovisita").val();
-
-            // Crea un objeto de datos para enviar al servidor
-            var data = {
-                numVisita: numVisita,
-                nomFinca: nomFinca,
-                direcVisit: direcVisit,
-                fecha: fecha,
-                empleados: {
-                    codEmp: codEmpleado
-                },
-                cultivo: {
-                    codCult: codCultivo
-                }
-            };
-
-            // Realiza la solicitud AJAX para insertar la visita
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/visita/insertar", // Ajusta la URL de la solicitud según tu ruta de backend
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                success: function(response) {
-                    // Maneja la respuesta del servidor si es necesario
-                    console.log("Visita insertada con éxito:", response);
-                    // Limpia los campos del formulario
-                    $("#formularioVisita")[0].reset();
-                },
-                error: function(error) {
-                    // Maneja los errores si ocurren
-                    console.error("Error al insertar visita:", error);
-                }
-            });
-        });
-    });*/
-
-    // Insertar ADM
-    $('#insertarVisita').on('click', function() {
-        var adminData = {
-            numVisita: $('#codvisita').val(), 
-            nom_finca: $('#nombrefincavisita').val(),  
-            direc_visit: $('#direccionvisita').val(),   
-            fecha: $('#fechavisita').val(),        
-            empleados: $('#codigoempleadovisita').val(),       
-            cultivo: $('#codigocultivovisita').val()   
-        };
-        
+    //Buscar por ID
+    $('#buscarVisita').on('click', function () {
+        var numVisita = $('#codigoVisita').val();
         $.ajax({
-            url: "http://localhost:8080/visita/insertar",
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify(adminData),
-            success: function(response) {
-                alert("Visita ingresado exitosamente.");
-                console.log(response);
+            url: "http://localhost:8080/visita/" + numVisita,
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#tablaVisita tbody').empty(); // Limpia la tabla antes de agregar datos
+                if (respuesta != null) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(respuesta.numVisita));
+                    row.append($("<td>").text(respuesta.nom_finca));
+                    row.append($("<td>").text(respuesta.direc_visit));
+                    row.append($("<td>").text(respuesta.fecha));
+                    row.append($("<td>").text(respuesta.empleados.codEmp));
+                    row.append($("<td>").text(respuesta.cultivo.codCult));
+                    $('#tablaVisita tbody').append(row);
+                } else {
+                    $('#error-message').html('No se encontró ningúna visita con el número de código especificado.');
+                }
             },
-            error: function(xhr, status, error) {
-                alert("No se pudo ingresar la visita.");
-                console.error(error);
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
             }
         });
     });
 
-    /*//insertar CLIENTE
-    $(document).ready(function() {
-        // Cuando se haga clic en el botón "Enviar"
-        $("#insertarVisita").click(function() {
-            // Recoge los valores de los campos de entrada
-            var numVisita = $("#codvisita").val();
-            var nom_finca = $("#nombrefincavisita").val();
-            var direc_visit = $("#direccionvisita").val();
-            var fecha = $("#fechavisita").val();
-            var empleados = $("#codigoempleadovisita").val(); // Valor del select
-            var cultivo = $("#codigocultivovisita").val();    
+    //eliminar 
+    $("#eliminarVisita").click(function () {
+        var numVisita = $("#codigoVisita").val();
 
-            // Crea un objeto de cliente con los valores recogidos
-            var visita = {
-                "numVisita": numVisita,
-                "nom_finca": nom_finca,
-                "direc_visit": direc_visit,
-                "fecha": fecha,
-                "empleados": {
-                    "codEmp": empleados // La llave foránea
-                },
-                "cultivo": {
-                    "codCult": cultivo // La llave foránea
-                }
-            };
-
-            // Realiza la solicitud AJAX para insertar el visita
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/visita/insertar",// La URL de tu endpoint de inserción
-                contentType: "application/json",
-                data: JSON.stringify(visita),
-                success: function(response) {
-                    // Visita insertado con éxito
-                    alert("Cliente insertado con éxito");
-                    // Limpia los campos de entrada
-                    $("#codvisita").val("");
-                    $("#nombrefincavisita").val("");
-                    $("#direccionvisita").val("");
-                    $("#fechavisita").val("");
-                    // Restablece el valor del select
-                    $("#codigoempleadovisita").val("");
-                    $("#codigocultivovisita").val("");
-                },
-                error: function() {
-                    // Maneja el error en caso de que falle la inserción
-                    alert("Error al insertar el visita");
-                }
-            });
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/visita/eliminar/" + numVisita,
+            success: function (response) {
+                alert("Visita eliminada con exitosamente.");
+                console.log(response);
+                console.log("Visita eliminada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al eliminar Visita:", error);
+            }
         });
-    });*/
+    });
 
+    //llamar datos del VISITA por el ID en los inputs
+    $('#llamarVisita').on('click', function () {
+        var numVisita = $('#codigoVisita').val();
+
+        $.ajax({
+            url: "http://localhost:8080/visita/" + numVisita,
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                if (respuesta != null) {
+                    $('#codvisita').val(respuesta.numVisita);
+                    $('#nombrefincavisita').val(respuesta.nom_finca);
+                    $('#direccionvisita').val(respuesta.direc_visit);
+                    $('#fechavisita').val(respuesta.fecha);
+                    $('#codigoempleadovisita').val(respuesta.empleados.codEmp);
+                    // Aquí se establece el valor del select 
+                    $('#codigocultivovisita').val(respuesta.cultivo.codCult); // Suponiendo que 'administrador' tiene un campo 'id'
+                } else {
+                    $('#codvisita').val('');
+                    $('#nombrefincavisita').val('');
+                    $('#direccionvisita').val('');
+                    $('#fechavisita').val('');
+                    $('#codigoempleadovisita').val('');
+                    $('#codigocultivovisita').val('');
+                    $('#error-message').html('No se encontró ningúna visita especificada.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Función para enviar la solicitud AJAX de actualización
+    function actualizarVisita() {
+        const numVisita = $("#codvisita").val();
+        const nomFinca = $("#nombrefincavisita").val();
+        const direcVisit = $("#direccionvisita").val();
+        const fecha = $("#fechavisita").val();
+        const codEmpleado = $("#codigoempleadovisita").val();
+        const codCultivo = $("#codigocultivovisita").val();
+
+        const visitaData = {
+            numVisita: numVisita,
+            nom_finca: nomFinca,
+            direc_visit: direcVisit,
+            fecha: fecha,
+            empleados: {
+                codEmp: codEmpleado
+            },
+            cultivo: {
+                codCult: codCultivo
+            }
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/visita/actualizar/" + numVisita, // Reemplaza con la URL correcta de tu endpoint de actualización
+            contentType: "application/json",
+            data: JSON.stringify(visitaData),
+            success: function (response) {
+                console.log("Visita actualizada con éxito:", response);
+                // Actualizar la tabla de visitas u otras operaciones necesarias
+            },
+            error: function (error) {
+                console.error("Error al actualizar visita:", error);
+            }
+        });
+    }
+
+    // Llamar la función cuando se haga clic en el botón "Actualizar"
+    $("#actualizarVisita").on("click", function () {
+        actualizarVisita();
+    });
 
 //---------------  FACTURACION  -----------------------------   
 
@@ -1620,7 +1301,6 @@ $(document).ready(function() {
                     $('#formapagofacturacion').val(respuesta.formaPag);
                     $('#valorfacturacion').val(respuesta.valor);
                     $('#fechapagofacturacion').val(respuesta.fechPago);
-    
                     // Aquí se establece el valor del select 
                     $('#cultivofacturacion').val(respuesta.cultivo.codCult); // Suponiendo que 'administrador' tiene un campo 'id'
                 } else {
@@ -1638,103 +1318,171 @@ $(document).ready(function() {
             }
         });
     });
+// url: "http://localhost:8080/clientes/actualizar/" + codigoCliente,
 
     //insertar FACTURACION
-    $(document).ready(function() {
-        // Cuando se haga clic en el botón "Enviar"
-        $("#insertarFacturacion").click(function() {
-            // Recoge los valores de los campos de entrada
-            var nfactura = $("#numerofacturacion").val();
-            var cuentac = $("#cuentaclientefacturacion").val();
-            var formapago = $("#formapagofacturacion").val();
-            var valor = $("#valorfacturacion").val();
-            var fechapago = $("#fechapagofacturacion").val();
-            var cultivo = $("#cultivofacturacion").val(); // Valor del select
-
-            // Crea un objeto de cliente con los valores recogidos
-            var factura = {
-                "numFac": nfactura,
-                "cuentClien": cuentac,
-                "formaPag": formapago,
-                "valor": valor,
-                "fechPago": fechapago,
-                "cultivo": {
-                    "codCult": cultivo // La llave foránea
-                }
-            };
-
-            // Realiza la solicitud AJAX para insertar el cliente
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/facturacion/insertar",// La URL de tu endpoint de inserción
-                contentType: "application/json",
-                data: JSON.stringify(factura),
-                success: function(response) {
-                    // Cliente insertado con éxito
-                    alert("Factura insertado con éxito");
-                    // Limpia los campos de entrada
-                    $("#numerofacturacion").val("");
-                    $("#cuentaclientefacturacion").val("");
-                    $("#formapagofacturacion").val("");
-                    $("#valorfacturacion").val("");
-                    $("#fechapagofacturacion").val("");
-                    // Restablece el valor del select
-                    $("#cultivofacturacion").val("");
-                },
-                error: function() {
-                    // Maneja el error en caso de que falle la inserción
-                    alert("Error al insertar la factura");
-                }
-            });
+    $("#insertarFacturacion").click(function () {
+        var numFac = $("#numerofacturacion").val();
+        var cuentClien = $("#cuentaclientefacturacion").val();
+        var formaPag = $("#formapagofacturacion").val();
+        var valor = $("#valorfacturacion").val();
+        var fechPago = $("#fechapagofacturacion").val();
+        var cultivo = $("#cultivofacturacion").val();
+    
+        var data = {
+            numFac: numFac,
+            cuentClien: cuentClien,
+            formaPag: formaPag,
+            valor: valor,
+            fechPago: fechPago,
+            cultivo: {
+                codCult: cultivo
+            }
+        };
+    
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/facturacion/insertar",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Facturacion ingresado exitosamente.");
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al insertar Facturación:");
+                console.log("Estado (status): " + status);
+                console.log("Error (error): " + error);
+                console.log("Respuesta (responseText): " + xhr.responseText);
+            }
         });
     });
-
     //Listar FACTURACION
-    /*$(document).ready(function () {
-        // Función para cargar y mostrar los clientes en la tabla
-        function cargarFactura() {
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:8080/facturacion/listar",
-                success: function (data) {
-                    $("#tablaFacturacion tbody").empty(); // Limpia la tabla antes de agregar datos
-                    $.each(data, function (index, facturacion) {
-                        var row = $("<tr>");
-                        row.append($("<td>").text(facturacion.numFac));
-                        row.append($("<td>").text(facturacion.cuentClien));
-                        row.append($("<td>").text(facturacion.formaPag));
-                        row.append($("<td>").text(facturacion.valor));
-                        row.append($("<td>").text(facturacion.fechPago));
-                        row.append($("<td>").text(facturacion.cultivo.codCult));
-                        $("#tablaFacturacion tbody").append(row);
-                    });
-                },
-                error: function () {
-                    alert("Error al obtener las facturas");
-                }
-            });
-        }
-
-        // Cargar los clientes al cargar la página
-        cargarFactura();
-
-        // Cuando se haga clic en el botón "Listar"
-        $("#listarFacturacion").click(function () {
-            cargarFactura();
+    $("#listarFacturacion").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/facturacion/listar",
+            //dataType: "json", // Espera una respuesta JSON
+            success: function (facturaciones) {
+                // Limpiar la tabla actual
+                $("#tablaFacturacion tbody").empty();
+    
+                // Iterar sobre las facturaciones y agregarlas a la tabla
+                facturaciones.forEach(function (facturacion) {
+                    var row = "<tr>";
+                    row += "<td>" + facturacion.numFac + "</td>";
+                    row += "<td>" + facturacion.cuentClien + "</td>";
+                    row += "<td>" + facturacion.formaPag + "</td>";
+                    row += "<td>" + facturacion.valor + "</td>";
+                    row += "<td>" + facturacion.fechPago + "</td>";
+                    row += "<td>" + facturacion.cultivo.codCult + "</td>";
+                    row += "</tr>";
+                    $("#tablaFacturacion tbody").append(row);
+                });
+            },
+                error: function (xhr, status, error) {
+                    console.error("Error al listar Facturaciones:");
+                    console.log("Estado (status): " + status);
+                    console.log("Error (error): " + error);
+                    console.log("Respuesta (responseText): " + xhr.responseText);
+                  }
         });
-    });*/
+    });
+    //Actualizar FACTURACION
+    $("#actualizarFacturacion").click(function () {
+        var numFac = $("#numerofacturacion").val();
+        var cuentClien = $("#cuentaclientefacturacion").val();
+        var formaPag = $("#formapagofacturacion").val();
+        var valor = $("#valorfacturacion").val();
+        var fechPago = $("#fechapagofacturacion").val();
+        var cultivo = $("#cultivofacturacion").val();
+    
+        var data = {
+            numFac: numFac,
+            cuentClien: cuentClien,
+            formaPag: formaPag,
+            valor: valor,
+            fechPago: fechPago,
+            cultivo: {
+                codCult: cultivo
+            }
+        };
+    
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/facturacion/actualizar/" + numFac,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Facturacion actualizada con exitosamente.");
+                console.log(response);
+                // Actualizar la tabla o mostrar un mensaje de éxito
+                //console.log("Facturación actualizada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al actualizar Facturación:", error);
+            }
+        });
+    });
+    //eliminar FACTURACION
+    $("#eliminarFacturacion").click(function () {
+        var numFac = $("#codigoFacturacion").val();
+    
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/facturacion/eliminar/" + numFac,
+            success: function (response) {
+                alert("Facturacion eliminada con exitosamente.");
+                console.log(response);
+                console.log("Facturación eliminada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al eliminar Facturación:", error);
+            }
+        });
+    });
+    //Buscar CLIENTE por ID
+    $('#buscarFacturacion').on('click', function () {
+        var numFac = $('#codigoFacturacion').val();
+        $.ajax({
+            url: "http://localhost:8080/facturacion/" + numFac,
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#tablaFacturacion tbody').empty(); // Limpia la tabla antes de agregar datos
+                if (respuesta != null) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(respuesta.numFac));
+                    row.append($("<td>").text(respuesta.cuentClien));
+                    row.append($("<td>").text(respuesta.formaPag));
+                    row.append($("<td>").text(respuesta.valor));
+                    row.append($("<td>").text(respuesta.fechPago));
+                    row.append($("<td>").text(respuesta.cultivo.codCult));
+                    $('#tablaFacturacion tbody').append(row);
+                } else {
+                    $('#error-message').html('No se encontró ningúnA Factura con el número de código especificado.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
 
 //---------------  DRON  ----------------------------- 
 
     // Cargar valores del ID de DRON en el formulario select
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.ajax({
             url: "http://localhost:8080/dron/listar", // Ajusta la URL adecuadamente
             type: "GET",
             dataType: "json",
-            success: function(respuesta) {
+            success: function (respuesta) {
                 var select = $('#codigoDron');
-                
+
                 for (var i = 0; i < respuesta.length; i++) {
                     var administrador = respuesta[i];
                     select.append($('<option>', {
@@ -1743,53 +1491,79 @@ $(document).ready(function() {
                     }));
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
     });
 
-        //Limpiar campos de Administrado
-        $('#limpiarDron').on('click', function () {
-            $('#coddron').val('');
-            $('#numeroserialdron').val('');
-            $('#marcadron').val('');
-        });
-
-// Insertar DRON
-$('#insertarDron').on('click', function() {
-    var Data = {
-        codDron: $('#coddron').val(), 
-        numSerial: $('#numeroserialdron').val(),  
-        marca: $('#marcadron').val()  
-    };
-    
-    $.ajax({
-        url: "http://localhost:8080/dron/insertar", 
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(Data),
-        success: function(response) {
-            alert("Dron ingresado exitosamente.");
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            alert("No se pudo ingresar el dron.");
-            console.error(error);
-        }
+    //Limpiar campos de Administrado
+    $('#limpiarDron').on('click', function () {
+        $('#coddron').val('');
+        $('#numeroserialdron').val('');
+        $('#marcadron').val('');
     });
-});
+
+    // Insertar DRON
+    $('#insertarDron').on('click', function () {
+        var Data = {
+            codDron: $('#coddron').val(),
+            numSerial: $('#numeroserialdron').val(),
+            marca: $('#marcadron').val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/dron/insertar",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(Data),
+            success: function (response) {
+                alert("Dron ingresado exitosamente.");
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                alert("No se pudo ingresar el dron.");
+                console.error(error);
+            }
+        });
+    });
+
+    //Buscar CLIENTE por ID
+    $('#buscarDron').on('click', function () {
+        var codDron = $('#codigoDron').val();
+        $.ajax({
+            url: "http://localhost:8080/dron/" + codDron,
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#tablaDron tbody').empty(); // Limpia la tabla antes de agregar datos
+                if (respuesta != null) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(respuesta.codDron));
+                    row.append($("<td>").text(respuesta.numSerial));
+                    row.append($("<td>").text(respuesta.marca));
+                    $('#tablaDron tbody').append(row);
+                } else {
+                    $('#error-message').html('No se encontró ningún Dron con el número de código especificado.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
 
     //llamar datos del DRON por el ID en los inputs
-    $('#llamarDron').on('click', function() {
+    $('#llamarDron').on('click', function () {
         var codDron = $('#codigoDron').val(); // Cambiado el ID a 'ndocumentoAdmin' para obtener el valor del número de documento.
 
         $.ajax({
             url: "http://localhost:8080/dron/" + codDron,
             type: "GET",
             dataType: "json",
-            success: function(respuesta) {
+            success: function (respuesta) {
                 if (respuesta != null) {
                     $('#coddron').val(respuesta.codDron);
                     $('#numeroserialdron').val(respuesta.numSerial);
@@ -1800,68 +1574,36 @@ $('#insertarDron').on('click', function() {
                     $('#error-message').html('No se encontró ningun DRON con el número especificado.');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
     });
 
-    //buscar por Numero documento ID
-    $('#buscarDron').on('click', function() {
-        var numDoc = $('#codigoDron').val(); 
-    
-        $.ajax({
-            url: "http://localhost:8080/dron/" + codDron,
-            type: "GET",
-            dataType: "json",
-            success: function(respuesta) {
-                $('#tablaDron').html('');
-                if (respuesta != null) {
-                    $('#tablaDron').html('<thead><tr>' +
-                        '<th>N° dron</th>' +
-                        '<th>Serial</th>' +
-                        '<th>Marca</th>' +
-                        '</tr></thead><tbody>' +
-                        '<tr>' +
-                        '<td>' + respuesta.codDron + '</td>' +
-                        '<td>' + respuesta.numSerial + '</td>' +
-                        '<td>' + respuesta.marca + '</td>' +
-                        '</tr></tbody>');
-                } else {
-                    $('#tablaDron').html('');
-                    $('#error-message').html('No se encontró ningun dron con el número especificado.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    });
-    
     //Listar DRON
-    $('#listarDron').on('click', function() {
+    $('#listarDron').on('click', function () {
         $.ajax({
-            url: "http://localhost:8080/dron/listar", 
+            url: "http://localhost:8080/dron/listar",
             type: "GET",
             dataType: "json",
-            success: function(respuesta) {
+            success: function (respuesta) {
                 $('#tablaDron').html('');
                 if (respuesta.length > 0) {
                     var tablaDron = '<thead><tr>' +
-                                    '<th>N° dron</th>' +
-                                    '<th>Serial</th>' +
-                                    '<th>Marca</th>' +
-                                    '</tr></thead><tbody>';
-                    
+                        '<th>N° dron</th>' +
+                        '<th>Serial</th>' +
+                        '<th>Marca</th>' +
+                        '</tr></thead><tbody>';
+
                     for (var i = 0; i < respuesta.length; i++) {
                         var dataDRON = respuesta[i];
                         tablaDron += '<tr>' +
-                                     '<td>' + dataDRON.codDron + '</td>' +
-                                     '<td>' + dataDRON.numSerial + '</td>' +
-                                     '<td>' + dataDRON.marca + '</td>' +
-                                     '</tr>';
+                            '<td>' + dataDRON.codDron + '</td>' +
+                            '<td>' + dataDRON.numSerial + '</td>' +
+                            '<td>' + dataDRON.marca + '</td>' +
+                            '</tr>';
                     }
-    
+
                     tablaDron += '</tbody>';
                     $('#tablaDron').html(tablaDron);
                 } else {
@@ -1869,14 +1611,14 @@ $('#insertarDron').on('click', function() {
                     $('#error-message').html('No se encontraron drones.');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
     });
 
     // Actualizar DRON
-    $('#actualizarDron').on('click', function() {
+    $('#actualizarDron').on('click', function () {
         var codDron = $('#codigoDron').val();
         var DataDRON = {
             //codDron: $('#coddron').val(),
@@ -1885,16 +1627,16 @@ $('#insertarDron').on('click', function() {
         };
 
         $.ajax({
-            url: "http://localhost:8080/dron/actualizar/" + codDron, 
+            url: "http://localhost:8080/dron/actualizar/" + codDron,
             type: "PUT",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(DataDRON),
-            success: function(response) {
+            success: function (response) {
                 alert("Dron actualizado exitosamente.");
                 console.log(response);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 if (xhr.status === 404) {
                     alert("No se encontró el número  " + codDron);
                 }
@@ -1902,7 +1644,6 @@ $('#insertarDron').on('click', function() {
             }
         });
     });
-        
 
     // Eliminar por número de ID
     $('#eliminarDron').on('click', function () {
@@ -1929,6 +1670,12 @@ $('#insertarDron').on('click', function() {
             }
         });
     });
+
+        //limpiar tabla 
+        $("#limpiarTablaDron").click(function () {
+            // Elimina todas las filas de la tabla
+            $("#tablaDron tbody").empty();
+        });
 
 //---------------  DIAGNOSTICO  ----------------------------- 
     // Cargar valores de IDnumDoc de Administrador en el formulario select de la tabla CLIENTE
@@ -1975,8 +1722,7 @@ $('#insertarDron').on('click', function() {
             }
         });
     });
-
-    //Limpiar campos CLIENTES
+    //Limpiar campos DIAGNOSTICO
     $('#limpiarDiagnostico').on('click', function () {
         $('#numeroDiagnostico').val('');
         $('#observacionesdiagnostico').val('');
@@ -1988,116 +1734,1095 @@ $('#insertarDron').on('click', function() {
         $('#codigocultivodiagnostico').val('');
     });
 
-    
-//---------------  MULTIMEDIA  ----------------------------- 
-//---------------  TIENE  ----------------------------- 
-//---------------  VIRUS  -----------------------------   
-    //buscar por Numero documento ID
-    $('#buscarVirus').on('click', function() {
-        var codvirus = $('#codigoVirus').val();
+    //limpiar tabla DIAGNOSTICO
+    $("#limpiarTablaDiagnostico").click(function () {
+        // Elimina todas las filas de la tabla
+        $("#tablaDiagnostico tbody").empty();
+    });
+
+    //cargar ID en el SELECT de DIAGNOSTICO
+    $(document).ready(function() {
         $.ajax({
-            url: "http://localhost:8080/num_doc/" + codvirus,
+            url: "http://localhost:8080/diagnostico/listar", // Ajusta la URL adecuadamente
             type: "GET",
-            datatype: "JSON",
+            dataType: "json",
             success: function(respuesta) {
-                console.log(respuesta);
-                $('#tablaVirus').html('');
-                if (respuesta != null) {
-                    $('#tablaCultivo').html('<thead><tr>' +
-                        '<th>codvirus</th>' +
-                        '<th>nombrevirus</th>' +
-                        '<tr>' +
-                        '<td>' + respuesta.codvirus + '</td>' +
-                        '<td>' + respuesta.nombrevirus + '</td>' +
-                        '</tr></tbody>');
-                } else {
-                    $('#tablaCultivo').html('');
-                    $('#error-message').html('No se encontró ningun virus con el Numero de codigo especificado.');
+                var select = $('#codigoDiagnostico');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var valor = respuesta[i];
+                    select.append($('<option>', {
+                        value: valor.numDiag,
+                        text: valor.numDiag
+                    }));
                 }
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText); 
+                console.error(xhr.responseText);
             }
         });
     });
 
-        // Insertar 
-    $('#insertarVirus').on('click', function() {
-        var adminData = {
-            codvirus: $('#codvirus').val(), 
-            nombrevirus: $('#nombrevirus').val(),
-        };
-        
+    //llamar datos del DIAGNOSTICO por el ID en los inputs
+    $('#llamarDiagnostico').on('click', function() {
+        var numDiag = $('#codigoDiagnostico').val();
+    
         $.ajax({
-            url: "http://localhost:8080/insertar", 
+            url: "http://localhost:8080/diagnostico/" + numDiag,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#numeroDiagnostico').val(respuesta.numDiag);
+                    $('#observacionesdiagnostico').val(respuesta.observaciones);
+                    $('#fechasolicitadadiagnostico').val(respuesta.fechaSolicit);
+                    $('#fechadiagnostico').val(respuesta.fechaDiag);
+                    $('#fechaentregadiagnostico').val(respuesta.fechaEntreg);
+                    $('#tipodañodiagnostico').val(respuesta.tipoDaño);
+                    // Aquí se establece el valor del select 
+                    $('#codigodrondiagnostico').val(respuesta.dron.codDron); // Suponiendo que 'administrador' tiene un campo 'id'
+                    $('#codigocultivodiagnostico').val(respuesta.cultivo.codCult);
+                } else {
+                    $('#numeroDiagnostico').val('');
+                    $('#observacionesdiagnostico').val('');
+                    $('#fechasolicitadadiagnostico').val('');
+                    $('#fechadiagnostico').val('');
+                    $('#fechaentregadiagnostico').val('');
+                    $('#tipodañodiagnostico').val('');
+                    $('#codigodrondiagnostico').val('');
+                    $('#codigocultivodiagnostico').val('');
+                    $('#error-message').html('No se encontró ningún diagnostico especificada.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //Listar DIAGNOSTICO
+    $(document).ready(function () {
+        // Función para cargar y mostrar los clientes en la tabla
+        function cargarDiagnostico() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/diagnostico/listar",
+                success: function (data) {
+                    $("#tablaDiagnostico tbody").empty(); // Limpia la tabla antes de agregar datos
+                    $.each(data, function (index, diagnostico) {
+                        var row = $("<tr>");
+                        row.append($("<td>").text(diagnostico.numDiag));
+                        row.append($("<td>").text(diagnostico.observaciones));
+                        row.append($("<td>").text(diagnostico.fechaSolicit));
+                        row.append($("<td>").text(diagnostico.fechaDiag));
+                        row.append($("<td>").text(diagnostico.fechaEntreg));
+                        row.append($("<td>").text(diagnostico.tipoDaño));
+                        row.append($("<td>").text(diagnostico.dron.codDron));
+                        row.append($("<td>").text(diagnostico.cultivo.codCult));
+                        $("#tablaDiagnostico tbody").append(row);
+                    });
+                },
+                error: function () {
+                    alert("Error al obtener los diagnosticos");
+                }
+            });
+        }
+
+        // Cargar los clientes al cargar la página
+        cargarDiagnostico();
+
+        // Cuando se haga clic en el botón "Listar"
+        $("#listarDiagnostico").click(function () {
+            cargarDiagnostico();
+        });
+    });
+
+    //insertar 
+    $("#insertarDiagnostico").click(function () {
+        var numDiag = $("#numeroDiagnostico").val();
+        var observaciones = $("#observacionesdiagnostico").val();
+        var fechaSolicit = $("#fechasolicitadadiagnostico").val();
+        var fechaDiag = $("#fechadiagnostico").val();
+        var fechaEntreg = $("#fechaentregadiagnostico").val();
+        var tipoDaño = $("#tipodañodiagnostico").val();
+        var dron = $("#codigodrondiagnostico").val();
+        var cultivo = $("#codigocultivodiagnostico").val();
+
+        var data = {
+            numDiag: numDiag,
+            observaciones: observaciones,
+            fechaSolicit: fechaSolicit,
+            fechaDiag: fechaDiag,
+            fechaEntreg: fechaEntreg,
+            tipoDaño: tipoDaño,
+            dron: {
+                codDron: dron
+            },
+            cultivo: {
+                codCult: cultivo
+            }
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/diagnostico/insertar",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Diagnostico ingresado exitosamente.");
+                console.log(response);
+            },
+        });
+    });
+
+    //Actualizar 
+    $("#actualizarDiagnostico").click(function () {
+        var numDiag = $("#numeroDiagnostico").val();
+        var observaciones = $("#observacionesdiagnostico").val();
+        var fechaSolicit = $("#fechasolicitadadiagnostico").val();
+        var fechaDiag = $("#fechadiagnostico").val();
+        var fechaEntreg = $("#fechaentregadiagnostico").val();
+        var tipoDaño = $("#tipodañodiagnostico").val();
+        var dron = $("#codigodrondiagnostico").val();
+        var cultivo = $("#codigocultivodiagnostico").val();
+
+        var data = {
+            numDiag: numDiag,
+            observaciones: observaciones,
+            fechaSolicit: fechaSolicit,
+            fechaDiag: fechaDiag,
+            fechaEntreg: fechaEntreg,
+            tipoDaño: tipoDaño,
+            dron: {
+                codDron: dron
+            },
+            cultivo: {
+                codCult: cultivo
+            }
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/diagnostico/actualizar/" + numDiag,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Diagnostico actualizado con exitosamente.");
+                console.log(response);
+                // Actualizar la tabla o mostrar un mensaje de éxito
+                //console.log("Facturación actualizada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al actualizar diagnostico:", error);
+            }
+        });
+    });
+
+    //eliminar FACTURACION
+    $("#eliminarDiagnostico").click(function () {
+        var numDiag = $("#codigoDiagnostico").val();
+    
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/diagnostico/eliminar/" + numDiag,
+            success: function (response) {
+                alert("Diagnostico eliminado exitosamente.");
+                console.log(response);
+                console.log("Diagnostico eliminado con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al eliminar diagnostico:", error);
+            }
+        });
+    });
+
+    
+//---------------  MULTIMEDIA  ----------------------------- 
+    // Cargar valores de ID de DIAGNOSTICO en el formulario select de la tabla MULTIM
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/diagnostico/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#numerodiagnosticomultimedia');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.numDiag,
+                        text: administrador.numDiag
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //Limpiar campos MULTIMEDIA
+    $('#limpiarMultimedia').on('click', function () {
+        $('#codmultimedia').val('');
+        $('#nombremultimedia').val('');
+        $('#tamañomultimedia').val('');
+        $('#numerodiagnosticomultimedia').val('');
+    });
+
+    //limpiar tabla 
+    $("#limpiarTablaMultimedia").click(function () {
+        // Elimina todas las filas de la tabla
+        $("#tablaMultimedia tbody").empty();
+    });
+
+    //cargar ID en el SELECT de MULTIMEDIA
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/multimedia/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigoMultimedia');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var valor = respuesta[i];
+                    select.append($('<option>', {
+                        value: valor.codMult,
+                        text: valor.codMult
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //llamar datos del MULTIMEDIA por el ID en los inputs
+    $('#llamarMultimedia').on('click', function() {
+        var codMult = $('#codigoMultimedia').val();
+    
+        $.ajax({
+            url: "http://localhost:8080/multimedia/" + codMult,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#codmultimedia').val(respuesta.codMult);
+                    $('#nombremultimedia').val(respuesta.cuentClien);
+                    $('#tamañomultimedia').val(respuesta.formaPag);
+                    // Aquí se establece el valor del select 
+                    $('#numerodiagnosticomultimedia').val(respuesta.cultivo.codCult); // Suponiendo que 'administrador' tiene un campo 'id'
+                } else {
+                    $('#codmultimedia').val('');
+                    $('#nombremultimedia').val('');
+                    $('#tamañomultimedia').val('');
+                    $('#numerodiagnosticomultimedia').val('');
+                    $('#error-message').html('No se encontró ningúna multimedia especificada.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+   // url: "http://localhost:8080/clientes/actualizar/" + codigoCliente,
+
+    
+    /*//insertar MULTIMEDIA
+    $("#insertarMultimedia").click(function () {
+        var codMult = $("#codmultimedia").val();
+        var nombArchivo = $("#nombremultimedia").val();
+        var tamaño = $("#tamañomultimedia").val();
+        var diagnostico = $("#numerodiagnosticomultimedia").val();
+    
+        var data = {
+            codMult: codMult,
+            nombArchivo: nombArchivo,
+            tamaño: tamaño,
+            diagnostico: {
+                numDiag: diagnostico
+            }
+        };
+    
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/multimedia/insertar",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Multimedia ingresado exitosamente.");
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al insertar Multimedia:");
+                console.log("Estado (status): " + status);
+                console.log("Error (error): " + error);
+                console.log("Respuesta (responseText): " + xhr.responseText);
+            }
+        });
+    });*/
+
+    //insertar 
+    $(document).ready(function() {
+        // Cuando se haga clic en el botón "Enviar"
+        $("#insertarMultimedia").click(function() {
+            // Recoge los valores de los campos de entrada
+            var nmulti = $("#codmultimedia").val();
+            var nombreMultimedia = $("#nombremultimedia").val();
+            var tamañoMulti = $("#tamañomultimedia").val();
+            var diagnostico = $("#numerodiagnosticomultimedia").val(); // Valor del select
+
+            // Crea un objeto de cliente con los valores recogidos
+            var data = {
+                "codMult": nmulti,
+                "nombArchivo": nombreMultimedia,
+                "tamaño": tamañoMulti,
+                "diagnostico": {
+                    "numDiag": diagnostico // La llave foránea
+                }
+            };
+
+            // Realiza la solicitud AJAX para insertar el cliente
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/multimedia/insertar",// La URL de tu endpoint de inserción
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    // Cliente insertado con éxito
+                    alert("Multimedia insertado con éxito");
+                    // Limpia los campos de entrada
+                    $("#codmultimedia").val("");
+                    $("#nombremultimedia").val("");
+                    $("#tamañomultimedia").val("");
+                    $("#numerodiagnosticomultimedia").val("");
+                    // Restablece el valor del select
+                },
+                error: function() {
+                    // Maneja el error en caso de que falle la inserción
+                    alert("Error al insertar el multimedia");
+                }
+            });
+        });
+    });
+
+    //Listar MULTIMEDIA
+    $(document).ready(function () {
+        // Función para cargar y mostrar los clientes en la tabla
+        function cargarMultimedia() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/multimedia/listar",
+                success: function (data) {
+                    $("#tablaMultimedia tbody").empty(); // Limpia la tabla antes de agregar datos
+                    $.each(data, function (index, multimedia) {
+                        var row = $("<tr>");
+                        row.append($("<td>").text(multimedia.codMult));
+                        row.append($("<td>").text(multimedia.nombArchivo));
+                        row.append($("<td>").text(multimedia.tamaño));
+                        row.append($("<td>").text(multimedia.diagnostico.numDiag));
+                        $("#tablaMultimedia tbody").append(row);
+                    });
+                },
+                error: function () {
+                    alert("Error al obtener los multimedia");
+                }
+            });
+        }
+
+        // Cargar los clientes al cargar la página
+        cargarMultimedia();
+
+        // Cuando se haga clic en el botón "Listar"
+        $("#listarMultimedia").click(function () {
+            cargarMultimedia();
+        });
+    });
+
+    //Actualizar MULTIMEDIA
+    $("#actualizarMultimedia").click(function () {
+        var codMult = $("#codmultimedia").val();
+        var nombArchivo = $("#nombremultimedia").val();
+        var tamaño = $("#tamañomultimedia").val();
+        var diagnostico = $("#numerodiagnosticomultimedia").val();
+    
+        var data = {
+            codMult: codMult,
+            nombArchivo: nombArchivo,
+            tamaño: tamaño,
+            diagnostico: {
+                numDiag: diagnostico
+            }
+        };
+    
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/multimedia/actualizar/" + codMult,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Multimedia actualizada con exitosamente.");
+                console.log(response);
+                // Actualizar la tabla o mostrar un mensaje de éxito
+                //console.log("Facturación actualizada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al actualizar multimedia:", error);
+            }
+        });
+    });
+
+    //eliminar 
+    $("#eliminarMultimedia").click(function () {
+        var codMult = $("#codigoMultimedia").val();
+
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/multimedia/eliminar/" + codMult,
+            success: function (response) {
+                alert("Multimedia eliminada con exitosamente.");
+                console.log(response);
+                console.log("Multimedia eliminada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al eliminar multimedia:", error);
+            }
+        });
+    });
+
+    //Buscar CLIENTE por ID
+    $('#buscarMultimedia').on('click', function () {
+        var codMult = $('#codigoMultimedia').val();
+        $.ajax({
+            url: "http://localhost:8080/multimedia/" + codMult,
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#tablaMultimedia tbody').empty(); // Limpia la tabla antes de agregar datos
+                if (respuesta != null) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(respuesta.codMult));
+                    row.append($("<td>").text(respuesta.nombArchivo));
+                    row.append($("<td>").text(respuesta.tamaño));
+                    row.append($("<td>").text(respuesta.diagnostico.numDiag));
+                    $('#tablaMultimedia tbody').append(row);
+                } else {
+                    $('#error-message').html('No se encontró ningúna multimedia con el número de código especificado.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+
+
+
+//---------------  VIRUS  -----------------------------  
+    // Cargar valores del ID de VIRUS en el formulario select
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/virus/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                var select = $('#codigoVirus');
+
+                for (var i = 0; i < respuesta.length; i++) {
+                    var administrador = respuesta[i];
+                    select.append($('<option>', {
+                        value: administrador.codVirus,
+                        text: administrador.codVirus
+                    }));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //Limpiar campos de VIRUS
+    $('#limpiarVirus').on('click', function () {
+        $('#codvirus').val('');
+        $('#nombrevirus').val('');
+    });
+
+    // Insertar VIRUS
+    $('#insertarVirus').on('click', function () {
+        var Data = {
+            codVirus: $('#codvirus').val(),
+            nomVirus: $('#nombrevirus').val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/virus/insertar",
             type: "POST",
             dataType: "json",
             contentType: "application/json",
-            data: JSON.stringify(adminData),
-            success: function(response) {
-                alert("Ingresado");
+            data: JSON.stringify(Data),
+            success: function (response) {
+                alert("Virus ingresado exitosamente.");
                 console.log(response);
             },
-            error: function(xhr, status, error) {
-                alert("No se pudo ingresar");
+            error: function (xhr, status, error) {
+                alert("No se pudo ingresar el virus.");
                 console.error(error);
             }
         });
     });
 
-        // Eliminar 
-    $('#eliminarVirus').on('click', function() {
-        var codvirus = $('#codigoVirus').val(); 
+    //llamar datos del VIRUS por el ID en los inputs
+    $('#llamarVirus').on('click', function () {
+        var codVirus = $('#codigoVirus').val(); // Cambiado el ID a 'ndocumentoAdmin' para obtener el valor del número de documento.
+
         $.ajax({
-            url: "http://localhost:8080/eliminar/" + codvirus, 
-            type: "DELETE",
-            dataType: "text",
-            success: function(respuesta) {
-                console.log(respuesta);
-                if (respuesta === "Eliminado") {
-                    alert("Eliminado");
-                } 
-            },
-            error: function(xhr) {
-                if (xhr.status === 404) {
-                    alert("No se encontró el codigo " + codvirus); 
+            url: "http://localhost:8080/virus/" + codVirus,
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                if (respuesta != null) {
+                    $('#codvirus').val(respuesta.codVirus);
+                    $('#nombrevirus').val(respuesta.nomVirus);
+                } else {
+                    $('#codvirus').val('');
+                    $('#nombrevirus').val('');
+                    $('#error-message').html('No se encontró ningun DRON con el número especificado.');
                 }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
             }
         });
     });
-        
-        // Actualizar 
-    $('#actualizarVirus').on('click', function() {
-        var codvirus = $('#codigoVirus').val(); 
-        var adminData = {
-            codvirus: $('#codvirus').val(), 
-            nombrevirus: $('#nombrevirus').val(),
-        };
-        
+
+    //buscar por Numero documento ID en VIRUS
+    $('#buscarVirus').on('click', function () {
+        var codVirus = $('#codigoVirus').val();
+
         $.ajax({
-            url: "http://localhost:8080/actualizar/" + codvirus, 
+            url: "http://localhost:8080/virus/" + codVirus,
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                $('#tablaVirus').html('');
+                if (respuesta != null) {
+                    $('#tablaVirus').html('<thead><tr>' +
+                        '<th>Codigo Virus</th>' +
+                        '<th>Nombre Virus</th>' +
+                        '</tr></thead><tbody>' +
+                        '<tr>' +
+                        '<td>' + respuesta.codVirus + '</td>' +
+                        '<td>' + respuesta.nomVirus + '</td>' +
+                        '</tr></tbody>');
+                } else {
+                    $('#tablaVirus').html('');
+                    $('#error-message').html('No se encontró ningun Virus con el número especificado.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //Listar VIRUS
+    $('#listarVirus').on('click', function () {
+        $.ajax({
+            url: "http://localhost:8080/virus/listar",
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                $('#tablaVirus').html('');
+                if (respuesta.length > 0) {
+                    var tablaVirus = '<thead><tr>' +
+                        '<th>Codigo Virus</th>' +
+                        '<th>Nombre Virus</th>' +
+                        '</tr></thead><tbody>';
+
+                    for (var i = 0; i < respuesta.length; i++) {
+                        var dataVIRUS = respuesta[i];
+                        tablaVirus += '<tr>' +
+                            '<td>' + dataVIRUS.codVirus + '</td>' +
+                            '<td>' + dataVIRUS.nomVirus + '</td>' +
+                            '</tr>';
+                    }
+
+                    tablaVirus += '</tbody>';
+                    $('#tablaVirus').html(tablaVirus);
+                } else {
+                    $('#tablaVirus').html('');
+                    $('#error-message').html('No se encontraron Virus.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    /*//Listar 
+    $("#listarVirus").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/virus/listar",
+            //dataType: "json", // Espera una respuesta JSON
+            success: function (facturaciones) {
+                // Limpiar la tabla actual
+                $("#tablaVirus tbody").empty();
+    
+                // Iterar sobre las facturaciones y agregarlas a la tabla
+                facturaciones.forEach(function (virus) {
+                    var row = "<tr>";
+                    row += "<td>" + virus.codVirus + "</td>";
+                    row += "<td>" + virus.nomVirus + "</td>";
+                    row += "</tr>";
+                    $("#tablaVirus tbody").append(row);
+                });
+            },
+                error: function (xhr, status, error) {
+                    console.error("Error al listar Virus:");
+                    console.log("Estado (status): " + status);
+                    console.log("Error (error): " + error);
+                    console.log("Respuesta (responseText): " + xhr.responseText);
+                  }
+        });
+    });*/
+
+    // Actualizar VIRUS
+    $('#actualizarVirus').on('click', function () {
+        var codVirus = $('#codigoVirus').val();
+        var DataVIRUS = {
+            //codDron: $('#coddron').val(),
+            codVirus: $('#codvirus').val(),
+            nomVirus: $('#nombrevirus').val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/virus/actualizar/" + codVirus,
             type: "PUT",
             dataType: "json",
             contentType: "application/json",
-            data: JSON.stringify(adminData),
-            success: function(response) {
-                alert("Actualizado");
+            data: JSON.stringify(DataVIRUS),
+            success: function (response) {
+                alert("Virus actualizado exitosamente.");
                 console.log(response);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 if (xhr.status === 404) {
-                    alert("No se encontró el número de documento " + codvirus);
+                    alert("No se encontró el número  " + codVirus);
                 }
                 console.error(xhr.responseText);
             }
         });
     });
 
-        //Limpiar campos
-    $('#limpiarCultivo').on('click', function () {
-        $('#codvirus').val('');
-        $('#nombrevirus').val('');
+    // Eliminar por número de ID
+    $('#eliminarVirus').on('click', function () {
+        var codVirus = $('#codigoVirus').val();
+        $.ajax({
+            url: "http://localhost:8080/virus/eliminar/" + codVirus,
+            type: "DELETE",
+            dataType: "text",
+            success: function (response) {
+                console.log("Respuesta del servidor:", response);
+                if (response.trim() === "Eliminado") {
+                    alert("Virus eliminado exitosamente.");
+                } else {
+                    alert("Eliminado el virus " + codVirus);
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 404) {
+                    alert("No se encontró el número " + codVirus);
+                } else {
+                    alert("Ocurrió un error en la solicitud. Por favor, inténtalo nuevamente.");
+                }
+                console.error(xhr.responseText);
+            }
+        });
     });
-  
+
+    //limpiar tabla 
+    $("#limpiarTablaVirus").click(function () {
+        // Elimina todas las filas de la tabla
+        $("#tablaVirus tbody").empty();
+    });
+
+    //---------------  INFORMACION  ----------------------------- 
+
+    // Cargar valores de ID de DIAGNOSTICO en el formulario
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/diagnostico/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                var select = $('#numerodiagnosticotiene');
+
+                for (var i = 0; i < respuesta.length; i++) {
+                    var cultivos = respuesta[i];
+                    select.append($('<option>', {
+                        value: cultivos.numDiag,
+                        text: cultivos.numDiag
+                    }));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Cargar valores de ID de VIRUS en el formulario
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/virus/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function (respuesta) {
+                var select = $('#codigovirustiene');
+
+                for (var i = 0; i < respuesta.length; i++) {
+                    var cultivos = respuesta[i];
+                    select.append($('<option>', {
+                        value: cultivos.codVirus,
+                        text: cultivos.codVirus
+                    }));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    //Limpiar campos de INFORMACION
+    $('#limpiarTiene').on('click', function () {
+        $('#numeroregistrotiene').val('');
+        $('#fecharegistrotiene').val('');
+        $('#numerodiagnosticotiene').val('');
+        $('#codigovirustiene').val('');
+    });
+
+    /*// Cargar valores del ID de INFORMACION en el  select
+$(document).ready(function() {
+    $.ajax({
+        url: "http://localhost:8080/tiene/listar", // Ajusta la URL adecuadamente
+        type: "GET",
+        dataType: "json",
+        success: function(respuesta) {
+            var select = $('#codigoTiene');
+            
+            for (var i = 0; i < respuesta.length; i++) {
+                var administrador = respuesta[i];
+                select.append($('<option>', {
+                    value: administrador.numReg,
+                    text: administrador.numReg
+                }));
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});*/
+/*
+    //cargar ID en el SELECT de 
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:8080/tiene/listar", // Ajusta la URL adecuadamente
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                var select = $('#codigoTiene');
+                
+                for (var i = 0; i < respuesta.length; i++) {
+                    var valor = respuesta[i];
+                    select.append($('<option>', {
+                        value: valor.numReg,
+                        text: valor.numReg
+                    }));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+    
+    //limpiar tabla 
+    $("#limpiarTablaTiene").click(function () {
+        // Elimina todas las filas de la tabla
+        $("#tablaTiene tbody").empty();
+    });
+*/
+
+
+   /* //llamar datos del  por el ID en los inputs
+    $('#llamarTiene').on('click', function() {
+        var numReg = $('#codigoTiene').val();
+    
+        $.ajax({
+            url: "http://localhost:8080/tiene/" + numReg,
+            type: "GET",
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta != null) {
+                    $('#numeroregistrotiene').val(respuesta.numReg);
+                    $('#fecharegistrotiene').val(respuesta.fechReg);
+                    // Aquí se establece el valor del select 
+                    $('#numerodiagnosticotiene').val(respuesta.virus.codVirus); // Suponiendo que 'administrador' tiene un campo 'id'
+                    $('#codigovirustiene').val(respuesta.diagnostico.numDiag);
+                } else {
+                    $('#numeroregistrotiene').val('');
+                    $('#fecharegistrotiene').val('');
+                    $('#numerodiagnosticotiene').val('');
+                    $('#codigovirustiene').val('');
+                    $('#error-message').html('No se encontró ningúna información especificada.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });*/
+
+    /*//insertar 
+    $("#insertarTiene").click(function () {
+        var numReg = $("#numeroregistrotiene").val();
+        var fechReg = $("#fecharegistrotiene").val();
+        var diagnostico = $("#numerodiagnosticotiene").val();
+        var virus = $("#codigovirustiene").val();
+    
+        var data = {
+            numReg: numReg,
+            fechReg: fechReg,
+            diagnostico: {
+                numDiag: diagnostico
+            },
+            virus: {
+                codVirus: virus
+            }
+        };
+    
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/tiene/insertar",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Información ingresado exitosamente.");
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al insertar información:");
+                console.log("Estado (status): " + status);
+                console.log("Error (error): " + error);
+                console.log("Respuesta (responseText): " + xhr.responseText);
+            }
+        });
+    });*/
+
+
+    /*//insertar CLIENTE
+    $(document).ready(function() {
+        // Cuando se haga clic en el botón "Enviar"
+        $("#insertarTiene").click(function() {
+            // Recoge los valores de los campos de entrada
+            var numReg = $("#numeroregistrotiene").val();
+            var fechReg = $("#fecharegistrotiene").val();
+            var diagnostico = $("#numerodiagnosticotiene").val();
+            var virus = $("#codigovirustiene").val(); // Valor del select
+
+            // Crea un objeto de cliente con los valores recogidos
+            var cliente = {
+                "numReg": numReg,
+                "fechReg": fechReg,
+                "diagnostico": {
+                    "numDiag": diagnostico // La llave foránea
+                },
+                "virus": {
+                    "codVirus": virus // La llave foránea
+                }
+            };
+
+            // Realiza la solicitud AJAX para insertar el cliente
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/tiene/insertar",// La URL de tu endpoint de inserción
+                contentType: "application/json",
+                data: JSON.stringify(cliente),
+                success: function(response) {
+                    // Cliente insertado con éxito
+                    alert("información insertado con éxito");
+                    // Limpia los campos de entrada
+                    $("#numeroregistrotiene").val("");
+                    $("#fecharegistrotiene").val("");
+                    $("#numerodiagnosticotiene").val("");
+                    $("#codigovirustiene").val("");
+                },
+                error: function() {
+                    // Maneja el error en caso de que falle la inserción
+                    alert("Error al insertar el informacion");
+                }
+            });
+        });
+    });*/
+
+    /*//Listar FACTURACION
+    $("#listarTiene").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/tiene/listar",
+            //dataType: "json", // Espera una respuesta JSON
+            success: function (facturaciones) {
+                // Limpiar la tabla actual
+                $("#tablaTiene tbody").empty();
+    
+                // Iterar sobre las facturaciones y agregarlas a la tabla
+                facturaciones.forEach(function (tiene) {
+                    var row = "<tr>";
+                    row += "<td>" + tiene.numReg + "</td>";
+                    row += "<td>" + tiene.fechReg + "</td>";
+                    row += "<td>" + tiene.diagnostico.numDiag + "</td>";
+                    row += "<td>" + tiene.virus.codVirus + "</td>";
+                    row += "</tr>";
+                    $("#tablaTiene tbody").append(row);
+                });
+            },
+                error: function (xhr, status, error) {
+                    console.error("Error al listar información:");
+                    console.log("Estado (status): " + status);
+                    console.log("Error (error): " + error);
+                    console.log("Respuesta (responseText): " + xhr.responseText);
+                  }
+        });
+    });*/
+
+/*//Actualizar FACTURACION
+$("#actualizarTiene").click(function () {
+    var numReg = $("#numeroregistrotiene").val();
+    var fechReg = $("#fecharegistrotiene").val();
+    var diagnostico = $("#numerodiagnosticotiene").val();
+    var virus = $("#codigovirustiene").val();
+
+    var data = {
+        numReg: numReg,
+        fechReg: fechReg,
+        diagnostico: {
+            numDiag: diagnostico
+        },
+        virus: {
+            codVirus: virus
+        }
+    };
+
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8080/tiene/actualizar/" + numReg,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (response) {
+            alert("informacion actualizada con exitosamente.");
+            console.log(response);
+            // Actualizar la tabla o mostrar un mensaje de éxito
+            //console.log("Facturación actualizada con éxito");
+        },
+        error: function (error) {
+            // Manejar el error, mostrar un mensaje de error, etc.
+            console.error("Error al actualizar información:", error);
+        }
+    });
+});*/
+/*
+// Actualizar 
+$('#actualizarTiene').on('click', function() {
+    var numReg = $('#numeroregistrotiene').val();
+    var clienteData = {
+        numReg: numReg,
+        fechReg: $('#fecharegistrotiene').val(),
+        diagnostico: {
+            numDiag: $('#numerodiagnosticotiene').val()
+        },
+        virus: {
+            codVirus: $('#codigovirustiene').val()
+        }
+    };
+
+    $.ajax({
+        url: "http://localhost:8080/tiene/actualizar/" + numReg,
+        type: "PUT",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(clienteData),
+        success: function(response) {
+            alert("informacion actualizado exitosamente.");
+            console.log(response);
+        },
+        error: function(xhr) {
+            if (xhr.status === 404) {
+                alert("No se encontró el informacion con código " + numReg);
+            }
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+    //eliminar 
+    $("#eliminarTiene").click(function () {
+        var numReg = $("#codigoTiene").val();
+    
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/tiene/eliminar/" + numReg,
+            success: function (response) {
+                alert("información eliminada con exitosamente.");
+                console.log(response);
+                console.log("informacion eliminada con éxito");
+            },
+            error: function (error) {
+                // Manejar el error, mostrar un mensaje de error, etc.
+                console.error("Error al eliminar informacion:", error);
+            }
+        });
+    });
+    */
+/*
+    //Buscar  por ID
+    $('#buscarTiene').on('click', function () {
+        var numReg = $('#codigoTiene').val();
+        $.ajax({
+            url: "http://localhost:8080/tiene/" + numReg,
+            type: "GET",
+            datatype: "JSON",
+            success: function (respuesta) {
+                console.log(respuesta);
+                $('#tablaTiene tbody').empty(); // Limpia la tabla antes de agregar datos
+                if (respuesta != null) {
+                    var row = $("<tr>");
+                    row.append($("<td>").text(respuesta.numReg));
+                    row.append($("<td>").text(respuesta.fechReg));
+                    row.append($("<td>").text(respuesta.diagnostico.numDiag));
+                    row.append($("<td>").text(respuesta.virus.codVirus));
+                    $('#tablaTiene tbody').append(row);
+                } else {
+                    $('#error-message').html('No se encontró ningúna informacion con el número de código especificado.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+*/
+
 
 });  // fin
