@@ -80,46 +80,37 @@
                     class="btn btn-primary btn-block mb-2">Visita</button>
                 <button type="button" id="mostrarFormularioFacturacion"
                     class="btn btn-primary btn-block mb-2">Facturacion</button>
-                <button type="button" id="mostrarFormularioDron"
+                <button type="button" id="mostrarFormularioDron" 
                     class="btn btn-primary btn-block mb-2">Dron</button>
                 <button type="button" id="mostrarFormularioDiagnostico"
                     class="btn btn-primary btn-block mb-2">Diagnóstico</button>
                 <button type="button" id="mostrarFormularioMultimedia"
                     class="btn btn-primary btn-block mb-2">Multimedia</button>
-                <button type="button" id="mostrarFormularioInformacion" 
-                    class="btn btn-primary btn-block mb-2">Informacion</button>
                 <button type="button" id="mostrarFormulario3" 
                     class="btn btn-primary btn-block mb-2">Virus</button>
+                <button type="button" id="mostrarFormularioInformacion"
+                    class="btn btn-primary btn-block mb-2">Informacion</button>
+                
             </div>
         </div>
         <hr>
 
-        <!--------------------------------------------------- ADMINISTRADOR ---------------------------------------------------------------------->
+        <!-- ADMINISTRADOR -->
         <form id="formulario" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Administración</h2>
             <div class="container mt-5">
-                <div class="input-group col-md-2">
-                    <span class="input-group-text" id="basic-addon1">ID Administrador</span>
-                    <select id="codigo" class="form-select "></select>
-                    <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
-                </div>
-                <hr>
-                </hr>
-                
                 <div class="row">
-                    <div class="col-10 col-md-4">
+                    <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">N° documento</label>
                             <input type="number" id="ndocumentoAdmin" class="form-control">
                         </div>
-                        
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" id="nombreAdmin" class="form-control">
                         </div>
-
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="mb-3">
@@ -159,44 +150,87 @@
             <!--BOTONES-->
             <hr>
             <div class="container" id="containerBotones">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-12">
                         <!--<div class="mb-3 d-flex justify-content-between">-->
                         <div class="d-grid gap-2 d-md-flex">
-                            <div class="mt-3 ">
+                            <div class="btn-group">
                                 <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
-                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>   
-                                <button type="button" id="actualizarAdmin" class="btn btn-warning">Actualizar</button>
-                                <button  type="button" id="limpiarAdmin" class="btn btn-secondary" >Limpiar</button>  
                                 <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
+                                <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">ID Administrador</span>
+                                <select id="codigo" class="form-select"></select>
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <hr>
+            <!--BOTONES-->
+            <!--
+            <div class="container" id="containerBotones">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
+                            <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
+                        
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">ID Administrador</span>
+                                <select id="codigo" class="form-select"></select>
+                            </div>
+                        
+                                <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
+                            
+                        </div>
+                        
+                </div>
+                </div>
+            </div>-->
+
+            <!-- tabla consulta -->
+            <hr>
             <div class="container mt-2">
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="table-responsive">
-                        <table class="table table-striped table-hover table-bordered" id="tablaAdmin">
-                            <thead>
-                                <tr>
-                                    <th>N° documento</th>
-                                    <th>Apellido</th>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Telefono</th>
-                                    <th>Tipo documento</th>
-                                </tr>
-                            </thead>
-                        </table>
+                            <table class="table table-striped table-hover table-bordered" id="tablaAdmin">
+                                <thead>
+                                    <tr>
+                                        <th>N° documento</th>
+                                        <th>Apellido</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Telefono</th>
+                                        <th>Tipo documento</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr>
+
+            <hr>
         </form>
 
-        <!---------------------------------------------------------------------- CULTIVO---------------------------------------------------------------- -->
+        <!-- CULTIVO -->
         <form id="formulario2" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Cultivo</h2>
             <div class="container mt-5">
@@ -234,9 +268,9 @@
                     <div class="col-12 ">
                         <div class="mb-3 ">
                             <div class="text-end">
-                            <button type="button" id="insertarCultivo" class="btn btn-primary">Enviar</button>
-                            <button type="button" id="listarCultivo" class="btn btn-primary">Listar</button>
-                            <button type="button" id="limpiarCultivo" class="btn btn-secondary">Limpiar</button>
+                                <button type="button" id="insertarCultivo" class="btn btn-primary">Enviar</button>
+                                <button type="button" id="listarCultivo" class="btn btn-primary">Listar</button>
+                                <button type="button" id="limpiarCultivo" class="btn btn-secondary">Limpiar</button>
                             </div>
                         </div>
                     </div>
@@ -301,11 +335,6 @@
         <form id="formularioCliente" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Cliente</h2>
             <div class="container mt-5">
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
-                    <select id="codigoCliente" class="form-select"></select>
-                    <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
-                </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="mb-3">
@@ -349,17 +378,16 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <button type="button" id="insertarCliente" class="btn btn-primary">Enviar</button>
-                            <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarCliente" class="btn btn-warning">Actualizar</button>
                             <button type="button" id="listarCliente" class="btn btn-primary">Listar</button>
                             <button type="button" id="limpiarCliente" class="btn btn-secondary">Limpiar</button>
-                            
+
 
                         </div>
                     </div>
                 </div>
             </div>
             <!-- tabla CLIENTE consulta -->
+            
             <hr>
             <div class="container mt-5">
                 <div class="row justify-content-center">
@@ -375,6 +403,9 @@
                                         <th>Administrador</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -382,7 +413,30 @@
             </div>
             <hr>
 
-        <!---------------------------------- EMPLEADOS -------------------------------------------------------->
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="d-grid gap-2 d-md-flex">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
+                                <select id="codigoCliente" class="form-select"></select>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
+                                <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaCliente"
+                                    class="btn btn-secondary">Limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- EMPLEADOS -->
         <form id="formularioEmpleados" style="display: none;">
             <h2 class="text-center mt-4 mb-5">Formulario de Empleados</h2>
             <div class="container mt-5">
@@ -442,9 +496,10 @@
                 <!-- tabla EMPLEADOS consulta -->
                 <hr>
                 <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-12 col-md-5">
-                            <table class="table table-hover" id="tablaEmpleados">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10">
+                            <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered" id="tablaEmpleados">
                                 <thead>
                                     <tr>
                                         <th>Codigo Empleados</th>
@@ -456,8 +511,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                               </tbody>
+                                </tbody>
                             </table>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -466,7 +522,7 @@
                     <div class="row">
                         <!--<div class="col-12 col-md-10">-->
                         <div class="d-grid gap-2 d-md-flex">
-                            
+
                             <!--<div class="mb-3">
                                 <label for="codigo" class="form-label">Codigo Empleados</label>
                                 <input type="text" id="codigoEmpleados" class="form-control">
@@ -482,8 +538,10 @@
                                 <button type="button" id="buscarEmpleados" class="btn btn-primary">Buscar</button>
                                 <button type="button" id="eliminarEmpleados" class="btn btn-danger">Eliminar</button>
                                 <button type="button" id="llamarEmpleados" class="btn btn-primary">Llamar</button>
-                                <button type="button" id="actualizarEmpleados"class="btn btn-primary">Actualizar</button>
-                                <button type="button" id="limpiarTablaEmpleados" class="btn btn-secondary">Limpiar</button>
+                                <button type="button" id="actualizarEmpleados"
+                                    class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaEmpleados"
+                                    class="btn btn-secondary">Limpiar</button>
                             </div>
                         </div>
                     </div>
@@ -554,7 +612,7 @@
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10">
-                        <table class="table table-striped table-hover table-bordered" id="tablaVirus">
+                        <table class="table table-striped table-hover table-bordered" id="tablaVisita">
                             <thead>
                                 <tr>
                                     <th>Numero Visita</th>
@@ -575,7 +633,7 @@
             <hr>
             <div class="container mt-5">
                 <div class="row">
-                    
+
                     <div class="d-grid gap-2 d-md-flex">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">Codigo Visita</span>
@@ -656,7 +714,7 @@
             <hr>
             <div class="container mt-5">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-md-10">
+                    <div class="col-12 col-md-12">
                         <table class="table table-striped table-hover table-bordered" id="tablaFacturacion">
                             <thead>
                                 <tr>
@@ -688,10 +746,12 @@
                                 <button type="button" id="buscarFacturacion" class="btn btn-primary">Buscar</button>
                                 <button type="button" id="eliminarFacturacion" class="btn btn-danger">Eliminar</button>
                                 <button type="button" id="llamarFacturacion" class="btn btn-primary">Llamar</button>
-                                <button type="button" id="actualizarFacturacion" class="btn btn-primary">Actualizar</button>
-                                <button type="button" id="limpiarTablaFacturacion" class="btn btn-secondary">Limpiar</button>
+                                <button type="button" id="actualizarFacturacion"
+                                    class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaFacturacion"
+                                    class="btn btn-secondary">Limpiar</button>
                             </div>
-                        </div>   
+                        </div>
                     </div>
                 </div>
             </div>
@@ -786,7 +846,7 @@
                     <div class="col-12 col-md-3">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Numero Diagnóstico</label>
-                            <input type="text" id="numeroDiagnostico" class="form-control">
+                            <input type="number" id="numeroDiagnostico" class="form-control">
                         </div>
                     </div>
                     <div class="col-12 col-md-9">
@@ -854,7 +914,7 @@
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10">
-                        <table class="table table-striped table-hover table-bordered"  id="tablaDiagnostico">
+                        <table class="table table-striped table-hover table-bordered" id="tablaDiagnostico">
                             <thead>
                                 <tr>
                                     <th>Numero Diagnostico</th>
@@ -887,8 +947,10 @@
                                 <button type="button" id="buscarDiagnostico" class="btn btn-primary">Buscar</button>
                                 <button type="button" id="eliminarDiagnostico" class="btn btn-danger">Eliminar</button>
                                 <button type="button" id="llamarDiagnostico" class="btn btn-primary">Llamar</button>
-                                <button type="button" id="actualizarDiagnostico" class="btn btn-primary">Actualizar</button>
-                                <button type="button" id="limpiarTablaDiagnostico" class="btn btn-secondary">Limpiar</button>
+                                <button type="button" id="actualizarDiagnostico"
+                                    class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaDiagnostico"
+                                    class="btn btn-secondary">Limpiar</button>
                             </div>
                         </div>
                     </div>
@@ -919,10 +981,11 @@
                             <input type="text" id="tamañomultimedia" class="form-control">
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <!--   -->
+                    <div class="col-12 col-md-4">
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Numero Diagnostico</label>
-                            <input type="text" id="numerodiagnosticomultimedia" class="form-control">
+                            <select id="numerodiagnosticomultimedia" class="form-select"></select>
                         </div>
                     </div>
 
@@ -941,12 +1004,12 @@
                     </div>
                 </div>
             </div>
-            <!-- tabla consulta -->
+            <!-- tabla consulta MULTIMEDIA-->
             <hr>
             <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaMultimedia">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <table class="table table-striped table-hover table-bordered" id="tablaMultimedia">
                             <thead>
                                 <tr>
                                     <th>Codigo Multimedia</th>
@@ -955,6 +1018,9 @@
                                     <th>Numero Diagnostico</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -962,96 +1028,22 @@
             <hr>
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Multimedia</label>
-                            <input type="email" id="codigoMultimedia" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarMultimedia" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarMultimedia" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarMultimedia" class="btn btn-primary">Actualizar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+                    <div class="col-12 col-md-8">
 
-        <!-- INFORMACION -->
-        <form id="formularioInformacion" style="display: none;">
-            <h2 class="text-center mt-4 mb-5">Formulario de Tiene</h2>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Numero Registro</label>
-                            <input type="text" id="numeroregistrotiene" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Numero Diagnostico</label>
-                            <input type="text" id="numerodiagnosticotiene" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Codigo Virus</label>
-                            <input type="text" id="codigovirustiene" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Fecha Registro</label>
-                            <input type="text" id="fecharegistrotiene" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-text">Llene todos los campos antes de enviar.</div>
-                    <br>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <br>
-                            <button type="button" id="insertarTiene" class="btn btn-primary">Enviar</button>
-                            <button type="button" id="listarTiene" class="btn btn-primary">Listar</button>
-                            <button type="button" id="limpiarTiene" class="btn btn-secondary">Limpiar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- tabla consulta -->
-            <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaTiene">
-                            <thead>
-                                <tr>
-                                    <th>Numero Registro</th>
-                                    <th>Numero Diagnostico</th>
-                                    <th>Codigo Virus</th>
-                                    <th>Fecha Registro</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Tiene</label>
-                            <input type="email" id="codigoTiene" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarTiene" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarTiene" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarTiene" class="btn btn-primary">Actualizar</button>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Codigo Multimedia</span>
+                                <select id="codigoMultimedia" class="form-select"></select>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="button" id="buscarMultimedia" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarMultimedia" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarMultimedia" class="btn btn-primary">Llamar</button>
+                                <button type="button" id="limpiarTablaMultimedia"
+                                    class="btn btn-secondary">Limpiar</button>
+                                <button type="button" id="actualizarMultimedia"
+                                    class="btn btn-primary">Actualizar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1066,7 +1058,7 @@
                     <div class="col-12 col-md-6">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Codigo Virus</label>
-                            <input type="text" id="codvirus" class="form-control">
+                            <input type="number" id="codvirus" class="form-control">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -1091,18 +1083,111 @@
                     </div>
                 </div>
             </div>
-            <!-- tabla consulta -->
+            <!-- tabla consulta VIRUS-->
             <hr>
             <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <table class="table table-hover" id="tablaVirus">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <table class="table table-striped table-hover table-bordered" id="tablaVirus">
                             <thead>
                                 <tr>
                                     <th>Codigo Virus</th>
                                     <th>Nombre Virus</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="d-grid gap-2 d-md-flex">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">Codigo Virus</span>
+                                    <select id="codigoVirus" class="form-select"></select>
+                                </div>
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="button" id="buscarVirus" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarVirus" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarVirus" class="btn btn-primary">Llamar</button>
+                                <button type="button" id="actualizarVirus" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaVirus" class="btn btn-secondary">Limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- INFORMACION -->
+        <form id="formularioInformacion" style="display: none;">
+            <h2 class="text-center mt-4 mb-5">Formulario de Informacion</h2>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Numero Registro</label>
+                            <input type="number" id="numeroregistrotiene" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Fecha Registro</label>
+                            <input type="text" id="fecharegistrotiene" class="form-control">
+                        </div>
+                    </div>
+                    <!--   -->
+                    <div class="col-12 col-md-3">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Numero Diagnostico</label>
+                            <select id="numerodiagnosticotiene" class="form-select"></select>
+                        </div>
+                    </div>
+                    <!--   -->
+                    <div class="col-12 col-md-3">
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Codigo Virus</label>
+                            <select id="codigovirustiene" class="form-select"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                    <br>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <br>
+                            <button type="button" id="insertarTiene" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="listarTiene" class="btn btn-primary">Listar</button>
+                            <button type="button" id="limpiarTiene" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- tabla consulta -->
+            <hr>
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <table class="table table-striped table-hover table-bordered" id="tablaTiene">
+                            <thead>
+                                <tr>
+                                    <th>Numero Registro</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Numero Diagnostico</th>
+                                    <th>Codigo Virus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí se agregarán las filas de datos dinámicamente con JavaScript -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -1110,15 +1195,19 @@
             <hr>
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="mb-3">
-                            <label for="codigo" class="form-label">Codigo Virus</label>
-                            <input type="email" id="codigoVirus" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" id="buscarVirus" class="btn btn-primary">Buscar</button>
-                            <button type="button" id="eliminarVirus" class="btn btn-danger">Eliminar</button>
-                            <button type="button" id="actualizarVirus" class="btn btn-primary">Actualizar</button>
+                    <div class="col-12 col-md-8">
+                        <div class="d-grid gap-2 d-md-flex">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">Codigo Tiene</span>
+                                <select id="codigoTiene" class="form-select"></select>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button type="button" id="buscarTiene" class="btn btn-primary">Buscar</button>
+                                <button type="button" id="eliminarTiene" class="btn btn-danger">Eliminar</button>
+                                <button type="button" id="llamarTiene" class="btn btn-primary">Llamar</button>
+                                <button type="button" id="actualizarTiene" class="btn btn-primary">Actualizar</button>
+                                <button type="button" id="limpiarTablaTiene" class="btn btn-secondary">Limpiar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1182,8 +1271,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/administrador.js"></script>
-    <script type="text/javascript" src="js/cliente.js"></script>
 </body>
 
 </html>
