@@ -1,0 +1,14 @@
+ /* Cambia la altura del carousel */
+ #carouselExample {
+    max-height: 600px; /* Ajusta la altura según tus necesidades */
+  }
+
+  /* Cambia la altura de las imágenes */
+  #carouselExample .carousel-inner .carousel-item img {
+    max-height: 500px; /* Ajusta la altura de las imágenes según tus necesidades */
+  }
+
+  .centrado{
+    text-align: center;
+    vertical-align: middle;
+  }
