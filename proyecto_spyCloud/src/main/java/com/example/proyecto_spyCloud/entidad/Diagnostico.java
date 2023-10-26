@@ -24,11 +24,11 @@ public class Diagnostico {
     private Date fechaEntreg;
     @Column (name="tip_daño",nullable = false, length = 20)
     private String tipoDaño;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( optional = false)
     @JoinColumn(name = "cod_dron", referencedColumnName = "cod_dron",nullable = false)
     private Dron dron;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "cod_cult", referencedColumnName = "cult_cod",nullable = false)
     private Cultivo cultivo;
 

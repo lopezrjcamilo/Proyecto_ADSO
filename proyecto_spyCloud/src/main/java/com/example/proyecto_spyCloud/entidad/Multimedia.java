@@ -13,7 +13,7 @@ public class Multimedia {
     private String nombArchivo;
     @Column (nullable = false, length = 15)
     private String tamaño;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "num_diag", referencedColumnName = "num_diag",nullable = false)
     private Diagnostico diagnostico;
 

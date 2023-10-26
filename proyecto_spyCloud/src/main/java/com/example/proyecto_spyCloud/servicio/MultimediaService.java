@@ -35,7 +35,11 @@ public class MultimediaService {
     }
 
     public Multimedia multimediaPorId(Integer id) {
-        return multimediaRepository.findById(Integer.valueOf(id)).get();
+        if(multimediaRepository.findById(Integer.valueOf(id)).isPresent()){
+            return multimediaRepository.findById(Integer.valueOf(id)).get();
+        }else{
+            return null;
+        }
     }
 
     public Multimedia insertarMultimedia(Multimedia multimedia){

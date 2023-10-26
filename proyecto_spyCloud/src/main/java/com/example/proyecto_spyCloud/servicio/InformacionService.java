@@ -31,7 +31,11 @@ public class InformacionService {
     }
 
     public Informacion informacionPorId(Integer id) {
-        return informacionRepository.findById(Integer.valueOf(id)).get();
+        if(informacionRepository.findById(Integer.valueOf(id)).isPresent()){
+            return informacionRepository.findById(Integer.valueOf(id)).get();
+        }else{
+            return null;
+        }
     }
     public Informacion insertarInformacion(Informacion informacion){
         Optional<Diagnostico> diagnosticoOptional= diagnosticoRepository.findById(informacion.getDiagnostico().getNumDiag());
