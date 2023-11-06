@@ -19,7 +19,7 @@ public class Administrador {
     private String apellido;
     @Column(nullable = false, length = 10)
     private String tipo_doc;
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 200)
     private String email;
     @Column(nullable = false, length = 15)
     private String telefono;
