@@ -7,14 +7,17 @@ import jakarta.persistence.*;
 @Table(name = "empleados")
 public class Empleados {
     @Id
+
     @Column(name = "num_doc", length = 30)
     private Integer numDoc;
     @Column(nullable = false, length = 40)
+
     private String nombre;
     @Column(nullable = false, length = 40)
     private String apellido;
     @Column(nullable = false, length = 15)
     private String tipo_doc;
+
     @Column(nullable = false, length = 60)
     private String email;
 
@@ -22,10 +25,12 @@ public class Empleados {
 
     @ManyToOne
     @JoinColumn(name = "administrador_num_doc", referencedColumnName = "num_doc", nullable = false)
+
     private Administrador administrador;
 
     public Empleados() {
     }
+
 
     public Empleados(Integer numDoc, String nombre, String apellido, String tipo_doc, String email, Administrador administrador) {
         this.numDoc = numDoc;
@@ -75,7 +80,6 @@ public class Empleados {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public Administrador getAdministrador() {
         return administrador;
