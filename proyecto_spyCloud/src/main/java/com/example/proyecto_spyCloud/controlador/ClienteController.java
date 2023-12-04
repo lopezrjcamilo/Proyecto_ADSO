@@ -42,20 +42,9 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @GetMapping("/Correo")
-    public ResponseEntity<Cliente> clientePorCorreo(@RequestParam("correo") String correo) {
-        Cliente cliente = clienteService.clientePorCorreo(correo);
-
-        if (cliente != null) {
-            return ResponseEntity.ok(cliente);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
     @PostMapping("/insertar")
     public ResponseEntity<Cliente> insertarCliente(@RequestBody Cliente clientePost){
-        Cliente cliente = clienteService.clientePorId(clientePost.getIdNit());
+        Cliente cliente = clienteService.clientePorId(clientePost.getNumDoc());
         if (cliente != null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -75,7 +64,7 @@ public class ClienteController {
     }
     @PutMapping("/actualizar/{idNit}")
     public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente clientePut){
-        Cliente cliente = clienteService.clientePorId(clientePut.getIdNit());
+        Cliente cliente = clienteService.clientePorId(clientePut.getNumDoc());
         if (cliente != null) {
             clienteService.insertarCliente(clientePut);
             return ResponseEntity.ok(clientePut);

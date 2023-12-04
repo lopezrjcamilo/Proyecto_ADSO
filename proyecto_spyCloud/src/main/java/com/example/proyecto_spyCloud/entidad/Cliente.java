@@ -1,6 +1,5 @@
 package com.example.proyecto_spyCloud.entidad;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +7,12 @@ import jakarta.persistence.*;
 public class Cliente {
 
     @Id
-    @Column(name= "nit" ,nullable = false, length = 30)
-    private Integer idNit;
+    @Column(name = "nun_doc", nullable = false, length = 30)
+    private Integer numDoc;
+    @Column(nullable = false, length = 40)
     private String nombre;
-    @Column(nullable = false, length = 20)
-    private String correo;
+    @Column(nullable = false, length = 60)
+    private String email;
     @Column(nullable = false, length = 15)
     private String telefono;
 
@@ -21,27 +21,26 @@ public class Cliente {
     //@JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name ="num_doc",referencedColumnName = "num_doc", nullable = false)
-
-
     public Administrador administrador;
     public Cliente() {
     }
 
-    public Cliente(Integer idNit, String nombre, String correo, String telefono, Administrador administrador) {
-        this.idNit = idNit;
+    public Cliente(Integer numDoc, String nombre, String email, String telefono, Administrador administrador) {
+        this.numDoc = numDoc;
         this.nombre = nombre;
-        this.correo = correo;
+        this.email = email;
         this.telefono = telefono;
         this.administrador = administrador;
     }
 
-    public Integer getIdNit() {
-        return idNit;
+    public Integer getNumDoc() {
+        return numDoc;
     }
 
-    public void setIdNit(Integer idNit) {
-        this.idNit = idNit;
+    public void setNumDoc(Integer numDoc) {
+        this.numDoc = numDoc;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -50,12 +49,12 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getTelefono() {

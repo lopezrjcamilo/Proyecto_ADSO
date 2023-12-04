@@ -37,7 +37,7 @@ public class EmpleadosController {
 
     @PostMapping("/insertar")
     public ResponseEntity<Empleados> insertarEmpleados(@RequestBody Empleados empleadosPost){
-        Empleados empleados = empleadosService.empleadosPorId(empleadosPost.getCodEmp());
+        Empleados empleados = empleadosService.empleadosPorId(empleadosPost.getNumDoc());
         if (empleados != null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -57,7 +57,7 @@ public class EmpleadosController {
     }
     @PutMapping("/actualizar/{CodEmp}")
     public ResponseEntity<Empleados> actualizarEmpleados(@RequestBody Empleados empleadosPut){
-        Empleados empleados = empleadosService.empleadosPorId(empleadosPut.getCodEmp());
+        Empleados empleados = empleadosService.empleadosPorId(empleadosPut.getNumDoc());
         if (empleados != null) {
             empleadosService.insertarEmpleados(empleadosPut);
             return ResponseEntity.ok(empleadosPut);

@@ -14,8 +14,7 @@ import java.util.List;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-
-    Cliente findByCorreo(String correo);
+    Cliente findByEmail(String Email);
 
     @Query(value = "SELECT clientes.* FROM clientes INNER JOIN administrador ON clientes.num_doc=administrador.num_doc where clientes.nit=:nitCliente", nativeQuery = true)
     Cliente clientePorAdministrador(@Param("nitCliente") Integer nitCliente);

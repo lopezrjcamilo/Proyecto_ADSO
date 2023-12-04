@@ -22,7 +22,7 @@ public class Visita {
     private Date fecha;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cod_emp", referencedColumnName = "cod_emp",nullable = false)
+    @JoinColumn(name = "num_doc", referencedColumnName = "num_doc",nullable = false)
     private Empleados empleados;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

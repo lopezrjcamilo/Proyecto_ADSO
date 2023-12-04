@@ -32,7 +32,7 @@ public class VisitaService {
 
 
     public Visita insertarVisita(Visita visita){
-        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getCodEmp());
+        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getNumDoc());
         Optional<Cultivo> cultivoOptional= cultivoRepository.findById(visita.getCultivo().getCodCult());
         if(empleadosOptional.isPresent() && cultivoOptional.isPresent()){
             Empleados empleados=empleadosOptional.get();
@@ -48,7 +48,7 @@ public class VisitaService {
         visitaRepository.deleteById(numVisita);
     }
     public Visita actualizarVisita(Visita visita){
-        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getCodEmp());
+        Optional<Empleados> empleadosOptional= empleadosRepository.findById(visita.getEmpleados().getNumDoc());
         Optional<Cultivo> cultivoOptional= cultivoRepository.findById(visita.getCultivo().getCodCult());
         if(empleadosOptional.isPresent() && cultivoOptional.isPresent()){
             Empleados empleados=empleadosOptional.get();

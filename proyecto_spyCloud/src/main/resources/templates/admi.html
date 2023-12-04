@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPY CLOUD</title>
+    <link rel="stylesheet" href="/css/estilobooci.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Ldtn1WzglcvKq3e27SnKvMc0n0Fv6kyy/TgHtM0X4c0bXGgOlnDsCc5KZb8vahT1g2VJHPPXwLckMjKDfUBVtw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap Datepicker CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+<br>
+<div class="contenedores_especiales">
+    <div class="botones_programados row justify-content-center">
+        <div class="col-12 col-md-12 text-center">
+            <button type="button" id="mostrarFormulario"
+                    class="btn btn-primary btn-block mb-2">Administrador</button>
+            <button type="button" id="mostrarFormulario2" class="btn btn-primary btn-block mb-2">Cultivo</button>
+            <button type="button" id="mostrarFormularioCliente"
+                    class="btn btn-primary btn-block mb-2">Cliente</button>
+            <button type="button" id="mostrarFormularioEmpleados"
+                    class="btn btn-primary btn-block mb-2">Empleados</button>
+            <button type="button" id="mostrarFormularioVisita"
+                    class="btn btn-primary btn-block mb-2">Visita</button>
+            <button type="button" id="mostrarFormularioFacturacion"
+                    class="btn btn-primary btn-block mb-2">Facturacion</button>
+            <button type="button" id="mostrarFormularioDron" class="btn btn-primary btn-block mb-2">Dron</button>
+            <button type="button" id="mostrarFormularioDiagnostico"
+                    class="btn btn-primary btn-block mb-2">Diagnóstico</button>
+            <button type="button" id="mostrarFormularioMultimedia"
+                    class="btn btn-primary btn-block mb-2">Multimedia</button>
+            <button type="button" id="mostrarFormulario3" class="btn btn-primary btn-block mb-2">Virus</button>
+            <button type="button" id="mostrarFormularioInformacion"
+                    class="btn btn-primary btn-block mb-2">Informacion</button>
+
+        </div>
+    </div>
+    <hr>
+
+    <!-- ADMINISTRADOR -->
+    <form id="formulario" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Administración</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">N° documento</label>
+                        <input type="number" id="ndocumentoAdmin" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombreAdmin" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Apellido</label>
+                        <input type="text" id="apellidoAdmin" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Tipo documento</label>
+                        <select class="form-select" id="tdocumentoAdmin" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+                            <option value="Cedula">Cedula</option>
+                            <option value="T.I.">Tarjeta Identidad</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Correo</label>
+                        <input type="email" id="correoAdmin" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Telefono</label>
+                        <input type="number" id="telefonoAdmin" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+            </div>
+        </div>
+        <hr>
+        <div class="container" id="containerBotones">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="btn-group">
+                            <button type="button" id="insertarAdmin" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="listarAdmin" class="btn btn-primary">Listar</button>
+                            <button type="button" id="limpiarAdmin" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">ID Administrador</span>
+                            <select id="codigo" class="form-select"></select>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" id="buscarAdmin" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarAdmin" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="actualizarAdmin" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="llamarAdmin" class="btn btn-primary">Llamar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaAdmin">
+                            <thead>
+                            <tr>
+                                <th>N° documento</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Tipo documento</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- CULTIVO -->
+    <form id="formulario2" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Cultivo</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Codigo Cultivo</label>
+                        <input type="number" id="codcultivo" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Direccion</label>
+                        <input type="text" id="dircultivo" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Hectarias</label>
+                        <input type="text" id="hectareascultivo" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Terreno</label>
+                        <input type="text" id="terrenocultivo" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-12 ">
+                    <div class="mb-3 ">
+                        <div class="text-end">
+                            <button type="button" id="insertarCultivo" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="listarCultivo" class="btn btn-primary">Listar</button>
+                            <button type="button" id="limpiarCultivo" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta -->
+        <hr>
+        <div class="container text-center mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped table-hover table-bordered" id="tablaCultivo">
+                            <thead>
+                            <tr>
+                                <th>Codigo Cultivo</th>
+                                <th>Dirección</th>
+                                <th>Hectareas</th>
+                                <th>Terreno</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Cultivo</span>
+                            <select id="codigoCultivo" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarCultivo" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarCultivo" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarCultivo" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarCultivo" class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- CLIENTE -->
+    <form id="formularioCliente" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Cliente</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nit</label>
+                        <input type="text" id="nitcliente" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Nombre Cliente</label>
+                        <input type="text" id="nombrecliente" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Correo</label>
+                        <input type="email" id="correocliente" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Telefono</label>
+                        <input type="text" id="telefonocliente" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Administrador</label>
+                        <select id="administradorcliente" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <button type="button" id="insertarCliente" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarCliente" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarCliente" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla CLIENTE consulta -->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered" id="tablaCliente">
+                                <thead>
+                                <tr>
+                                    <th>Nit</th>
+                                    <th>Nombre Cliente</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Administrador</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Cliente</span>
+                            <select id="codigoCliente" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarCliente" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarCliente" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarCliente" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarCliente" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaCliente"
+                                    class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- EMPLEADOS -->
+    <form id="formularioEmpleados" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Empleados</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-2">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Codigo Empleados</label>
+                        <input type="text" id="codempleados" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Nombre</label>
+                        <input type="text" id="nombreempleados" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Apellidos</label>
+                        <input type="text" id="apellidoempleados" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Tipo documento</label>
+                        <select class="form-select" id="tdocumentoempleados" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+                            <option value="Cedula">Cedula</option>
+                            <option value="T.I.">Tarjeta Identidad</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Correo</label>
+                        <input type="text" id="ndocumentoempleados" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Administrador</label>
+                        <select id="administradorempleados" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <button type="button" id="insertarEmpleados" class="btn btn-primary">Enviar</button>
+                            <button type="button" id="listarEmpleados" class="btn btn-primary">Listar</button>
+                            <button type="button" id="limpiarEmpleados" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla EMPLEADOS consulta -->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaEmpleados">
+                            <thead>
+                            <tr>
+                                <th>Numero Documento</th>
+                                <th>Apellidos</th>
+                                <th>Nombres</th>
+                                <th>Correo</th>
+                                <th>Tipo Documento</th>
+                                <th>Numero Admin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="d-grid gap-2 d-md-flex">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">Codigo Empleados</span>
+                        <select id="codigoEmpleados" class="form-select"></select>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex">
+                        <button type="button" id="buscarEmpleados" class="btn btn-primary">Buscar</button>
+                        <button type="button" id="eliminarEmpleados" class="btn btn-danger">Eliminar</button>
+                        <button type="button" id="llamarEmpleados" class="btn btn-primary">Llamar</button>
+                        <button type="button" id="actualizarEmpleados" class="btn btn-primary">Actualizar</button>
+                        <button type="button" id="limpiarTablaEmpleados" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- VISITA -->
+    <form id="formularioVisita" style="display: none;">
+        <h2 class="text-center mt-4">Formulario de Visita</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-2">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Numero Visita</label>
+                        <input type="number" id="codvisita" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Nombre Finca</label>
+                        <input type="text" id="nombrefincavisita" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Direccion Visita</label>
+                        <input type="text" id="direccionvisita" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="fechavisita" class="form-label">Fecha</label>
+                        <input type="date" id="fechavisita" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Codigo Empleado</label>
+                        <select id="codigoempleadovisita" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Codigo Cultivo</label>
+                        <select id="codigocultivovisita" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-text">Llene todos los campos antes de enviar.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <button type="button" id="insertarVisita" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarVisita" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarVisita" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta VISITA-->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaVisita">
+                            <thead>
+                            <tr>
+                                <th>Numero Visita</th>
+                                <th>Nombre Finca</th>
+                                <th>Dirección Visita</th>
+                                <th>Fecha</th>
+                                <th>Codigo Empleado</th>
+                                <th>Codigo Cultivo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="d-grid gap-2 d-md-flex">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">Codigo Visita</span>
+                        <select id="codigoVisita" class="form-select"></select>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex">
+                        <button type="button" id="buscarVisita" class="btn btn-primary">Buscar</button>
+                        <button type="button" id="eliminarVisita" class="btn btn-danger">Eliminar</button>
+                        <button type="button" id="llamarVisita" class="btn btn-primary">Llamar</button>
+                        <button type="button" id="actualizarVisita" class="btn btn-primary">Actualizar</button>
+                        <button type="button" id="limpiarTablaVisita" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- FACTURACION -->
+    <form id="formularioFacturacion" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Facturacion</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Numero Factura</label>
+                        <input type="text" id="numerofacturacion" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Cuenta Cliente</label>
+                        <input type="text" id="cuentaclientefacturacion" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Forma Pago</label>
+                        <input type="text" id="formapagofacturacion" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Valor</label>
+                        <input type="text" id="valorfacturacion" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+
+                        <label for="fechafacturacion" class="form-label">Fecha Pago</label>
+                        <input type="date" id="fechapagofacturacion" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Cultivo</label>
+                        <select id="cultivofacturacion" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <br>
+                        <button type="button" id="insertarFacturacion" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarFacturacion" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarFacturacion" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta -->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaFacturacion">
+                            <thead>
+                            <tr>
+                                <th>Numero Factura</th>
+                                <th>Cuenta Cliente</th>
+                                <th>Forma Pago</th>
+                                <th>Valor</th>
+                                <th>Fecha Pago</th>
+                                <th>Cultivo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Factura</span>
+                            <select id="codigoFacturacion" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarFacturacion" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarFacturacion" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarFacturacion" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarFacturacion"
+                                    class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaFacturacion"
+                                    class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- DRON -->
+    <form id="formularioDron" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Dron</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Codigo Dron</label>
+                        <input type="text" id="coddron" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Numero Serial</label>
+                        <input type="text" id="numeroserialdron" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Marca</label>
+                        <input type="text" id="marcadron" class="form-control">
+                    </div>
+                </div>
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <br>
+                        <button type="button" id="insertarDron" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarDron" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarDron" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta -->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaDron">
+                            <thead>
+                            <tr>
+                                <th>Codigo Dron</th>
+                                <th>Numero Serial</th>
+                                <th>Marca</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-7">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Dron</span>
+                            <select id="codigoDron" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarDron" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarDron" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarDron" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarDron" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaDron" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- DIAGNOSTICO -->
+    <form id="formularioDiagnostico" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Diagnostico</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Numero Diagnóstico</label>
+                        <input type="number" id="numeroDiagnostico" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Observaciones</label>
+                        <input type="text" id="observacionesdiagnostico" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="fechadiagnos" class="form-label">Fecha Solicitada</label>
+                        <input type="date" id="fechasolicitadadiagnostico" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="fechadiag" class="form-label">Fecha Diagnostico</label>
+                        <input type="date" id="fechadiagnostico" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="fechadiagn" class="form-label">Fecha Entrega</label>
+                        <input type="date" id="fechaentregadiagnostico" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Tipo Daño</label>
+                        <input type="text" id="tipodañodiagnostico" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Codigo Dron</label>
+                        <select id="codigodrondiagnostico" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Codigo Cultivo</label>
+                        <select id="codigocultivodiagnostico" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <br>
+                        <button type="button" id="insertarDiagnostico" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarDiagnostico" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarDiagnostico" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta DIAGNOSTICO-->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaDiagnostico">
+                            <thead>
+                            <tr>
+                                <th>Numero Diagnostico</th>
+                                <th>Observaciones</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Fecha Diagnostico</th>
+                                <th>Fecha Entrega</th>
+                                <th>Tipo de Daño</th>
+                                <th>Codigo Dron</th>
+                                <th>Codigo Cultivo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Diagnostico</span>
+                            <select id="codigoDiagnostico" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarDiagnostico" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarDiagnostico" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarDiagnostico" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarDiagnostico"
+                                    class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaDiagnostico"
+                                    class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- MULTIMEDIA -->
+    <form id="formularioMultimedia" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Multimedia</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Codigo Multimedia</label>
+                        <input type="text" id="codmultimedia" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Nombre Archivo</label>
+                        <input type="text" id="nombremultimedia" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Tamaño</label>
+                        <input type="text" id="tamañomultimedia" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Numero Diagnostico</label>
+                        <select id="numerodiagnosticomultimedia" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <br>
+                        <button type="button" id="insertarMultimedia" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarMultimedia" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarMultimedia" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta MULTIMEDIA-->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaMultimedia">
+                            <thead>
+                            <tr>
+                                <th>Codigo Multimedia</th>
+                                <th>Nombre Archivo</th>
+                                <th>Tamaño</th>
+                                <th>Numero Diagnostico</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-8">
+
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Multimedia</span>
+                            <select id="codigoMultimedia" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarMultimedia" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarMultimedia" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarMultimedia" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="limpiarTablaMultimedia"
+                                    class="btn btn-secondary">Limpiar</button>
+                            <button type="button" id="actualizarMultimedia"
+                                    class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- VIRUS -->
+    <form id="formulario3" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Virus</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Codigo Virus</label>
+                        <input type="number" id="codvirus" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Nombre Virus</label>
+                        <input type="text" id="nombrevirus" class="form-control">
+                    </div>
+                </div>
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <br>
+                        <button type="button" id="insertarVirus" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarVirus" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarVirus" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta VIRUS-->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaVirus">
+                            <thead>
+                            <tr>
+                                <th>Codigo Virus</th>
+                                <th>Nombre Virus</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Virus</span>
+                            <select id="codigoVirus" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarVirus" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarVirus" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarVirus" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarVirus" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaVirus" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+    <!-- INFORMACION -->
+    <form id="formularioInformacion" style="display: none;">
+        <h2 class="text-center mt-4 ">Formulario de Informacion</h2>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Numero Registro</label>
+                        <input type="number" id="numeroregistrotiene" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Fecha Registro</label>
+                        <input type="text" id="fecharegistrotiene" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Numero Diagnostico</label>
+                        <select id="numerodiagnosticotiene" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Codigo Virus</label>
+                        <select id="codigovirustiene" class="form-select"></select>
+                    </div>
+                </div>
+                <div class="form-text">Llene todos los campos antes de enviar.</div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <br>
+                        <button type="button" id="insertarTiene" class="btn btn-primary">Enviar</button>
+                        <button type="button" id="listarTiene" class="btn btn-primary">Listar</button>
+                        <button type="button" id="limpiarTiene" class="btn btn-secondary">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tabla consulta -->
+        <hr>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered" id="tablaTiene">
+                            <thead>
+                            <tr>
+                                <th>Numero Registro</th>
+                                <th>Fecha Registro</th>
+                                <th>Numero Diagnostico</th>
+                                <th>Codigo Virus</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">Codigo Tiene</span>
+                            <select id="codigoTiene" class="form-select"></select>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="button" id="buscarTiene" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="eliminarTiene" class="btn btn-danger">Eliminar</button>
+                            <button type="button" id="llamarTiene" class="btn btn-primary">Llamar</button>
+                            <button type="button" id="actualizarTiene" class="btn btn-primary">Actualizar</button>
+                            <button type="button" id="limpiarTablaTiene" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </form>
+
+</div> <!-- FIN CONTENEDOR FORMULARIOS-->
+
+<!--<hr>
+<div class="container">
+    <div class="mensaje" id="mensaje"></div>
+    <div class="error" id="error-message"></div>
+</div>-->
+
+<script>
+        const formularios = [
+            document.getElementById('formulario'),
+            document.getElementById('formulario2'),
+            document.getElementById('formulario3'),
+            document.getElementById('formularioCliente'),
+            document.getElementById('formularioEmpleados'),
+            document.getElementById('formularioVisita'),
+            document.getElementById('formularioFacturacion'),
+            document.getElementById('formularioDron'),
+            document.getElementById('formularioDiagnostico'),
+            document.getElementById('formularioMultimedia'),
+            document.getElementById('formularioInformacion')
+        ];
+        const botones = [
+            document.getElementById('mostrarFormulario'),
+            document.getElementById('mostrarFormulario2'),
+            document.getElementById('mostrarFormulario3'),
+            document.getElementById('mostrarFormularioCliente'),
+            document.getElementById('mostrarFormularioEmpleados'),
+            document.getElementById('mostrarFormularioVisita'),
+            document.getElementById('mostrarFormularioFacturacion'),
+            document.getElementById('mostrarFormularioDron'),
+            document.getElementById('mostrarFormularioDiagnostico'),
+            document.getElementById('mostrarFormularioMultimedia'),
+            document.getElementById('mostrarFormularioInformacion')
+        ];
+
+        for (let i = 0; i < botones.length; i++) {
+            botones[i].addEventListener('click', () => {
+                for (let j = 0; j < formularios.length; j++) {
+                    if (i === j) {
+                        formularios[j].style.display = 'block';
+                    } else {
+                        formularios[j].style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>

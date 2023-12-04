@@ -20,7 +20,7 @@ $(document).ready(function(){
                 }
             };
             $.ajax({
-                
+
                 url: "http://localhost:8080/clientes/insertar",// La URL de tu endpoint de inserción
                 type: "POST",
                 dataType: "json",
@@ -48,7 +48,7 @@ $(document).ready(function(){
                 var correoCliente = $("#correocliente").val();
                 var telefonoCliente = $("#telefonocliente").val();
                 var administrador = $("#administradorcliente").val(); // Valor del select
-    
+
                 // Crea un objeto de cliente con los valores recogidos
                 var cliente = {
                     "idNit": nit,
@@ -59,7 +59,7 @@ $(document).ready(function(){
                         "numDoc": administrador // La llave foránea
                     }
                 };
-    
+
                 // Realiza la solicitud AJAX para insertar el cliente
                 $.ajax({
                     type: "POST",
@@ -84,7 +84,7 @@ $(document).ready(function(){
                 });
             });
         });
-    
+
     //Buscar CLIENTE por ID
     $('#insertarCliente').on('click', function () {
         let idNit = $('#codigoCliente').val();
@@ -143,9 +143,9 @@ $(document).ready(function(){
                         '<td>' + client.correo + '</td>' +
                         '<td>' + client.telefono + '</td>' +
                         '</tr>';
-                        
+
                     }
-                    
+
                     tablaHTML += '</tbody>';
                     $('#tablaCliente').html(tablaHTML);
                 } else {
@@ -159,7 +159,7 @@ $(document).ready(function(){
             });
         });
 
-        
+
     // Actualizar cliente
     $('#actualizarCliente').on('click', function() {
         let codigoCliente = $('#codigoCliente').val();
@@ -209,7 +209,7 @@ $(document).ready(function(){
             dataType: "json",
             success: function(respuesta) {
                 let select = $('#administradorcliente');
-                
+
                 for (let i = 0; i < respuesta.length; i++) {
                     let administrador = respuesta[i];
                     select.append($('<option>', {
@@ -227,7 +227,7 @@ $(document).ready(function(){
     //llamar datos del CLIENTE por el ID en los inputs
     $('#buscarCliente').on('click', function() {
         let idNit = $('#codigoCliente').val();
-    
+
         $.ajax({
             url: "http://localhost:8080/clientes/" + idNit,
             type: "GET",
@@ -254,7 +254,7 @@ $(document).ready(function(){
             }
         });
     });
-    
+
     //cargar ID en el SELECT de CLIENTE
     $(document).ready(function() {
         $.ajax({
@@ -263,7 +263,7 @@ $(document).ready(function(){
             dataType: "json",
             success: function(respuesta) {
                 let select = $('#codigoCliente');
-                
+
                 for (let i = 0; i < respuesta.length; i++) {
                     let administrador = respuesta[i];
                     select.append($('<option>', {
@@ -303,6 +303,6 @@ $(document).ready(function(){
                 console.error(xhr.responseText);
             }
         });
-    
+
 });
 });

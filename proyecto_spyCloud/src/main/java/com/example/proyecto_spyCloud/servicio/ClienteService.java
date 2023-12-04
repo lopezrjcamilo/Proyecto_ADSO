@@ -27,17 +27,17 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Cliente clientePorId(Integer idNit) {
-        return clienteRepository.findById(idNit).orElse(null);
+    public Cliente clientePorId(Integer numDoc) {
+        return clienteRepository.findById(numDoc).orElse(null);
     }
 
 
-    public Cliente clientePorCorreo(String correo) {
-        return clienteRepository.findByCorreo(correo);
+    public Cliente clientePorCorreo(String email) {
+        return clienteRepository.findByEmail(email);
     }
 
-    public Cliente clientePorAdministrador(Integer nitCliente){
-        return clienteRepository.clientePorAdministrador(nitCliente);
+    public Cliente clientePorAdministrador(Integer numDocCliente){
+        return clienteRepository.clientePorAdministrador(numDocCliente);
     }
 
 
@@ -64,9 +64,9 @@ public class ClienteService {
         }
     }
 
-    public void eliminarClientePorId(Integer idNit){
-        clienteRepository.deleteById(idNit);
-    }
+    public void eliminarClientePorId(Integer numDoc){
+        clienteRepository.deleteById(numDoc);
+}
 
 
 

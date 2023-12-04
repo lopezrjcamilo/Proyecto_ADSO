@@ -1,0 +1,8 @@
+# src/main/resources/application.yml
+okta:
+  oauth2:
+    issuer: https://dev-zstcmnbd5qzwv4cu.us.auth0.com/
+    client-id: fCFXhsT4Vah1zAvLEaAOmRIiYNpgQAKN
+    client-secret: 8PO3dCauPKk5Yej89pI5b64MZTgwV0FnMH2V37-lL9qXvekMrMddhKNl0JsXMP9w
+
+

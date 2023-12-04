@@ -7,8 +7,3 @@
   #carouselExample .carousel-inner .carousel-item img {
     max-height: 500px; /* Ajusta la altura de las imágenes según tus necesidades */
   }
-
-  .centrado{
-    text-align: center;
-    vertical-align: middle;
-  }

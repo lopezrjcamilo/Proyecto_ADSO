@@ -4,16 +4,16 @@
 
 const domino = "http://localhost:8080";
 const administrador = 'administradores';
- 
+
 
 function limpiarAdmin(){
     $('#ndocumentoAdmin').val('');
     $('#tdocumentoAdmin').val('');
     $('#apellidoAdmin').val('');
     $('#correoAdmin').val('');
-    $('#nombreAdmin').val(''); 
+    $('#nombreAdmin').val('');
     $('#telefonoAdmin').val('');
-} 
+}
 
 $(document).ready(function(){
    //---------------  ADMINISTRADOR  -----------------------------
@@ -51,8 +51,8 @@ $(document).ready(function(){
 
     //buscar por Numero documento ID
     function buscarAlInsertar() {
-        let numDoc = $('#ndocumentoAdmin').val(); 
-    
+        let numDoc = $('#ndocumentoAdmin').val();
+
         $.ajax({
             url: `${domino}/${administrador}/${numDoc}`,
             type: "GET",
@@ -91,22 +91,22 @@ $(document).ready(function(){
         $('#tdocumentoAdmin').val('');
         $('#apellidoAdmin').val('');
         $('#correoAdmin').val('');
-        $('#nombreAdmin').val(''); 
-        $('#telefonoAdmin').val(''); 
+        $('#nombreAdmin').val('');
+        $('#telefonoAdmin').val('');
     })
         // Insertar administrador
     $('#insertarAdmin').on('click', function() {
         let adminData = {
-            numDoc: $('#ndocumentoAdmin').val(), 
-            tipo_doc: $('#tdocumentoAdmin').val(),  
-            apellido: $('#apellidoAdmin').val(),   
-            email: $('#correoAdmin').val(),        
-            nombre: $('#nombreAdmin').val(),       
-            telefono: $('#telefonoAdmin').val()   
+            numDoc: $('#ndocumentoAdmin').val(),
+            tipo_doc: $('#tdocumentoAdmin').val(),
+            apellido: $('#apellidoAdmin').val(),
+            email: $('#correoAdmin').val(),
+            nombre: $('#nombreAdmin').val(),
+            telefono: $('#telefonoAdmin').val()
         };
-        
+
         $.ajax({
-            url:"http://localhost:8080/administradores/insertar", 
+            url:"http://localhost:8080/administradores/insertar",
             type: "POST",
             dataType: "json",
             contentType: "application/json",
@@ -115,7 +115,7 @@ $(document).ready(function(){
                 alert("Administrador ingresado exitosamente.");
                 console.log(response);
                 buscarAlInsertar()
-                limpiarAdmin() 
+                limpiarAdmin()
             },
             error: function(xhr, status, error) {
                 alert("No se pudo ingresar el administrador.");
@@ -163,7 +163,7 @@ $(document).ready(function(){
         };
 
         $.ajax({
-            url: `${domino}/${administrador}/actualizar/${numDoc}`, 
+            url: `${domino}/${administrador}/actualizar/${numDoc}`,
             type: "PUT",
             dataType: "json",
             contentType: "application/json",
@@ -184,7 +184,7 @@ $(document).ready(function(){
         //Listar administradores
     $('#listarAdmin').on('click', function() {
         $.ajax({
-            url: `${domino}/${administrador}/listar`, 
+            url: `${domino}/${administrador}/listar`,
             type: "GET",
             dataType: "json",
             success: function(respuesta) {
@@ -198,7 +198,7 @@ $(document).ready(function(){
                                     '<th>Correo</th>' +
                                     '<th>Telefono</th>' +
                                     '</tr></thead><tbody>';
-                    
+
                     for (let i = 0; i < respuesta.length; i++) {
                         let admin = respuesta[i];
                         tablaHTML += '<tr>' +
@@ -210,7 +210,7 @@ $(document).ready(function(){
                                     '<td>' + admin.telefono + '</td>' +
                                     '</tr>';
                     }
-    
+
                     tablaHTML += '</tbody>';
                     $('#tablaAdmin').html(tablaHTML);
                 } else {
@@ -234,7 +234,7 @@ $(document).ready(function() {
         dataType: "json",
         success: function(respuesta) {
             let select = $('#codigo');
-            
+
             for (let i = 0; i < respuesta.length; i++) {
                 let administrador = respuesta[i];
                 select.append($('<option>', {
@@ -247,5 +247,5 @@ $(document).ready(function() {
             console.error(xhr.responseText);
         }
     });
-}); 
+});
 });
